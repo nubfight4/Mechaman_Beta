@@ -19,6 +19,7 @@ public class SelectButtonOnInput : MonoBehaviour {
 	void Update () {
 		if(Input.GetAxisRaw("Vertical") != 0 && buttonSelected == false)
 		{
+			Debug.Log("Adui");
 			eventSystem.SetSelectedGameObject(selectedObject);
 			buttonSelected = true;
 		}
