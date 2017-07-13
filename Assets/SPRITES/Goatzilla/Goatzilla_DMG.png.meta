@@ -1,0 +1,356 @@
+fileFormatVersion: 2
+guid: a1e8a8b36921bce4d96c84b375cd2065
+timeCreated: 1496740366
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Goatzilla_DMG_0
+    21300002: Goatzilla_DMG_1
+    21300004: Goatzilla_DMG_2
+    21300006: Goatzilla_DMG_3
+    21300008: Goatzilla_DMG_4
+    21300010: Goatzilla_DMG_5
+    21300012: Goatzilla_DMG_6
+    21300014: Goatzilla_DMG_7
+    21300016: Goatzilla_DMG_8
+    21300018: Goatzilla_DMG_9
+    21300020: Goatzilla_DMG_10
+    21300022: Goatzilla_DMG_11
+    21300024: Goatzilla_DMG_12
+    21300026: Goatzilla_DMG_13
+    21300028: Goatzilla_DMG_14
+    21300030: Goatzilla_DMG_15
+    21300032: Goatzilla_DMG_16
+    21300034: Goatzilla_DMG_17
+    21300036: Goatzilla_DMG_18
+    21300038: Goatzilla_DMG_19
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: 0
+    aniso: -1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Goatzilla_DMG_0
+      rect:
+        serializedVersion: 2
+        x: 133
+        y: 1354
+        width: 303
+        height: 399
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Goatzilla_DMG_1
+      rect:
+        serializedVersion: 2
+        x: 687
+        y: 1354
+        width: 301
+        height: 400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Goatzilla_DMG_2
+      rect:
+        serializedVersion: 2
+        x: 1242
+        y: 1354
+        width: 298
+        height: 400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Goatzilla_DMG_3
+      rect:
+        serializedVersion: 2
+        x: 1797
+        y: 1354
+        width: 294
+        height: 400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Goatzilla_DMG_4
+      rect:
+        serializedVersion: 2
+        x: 2350
+        y: 1354
+        width: 293
+        height: 403
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Goatzilla_DMG_5
+      rect:
+        serializedVersion: 2
+        x: 154
+        y: 903
+        width: 290
+        height: 404
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Goatzilla_DMG_6
+      rect:
+        serializedVersion: 2
+        x: 709
+        y: 903
+        width: 287
+        height: 404
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Goatzilla_DMG_7
+      rect:
+        serializedVersion: 2
+        x: 1264
+        y: 903
+        width: 284
+        height: 404
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Goatzilla_DMG_8
+      rect:
+        serializedVersion: 2
+        x: 1819
+        y: 903
+        width: 280
+        height: 404
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Goatzilla_DMG_9
+      rect:
+        serializedVersion: 2
+        x: 2373
+        y: 903
+        width: 278
+        height: 403
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Goatzilla_DMG_10
+      rect:
+        serializedVersion: 2
+        x: 177
+        y: 454
+        width: 276
+        height: 400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Goatzilla_DMG_11
+      rect:
+        serializedVersion: 2
+        x: 728
+        y: 454
+        width: 278
+        height: 402
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Goatzilla_DMG_12
+      rect:
+        serializedVersion: 2
+        x: 1280
+        y: 454
+        width: 282
+        height: 402
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Goatzilla_DMG_13
+      rect:
+        serializedVersion: 2
+        x: 1830
+        y: 454
+        width: 285
+        height: 404
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Goatzilla_DMG_14
+      rect:
+        serializedVersion: 2
+        x: 2381
+        y: 454
+        width: 288
+        height: 404
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Goatzilla_DMG_15
+      rect:
+        serializedVersion: 2
+        x: 183
+        y: 4
+        width: 290
+        height: 403
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Goatzilla_DMG_16
+      rect:
+        serializedVersion: 2
+        x: 733
+        y: 4
+        width: 296
+        height: 401
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Goatzilla_DMG_17
+      rect:
+        serializedVersion: 2
+        x: 1284
+        y: 4
+        width: 298
+        height: 401
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Goatzilla_DMG_18
+      rect:
+        serializedVersion: 2
+        x: 1836
+        y: 4
+        width: 300
+        height: 400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Goatzilla_DMG_19
+      rect:
+        serializedVersion: 2
+        x: 2387
+        y: 4
+        width: 303
+        height: 399
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,496 @@
+fileFormatVersion: 2
+guid: 8e21f5e4cc45e3f42980965ffc3a2051
+timeCreated: 1496744572
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: idle_gif_0
+    21300002: idle_gif_1
+    21300004: idle_gif_2
+    21300006: idle_gif_3
+    21300008: idle_gif_4
+    21300010: idle_gif_5
+    21300012: idle_gif_6
+    21300014: idle_gif_7
+    21300016: idle_gif_8
+    21300018: idle_gif_9
+    21300020: idle_gif_10
+    21300022: idle_gif_11
+    21300024: idle_gif_12
+    21300026: idle_gif_13
+    21300028: idle_gif_14
+    21300030: idle_gif_15
+    21300032: idle_gif_16
+    21300034: idle_gif_17
+    21300036: idle_gif_18
+    21300038: idle_gif_19
+    21300040: idle_gif_20
+    21300042: idle_gif_21
+    21300044: idle_gif_22
+    21300046: idle_gif_23
+    21300048: idle_gif_24
+    21300050: idle_gif_25
+    21300052: idle_gif_26
+    21300054: idle_gif_27
+    21300056: idle_gif_28
+    21300058: idle_gif_29
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: 0
+    aniso: -1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: idle_gif_0
+      rect:
+        serializedVersion: 2
+        x: 135
+        y: 1805
+        width: 303
+        height: 400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: idle_gif_1
+      rect:
+        serializedVersion: 2
+        x: 683
+        y: 1805
+        width: 306
+        height: 400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: idle_gif_2
+      rect:
+        serializedVersion: 2
+        x: 1231
+        y: 1805
+        width: 309
+        height: 400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: idle_gif_3
+      rect:
+        serializedVersion: 2
+        x: 1779
+        y: 1805
+        width: 313
+        height: 398
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: idle_gif_4
+      rect:
+        serializedVersion: 2
+        x: 2327
+        y: 1805
+        width: 317
+        height: 397
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: idle_gif_5
+      rect:
+        serializedVersion: 2
+        x: 2879
+        y: 1805
+        width: 316
+        height: 397
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: idle_gif_6
+      rect:
+        serializedVersion: 2
+        x: 127
+        y: 1354
+        width: 321
+        height: 396
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: idle_gif_7
+      rect:
+        serializedVersion: 2
+        x: 675
+        y: 1354
+        width: 324
+        height: 396
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: idle_gif_8
+      rect:
+        serializedVersion: 2
+        x: 1225
+        y: 1354
+        width: 325
+        height: 395
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: idle_gif_9
+      rect:
+        serializedVersion: 2
+        x: 1772
+        y: 1354
+        width: 331
+        height: 395
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: idle_gif_10
+      rect:
+        serializedVersion: 2
+        x: 2320
+        y: 1354
+        width: 335
+        height: 392
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: idle_gif_11
+      rect:
+        serializedVersion: 2
+        x: 2868
+        y: 1354
+        width: 342
+        height: 390
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: idle_gif_12
+      rect:
+        serializedVersion: 2
+        x: 119
+        y: 903
+        width: 339
+        height: 393
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: idle_gif_13
+      rect:
+        serializedVersion: 2
+        x: 664
+        y: 903
+        width: 345
+        height: 393
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: idle_gif_14
+      rect:
+        serializedVersion: 2
+        x: 1215
+        y: 903
+        width: 345
+        height: 390
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: idle_gif_15
+      rect:
+        serializedVersion: 2
+        x: 1764
+        y: 903
+        width: 350
+        height: 393
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: idle_gif_16
+      rect:
+        serializedVersion: 2
+        x: 2317
+        y: 903
+        width: 342
+        height: 390
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: idle_gif_17
+      rect:
+        serializedVersion: 2
+        x: 2868
+        y: 907
+        width: 339
+        height: 389
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: idle_gif_18
+      rect:
+        serializedVersion: 2
+        x: 119
+        y: 456
+        width: 335
+        height: 390
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: idle_gif_19
+      rect:
+        serializedVersion: 2
+        x: 670
+        y: 451
+        width: 334
+        height: 394
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: idle_gif_20
+      rect:
+        serializedVersion: 2
+        x: 1218
+        y: 451
+        width: 335
+        height: 395
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: idle_gif_21
+      rect:
+        serializedVersion: 2
+        x: 1774
+        y: 451
+        width: 327
+        height: 400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: idle_gif_22
+      rect:
+        serializedVersion: 2
+        x: 2325
+        y: 451
+        width: 324
+        height: 397
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: idle_gif_23
+      rect:
+        serializedVersion: 2
+        x: 2875
+        y: 456
+        width: 322
+        height: 395
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: idle_gif_24
+      rect:
+        serializedVersion: 2
+        x: 127
+        y: 3
+        width: 318
+        height: 397
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: idle_gif_25
+      rect:
+        serializedVersion: 2
+        x: 680
+        y: 6
+        width: 314
+        height: 400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: idle_gif_26
+      rect:
+        serializedVersion: 2
+        x: 1231
+        y: 6
+        width: 311
+        height: 400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: idle_gif_27
+      rect:
+        serializedVersion: 2
+        x: 1779
+        y: 6
+        width: 316
+        height: 399
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: idle_gif_28
+      rect:
+        serializedVersion: 2
+        x: 2333
+        y: 6
+        width: 310
+        height: 399
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: idle_gif_29
+      rect:
+        serializedVersion: 2
+        x: 2884
+        y: 3
+        width: 306
+        height: 403
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
