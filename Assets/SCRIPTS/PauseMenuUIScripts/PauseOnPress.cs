@@ -6,27 +6,27 @@ using UnityEngine.SceneManagement;
 
 public class PauseOnPress : MonoBehaviour {
 
-	private static PauseOnPress mInstance;
-
-	public static PauseOnPress Instance
-	{
-		get
-		{
-			return mInstance;
-		}
-	}
-
-	void Awake()
-	{
-		if(mInstance == null)
-		{
-			mInstance = this;
-		}
-		else if(mInstance != this)
-		{
-			Destroy(this.gameObject);
-		}
-	}
+//	private static PauseOnPress mInstance;
+//
+//	public static PauseOnPress Instance
+//	{
+//		get
+//		{
+//			return mInstance;
+//		}
+//	}
+//
+//	void Awake()
+//	{
+//		if(mInstance == null)
+//		{
+//			mInstance = this;
+//		}
+//		else if(mInstance != this)
+//		{
+//			Destroy(this.gameObject);
+//		}
+//	}
 
     [SerializeField] public GameObject PauseMenuPanel;
     public bool paused;
@@ -63,7 +63,7 @@ public class PauseOnPress : MonoBehaviour {
 		}
     }
 
-    void PauseGame()
+    public void PauseGame()
     {
         PauseMenuPanel.SetActive(true);
 		paused = true;
@@ -71,11 +71,16 @@ public class PauseOnPress : MonoBehaviour {
 		Time.timeScale = 0.0f;
     }
 
-    void ContinueGame()
+    public void ContinueGame()
     {
         PauseMenuPanel.SetActive(false);
 		paused = false;
 		Debug.Log("Timescale resumed");
 		Time.timeScale = 1.0f;
     }
+
+	public void TogglePause()
+	{
+		paused = !paused;
+	}
 }
