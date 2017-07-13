@@ -6,14 +6,12 @@ public enum AudioClipID
 {
 	BGM_MAIN_MENU = 0,
 	BGM_TUTORIAL = 1,
-	BGM_LEVEL1 = 2,
+	BGM_LEVEL_1 = 2,
 	BGM_LOSE = 3,
 	BGM_WIN = 4,
 
-	SFX_INPUT_CORRECT = 100,
-	SFX_INPUT_ERROR = 101,
-	SFX_WHEEL_ROTATE = 102,
-	SFX_ATTACK = 103,
+	SFX_INPUT_SFX_Volume = 100,
+	SFX_ATTACK = 102,
 
 	TOTAL = 9001
 }
@@ -89,13 +87,15 @@ public class SoundManagerScript : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
+
 	}
 
 	// Update is called once per frame
 	void Update () 
 	{
-
-	}
+        bgmVolume = PlayerPrefs.GetFloat("BGM_Slider");
+        sfxVolume = PlayerPrefs.GetFloat("SFX_Slider");
+    }
 
 	AudioClip FindAudioClip(AudioClipID audioClipID)
 	{
@@ -114,9 +114,9 @@ public class SoundManagerScript : MonoBehaviour
 
 	//! BACKGROUND MUSIC (BGM)
 	public void PlayBGM(AudioClipID audioClipID)
-	{
-		bgmAudioSource.clip = FindAudioClip(audioClipID);
-		Debug.Log (audioClipID);
+    {   
+        bgmAudioSource.clip = FindAudioClip(audioClipID);
+        Debug.Log (audioClipID);
 		bgmAudioSource.volume = bgmVolume;
 		bgmAudioSource.loop = true;
 		bgmAudioSource.Play();

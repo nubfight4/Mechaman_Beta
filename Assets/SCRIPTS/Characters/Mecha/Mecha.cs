@@ -86,13 +86,13 @@ public class Mecha : LifeObject
 	void Update ()
 	{
 		CheckDeath();
-		Debug.Log (state);
+		//Debug.Log (state);
 		Boundary ();
 		gamepadPos.x = Input.GetAxis ("Horizontal");
 		//gamepadPos.y = Input.GetAxis ("Vertical");
 		if(!isJumpPunching)
 		{
-			Debug.Log("I can Move");
+			//Debug.Log("I can Move");
 			transform.position = gamepadPos + transform.position;
 			Movement ();
 		}
@@ -402,7 +402,7 @@ public class Mecha : LifeObject
 //				}
 //			}
 //		}
-		Debug.Log(timePressedHeavy);
+		//Debug.Log(timePressedHeavy);
 		if(timePressedHeavy < 3)
 		{
 			if (Input.GetButtonDown("Heavy Attack")) 
