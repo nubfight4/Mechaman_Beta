@@ -52,36 +52,40 @@ public class PauseOnPress : MonoBehaviour {
 //        }
 		if (Input.GetButtonDown("Pause"))
 		{
-			if(!PauseMenuPanel.activeInHierarchy)
+			if(!paused)
 			{
-				PauseMenuPanel.SetActive(true);
+				if(!PauseMenuPanel.activeInHierarchy)
+				{
+					PauseMenuPanel.SetActive(true);
+				}
+				else if(PauseMenuPanel.activeInHierarchy)
+				{
+					PauseMenuPanel.SetActive(false);
+				}
+				paused = !paused;
 			}
-			else if(PauseMenuPanel.activeInHierarchy)
-			{
-				PauseMenuPanel.SetActive(false);
-			}
-			paused = !paused;
 		}
 		if(paused)
 		{
 			PauseGame();
+			Debug.Log("Timescale paused");
 		}
 		else{
 			ContinueGame();
+			Debug.Log("Timescale resumed");
 		}
     }
 
     public void PauseGame()
     {
 		paused = true;
-		Debug.Log("Timescale paused");
 		Time.timeScale = 0.0f;
     }
 
     public void ContinueGame()
     {
 		paused = false;
-		Debug.Log("Timescale resumed");
+		PauseMenuPanel.SetActive(false);
 		Time.timeScale = 1.0f;
     }
 
