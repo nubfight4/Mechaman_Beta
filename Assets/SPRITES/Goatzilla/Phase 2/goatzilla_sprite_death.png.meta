@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 605e178ee3394444293fea9e88e51db5
-timeCreated: 1499583288
+guid: fd9b1aedab3eedb4db09ff0ea96fe46c
+timeCreated: 1500017710
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -87,8 +87,8 @@ TextureImporter:
         y: 550
         width: 600
         height: 550
-      alignment: 9
-      pivot: {x: 0.54574186, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -100,8 +100,8 @@ TextureImporter:
         y: 550
         width: 600
         height: 550
-      alignment: 9
-      pivot: {x: 0.54158366, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -113,8 +113,8 @@ TextureImporter:
         y: 550
         width: 600
         height: 550
-      alignment: 9
-      pivot: {x: 0.54158366, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -126,8 +126,8 @@ TextureImporter:
         y: 550
         width: 600
         height: 550
-      alignment: 9
-      pivot: {x: 0.5499003, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -139,8 +139,8 @@ TextureImporter:
         y: 550
         width: 600
         height: 550
-      alignment: 9
-      pivot: {x: 0.5457418, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -151,9 +151,9 @@ TextureImporter:
         x: 0
         y: 0
         width: 600
-        height: 550
-      alignment: 9
-      pivot: {x: 0.5415835, y: 0}
+        height: 548
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -164,7 +164,7 @@ TextureImporter:
         x: 600
         y: 0
         width: 600
-        height: 550
+        height: 548
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -177,7 +177,7 @@ TextureImporter:
         x: 1200
         y: 0
         width: 600
-        height: 550
+        height: 548
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -187,23 +187,10 @@ TextureImporter:
       name: goatzilla_sprite_death_8
       rect:
         serializedVersion: 2
-        x: 1800
+        x: 1798
         y: 0
         width: 600
-        height: 550
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: goatzilla_sprite_death_9
-      rect:
-        serializedVersion: 2
-        x: 2400
-        y: 0
-        width: 600
-        height: 550
+        height: 548
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

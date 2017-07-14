@@ -1,13 +1,11 @@
 fileFormatVersion: 2
-guid: ec89fcb3003c812498b4814c91326ec1
-timeCreated: 1500015446
+guid: 89a8ed48d03b7524eb693b8b45c6b56f
+timeCreated: 1500016174
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: goatzilla_walk_sprite_0
-    21300002: goatzilla_walk_sprite_1
-    21300004: goatzilla_walk_sprite_2
-    21300006: goatzilla_walk_sprite_3
+    21300000: sparks_0
+    21300002: sparks_1
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -74,54 +72,28 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: goatzilla_walk_sprite_0
+      name: sparks_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 600
-        height: 550
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        width: 240.5
+        height: 539
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: goatzilla_walk_sprite_1
+      name: sparks_1
       rect:
         serializedVersion: 2
-        x: 600
+        x: 240
         y: 0
-        width: 600
-        height: 550
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: goatzilla_walk_sprite_2
-      rect:
-        serializedVersion: 2
-        x: 1200
-        y: 0
-        width: 600
-        height: 550
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: goatzilla_walk_sprite_3
-      rect:
-        serializedVersion: 2
-        x: 1800
-        y: 0
-        width: 600
-        height: 550
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        width: 240.5
+        height: 539
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0

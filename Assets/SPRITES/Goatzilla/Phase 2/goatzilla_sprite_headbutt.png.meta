@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 26e128049918e7143a025ba885f89b9f
-timeCreated: 1499670924
+guid: e46eb65870541ba409bd87d7a31a81fc
+timeCreated: 1500017733
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -10,8 +10,6 @@ TextureImporter:
     21300006: goatzilla_sprite_headbutt_3
     21300008: goatzilla_sprite_headbutt_4
     21300010: goatzilla_sprite_headbutt_5
-    21300012: goatzilla_sprite_headbutt_6
-    21300014: goatzilla_sprite_headbutt_7
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -85,8 +83,8 @@ TextureImporter:
         y: 550
         width: 600
         height: 550
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -98,8 +96,8 @@ TextureImporter:
         y: 550
         width: 600
         height: 550
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -111,8 +109,8 @@ TextureImporter:
         y: 550
         width: 600
         height: 550
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -124,8 +122,8 @@ TextureImporter:
         y: 550
         width: 600
         height: 550
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -136,9 +134,9 @@ TextureImporter:
         x: 0
         y: 0
         width: 600
-        height: 550
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        height: 548
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -146,38 +144,12 @@ TextureImporter:
       name: goatzilla_sprite_headbutt_5
       rect:
         serializedVersion: 2
-        x: 604
+        x: 600
         y: 0
         width: 600
-        height: 550
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: goatzilla_sprite_headbutt_6
-      rect:
-        serializedVersion: 2
-        x: 1200
-        y: 0
-        width: 600
-        height: 550
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: goatzilla_sprite_headbutt_7
-      rect:
-        serializedVersion: 2
-        x: 1800
-        y: 0
-        width: 600
-        height: 550
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        height: 548
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
