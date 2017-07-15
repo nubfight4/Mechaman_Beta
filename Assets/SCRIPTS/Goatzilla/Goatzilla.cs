@@ -552,6 +552,8 @@ public class Goatzilla : LifeObject
 		if (target.tag == ("FistRocketAttack") && this.tag == ("Enemy") && !canHurt) {
 			ReceiveDamage (fistRocketDamage + mecha.tempBonusDamage); //include bonus damage
 			mecha.tempBonusDamage = 0;
+			mecha.stopMove = false;
+			mecha.canSpecial = false;
 			canHurt = true;
 		}
 	}

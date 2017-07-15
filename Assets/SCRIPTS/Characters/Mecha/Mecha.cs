@@ -29,19 +29,20 @@ public class Mecha : LifeObject
 	private SpriteRenderer sprite;
 	public int state;
 	public int dMG;
-	bool isJumping;
-	bool isStop;
-	//! Combo and Syncgronise attack
+
+	//! Combo and Synchronise attack
 	bool p1LPressed;
 	bool p1RPressed;
 	bool p2LPressed;
 	bool p2RPressed;
 	int timePressedNormal;
 	int timePressedHeavy;
+
 	//reset
 	bool startReset;
 	float resetTimer;
 	float resetDuration;
+
 	//prevent
 	bool isOtherCombo;
 	bool isJumpPunching;
@@ -52,13 +53,16 @@ public class Mecha : LifeObject
 	GameObject JumpPunchColliderClone;
 	GameObject DashPunchColliderClone;
 
+	Rigidbody2D rb2d;
+
+	public float mechSpeed = 5f;
+
 	void Awake ()
 	{
 		SetMaxHP (500);
 		SetHP (this.GetMaxHP ());
 	}
 
-	// Use this for initialization
 	void Start ()
 	{ 
 		QButton.SetActive (false);
@@ -68,13 +72,11 @@ public class Mecha : LifeObject
 
 		anim = GetComponent<Animator> ();
 		state = 0;
-		isJumping = false; 
-		isStop = false;
 		maxPos.x = 4.34f;
-		//maxPos.y = -1.0f;
 		minPos.x = -4.55f;
+		//maxPos.y = -1.0f;
 		//minPos.y = -2.25f;
-		anim = GetComponent<Animator> ();
+
 		isOtherCombo = false;
 		isJumpPunching = false;
 		startReset = false;
@@ -82,33 +84,52 @@ public class Mecha : LifeObject
 		p1RPressed = false;
 		p2LPressed = false;
 		p2RPressed = false;
+
 		timePressedNormal = 0;
 		timePressedHeavy = 0;
 		resetTimer = 0f;
-		//resetDuration = 0.7f;
 		resetDuration = 1.2f;
+
+		rb2d = gameObject.GetComponent<Rigidbody2D> ();
 	}
 
 	// Update is called once per frame
 	void Update ()
 	{
 		CheckDeath ();
-		Debug.Log (state);
 		Boundary ();
-		gamepadPos.x = Input.GetAxis ("Horizontal");
-		//gamepadPos.y = Input.GetAxis ("Vertical");
-		if (!isJumpPunching) {
-			Debug.Log ("I can Move");
-			transform.position = gamepadPos + transform.position;
-			Movement ();
-		}
-		//transform.position = gamepadPos + transform.position;
-		//Movement ();
-		//Movement ();
+		NewMovement ();
 		Combo ();
 		UpdateAnimator ();
 	}
 
+	void NewMovement ()
+	{
+		if (Input.GetButton ("Horizontal") && !stopMove) {
+			state = (int)STATE.WALKING;
+			if (Input.GetAxis ("Horizontal") > 0) {
+				rb2d.velocity = new Vector2 (mechSpeed, transform.position.y);
+				//transform.Translate (Vector2.right * mechSpeed * Time.deltaTime);
+				transform.localScale = new Vector3 (1f, 1f, 1f);
+			} else if (Input.GetAxis ("Horizontal") < 0) {
+				rb2d.velocity = new Vector2 (-mechSpeed, transform.position.y);
+				//transform.Translate (Vector2.left * mechSpeed * Time.deltaTime);
+				transform.localScale = new Vector3 (-1f, 1f, 1f);
+			}
+		} else {
+			//rb2d.velocity = new Vector2 (0f, transform.position.y);
+			state = (int)STATE.IDLE;
+		}
+
+		if (Input.GetButton ("Vertical") && Input.GetAxis ("Vertical") > 0) {
+
+		}
+		if (Input.GetButton ("Vertical") && Input.GetAxis ("Vertical") < 0) {
+
+		}
+	}
+
+	/*
 	void Movement ()
 	{
 		gamepadPos.x = Input.GetAxis ("Horizontal");
@@ -121,6 +142,7 @@ public class Mecha : LifeObject
 			transform.localScale = new Vector3 (1, transform.localScale.y);	
 		}
 	}
+	*/
 
 	void Boundary ()
 	{
@@ -133,18 +155,20 @@ public class Mecha : LifeObject
 			transform.position = new Vector3 (minPos.x, transform.position.y);
 		}
 
-//		if (transform.position.y > maxPos.y) 
-//		{
-//			transform.position = new Vector3 (transform.position.x,maxPos.y);
-//		}
-//
-//		if (transform.position.y < minPos.y) 
-//		{
-//			transform.position = new Vector3 (transform.position.x,minPos.y);
-//		}
+		/*
+		if (transform.position.y > maxPos.y) 
+		{
+			transform.position = new Vector3 (transform.position.x,maxPos.y);
+		}
+
+		if (transform.position.y < minPos.y) 
+		{
+			transform.position = new Vector3 (transform.position.x,minPos.y);
+		}
+		*/
 	}
 
-	public override void CheckDeath ()
+	public override void CheckDeath () //highest priority to check player death
 	{
 		if (HP <= 0) {
 			if (lives > 0) {
@@ -160,9 +184,7 @@ public class Mecha : LifeObject
 
 	void UpdateAnimator ()
 	{
-		anim.SetFloat ("Speed", gamepadPos.x);
 		//anim.SetBool ("isJumping", isJumping);
-		anim.SetBool ("isStop", isStop);
 		anim.SetInteger ("State", state);
 	}
 
@@ -191,14 +213,19 @@ public class Mecha : LifeObject
 	public GameObject OButton;
 	public GameObject PButton;
 
+	public bool stopMove = false;
+
 	void Combo ()
 	{
+		/*
 		if (gamepadPos.x == 0) {
-			isStop = true;
+			state = (int)STATE.IDLE;
 		} else {
-			isStop = false;
+			state = (int)STATE.WALKING;
 		}
-		//delay
+		*/
+
+		//delay before resetting button press
 		if (startReset) {
 			resetTimer += Time.deltaTime;
 			if (resetTimer >= resetDuration) {
@@ -218,21 +245,16 @@ public class Mecha : LifeObject
 			}
 		}
 
-		//animation
-		//when activate, do first jump punch
-		//after it ends, freeze at fist holding up
-		//then return to idle
-
-		//Jump Punch (Terrence)
-		if (Input.GetAxis ("Vertical") > 0) { // Up + X
+		//Jump Punch
+		if (Input.GetButton ("Vertical") && Input.GetAxis ("Vertical") > 0) { // Up + X
 			if (Input.GetButtonDown ("Normal Attack") && timePressedNormal == 0) {
 				state = (int)STATE.JUMPPUNCH1;
+				Debug.Log ("JumpPunch");
 				if (dashPunch) {
 					dMG = 88;
 				} else {
 					dMG = 250;
 				}
-				Debug.Log ("JumpPunch");
 				startReset = true;
 				resetTimer = resetDuration * 0.5f;
 				isOtherCombo = true;
@@ -240,42 +262,40 @@ public class Mecha : LifeObject
 			}
 		}
 
-//		if(isJumpPunching)
-//		{
-//			gameObject.transform.Translate (Vector2.up * jumpPunchForce * Time.deltaTime);
-//		}
+		/*
+		if(isJumpPunching)
+		{
+			gameObject.transform.Translate (Vector2.up * jumpPunchForce * Time.deltaTime);
+		}
 
-//		if (isJumpPunching) 
-//		{
-//			if (jumpPunchDurationTimer <= jumpPunchDuration) 
-//			{
-//				state = (int)STATE.JUMPPUNCH1;
-//				jumpPunchDurationTimer += Time.deltaTime * 1000f;
-//			} 
-//			else
-//			{
-//				state = (int)STATE.IDLE;
-//				Destroy (JumpPunchColliderClone);
-//				jumpPunchDurationTimer = 0f;
-//				isJumpPunching = false;
-//				instantOnce = false;
-//			}
-//				gameObject.transform.Translate (Vector2.up * jumpPunchForce * Time.deltaTime);
-//			/* 
-//			pseudocode for looking for specific animation
-//			if (anim.frame == 5) {
-//				anim.frame.pause;
-//			}
-//			*/
-//			if (!instantOnce) {
-//				JumpPunchColliderClone = Instantiate (JumpPunchCollider, new Vector2 (transform.position.x, transform.position.y + 1), Quaternion.identity);
-//				JumpPunchColliderClone.transform.parent = gameObject.transform;
-//				instantOnce = true;
-//			}
-//		}
+		if (isJumpPunching) 
+		{
+			if (jumpPunchDurationTimer <= jumpPunchDuration) 
+			{
+				state = (int)STATE.JUMPPUNCH1;
+				jumpPunchDurationTimer += Time.deltaTime * 1000f;
+			} 
+			else
+			{
+				state = (int)STATE.IDLE;
+				Destroy (JumpPunchColliderClone);
+				jumpPunchDurationTimer = 0f;
+				isJumpPunching = false;
+				instantOnce = false;
+			}
+			
+			//gameObject.transform.Translate (Vector2.up * jumpPunchForce * Time.deltaTime);
+			
+			if (!instantOnce) {
+				JumpPunchColliderClone = Instantiate (JumpPunchCollider, new Vector2 (transform.position.x, transform.position.y + 1), Quaternion.identity);
+				JumpPunchColliderClone.transform.parent = gameObject.transform;
+				instantOnce = true;
+			}
+		}
+		*/
 
-		//Dash punch (Terrence)
-		if (gamepadPos.x > 0) { // A + Mech Move Right
+		//Dash Punch
+		if (Input.GetButton ("Horizontal") && Input.GetAxis ("Horizontal") > 0) { // A + Mech Move Right
 			if (Input.GetButtonDown ("Heavy Attack") && isJumpPunching == false && timePressedHeavy == 0) {
 				Debug.Log ("Dash attack right");
 				state = (int)STATE.DASHPUNCH1;
@@ -285,7 +305,7 @@ public class Mecha : LifeObject
 				dashPunchRight = true;
 				dashPunchLeft = false;
 			}
-		} else if (gamepadPos.x < 0) { //A + Mech Move Left
+		} else if (Input.GetButton ("Horizontal") && Input.GetAxis ("Horizontal") < 0) { //A + Mech Move Left
 			if (Input.GetButtonDown ("Heavy Attack") && isJumpPunching == false && timePressedHeavy == 0) {
 				Debug.Log ("Dash attack left");
 				state = (int)STATE.DASHPUNCH1;
@@ -313,18 +333,22 @@ public class Mecha : LifeObject
 
 			if (dashPunchLeft && !dashPunchRight) {
 				gameObject.transform.Translate (Vector2.left * dashPunchForce * Time.deltaTime);
+				/*
 				if (!instantOnce) {
-					//DashPunchColliderClone = Instantiate (DashPunchCollider, new Vector2 (transform.position.x - 1, transform.position.y), Quaternion.identity);
-					//DashPunchColliderClone.transform.parent = gameObject.transform;
+					DashPunchColliderClone = Instantiate (DashPunchCollider, new Vector2 (transform.position.x - 1, transform.position.y), Quaternion.identity);
+					DashPunchColliderClone.transform.parent = gameObject.transform;
 					instantOnce = true;
 				}
+				*/
 			} else if (dashPunchRight && !dashPunchLeft) {
 				gameObject.transform.Translate (Vector2.right * dashPunchForce * Time.deltaTime);
+				/*
 				if (!instantOnce) {
-					//DashPunchColliderClone = Instantiate (DashPunchCollider, new Vector2 (transform.position.x + 1, transform.position.y), Quaternion.identity);
-					//DashPunchColliderClone.transform.parent = gameObject.transform;
+					DashPunchColliderClone = Instantiate (DashPunchCollider, new Vector2 (transform.position.x + 1, transform.position.y), Quaternion.identity);
+					DashPunchColliderClone.transform.parent = gameObject.transform;
 					instantOnce = true;
 				}
+				*/
 			}
 		}
 
@@ -361,34 +385,38 @@ public class Mecha : LifeObject
 		}
 
 		//heavy combo
-//		if (Input.GetButtonDown("Heavy Attack")) 
-//		{
-//			Debug.Log(timePressedHeavy);
-//			if(!isOtherCombo)
-//			{
-//				timePressedNormal = 0;
-//				startReset = true;
-//				if(timePressedHeavy < 5)
-//				{
-//					if(timePressedHeavy == 0)
-//					{
-//						state = (int)STATE.HEAVY;
-//						resetTimer = 0;
-//						timePressedHeavy++;
-//					}
-//					else if(timePressedHeavy >= 1)
-//					{
-//						state = (int)STATE.DOUBLETROUBLE;
-//					}
-//				}
-//				else
-//				{
-//					resetTimer = resetDuration;
-//					timePressedHeavy = 0;
-//					state = (int)STATE.IDLE;
-//				}
-//			}
-//		}
+
+		/*
+		if (Input.GetButtonDown("Heavy Attack")) 
+		{
+			Debug.Log(timePressedHeavy);
+			if(!isOtherCombo)
+			{
+				timePressedNormal = 0;
+				startReset = true;
+				if(timePressedHeavy < 5)
+				{
+					if(timePressedHeavy == 0)
+					{
+						state = (int)STATE.HEAVY;
+						resetTimer = 0;
+						timePressedHeavy++;
+					}
+					else if(timePressedHeavy >= 1)
+					{
+						state = (int)STATE.DOUBLETROUBLE;
+					}
+				}
+				else
+				{
+					resetTimer = resetDuration;
+					timePressedHeavy = 0;
+					state = (int)STATE.IDLE;
+				}
+			}
+		}
+		*/
+
 		Debug.Log (timePressedHeavy);
 		if (timePressedHeavy < 3) {
 			if (Input.GetButtonDown ("Heavy Attack")) { 
@@ -410,15 +438,18 @@ public class Mecha : LifeObject
 				}
 			}
 		}
-//		if(timePressedHeavy >= 3)
-//		{
-//			resetTimer = resetDuration;
-//			Debug.Log("OVER =3");
-//			timePressedHeavy = 0;
-//			state = (int)STATE.IDLE;
-//		}
 
-		//ULtimate
+		/*
+		if(timePressedHeavy >= 3)
+		{
+			resetTimer = resetDuration;
+			Debug.Log("OVER =3");
+			timePressedHeavy = 0;
+			state = (int)STATE.IDLE;
+		}
+		*/
+
+		//Ultimate
 		if (Input.GetButtonDown ("Bumper_Left_P1")) {
 			Debug.Log ("P1.L.Bumper");
 			startReset = true;
@@ -477,9 +508,11 @@ public class Mecha : LifeObject
 		//play animation, use animation function to spawn the fist at specific frame
 		//just make it like respawn from thin air or some shit
 		//rocket fist retain previous behaviour on separate script
-		if (p1LPressed == true && p1RPressed == true && p2LPressed == true && p2RPressed == true) {
+		if (p1LPressed == true && p1RPressed == true && p2LPressed == true && p2RPressed == true && !canSpecial) {
 			Debug.Log ("UltimateGG");
+			canSpecial = true;
 			isMinigame = true;
+			stopMove = true;
 			//RocketFistPrefabClone = Instantiate (RocketFistPrefab, transform.position, Quaternion.Euler (0f, 0f, 90f));
 		}
 
@@ -493,6 +526,13 @@ public class Mecha : LifeObject
 			if (specialAttackDurationTimer <= specialAttackDuration) {
 				specialAttackDurationTimer += Time.deltaTime * 1000f;
 
+				if (correctPressCounter == 2) { //the part where the damage will increase and then reset counter
+					correctPressCounter = 0;
+					tempBonusDamage += 20;
+					isRandomNP1 = false;
+					isRandomNP2 = false;
+				}
+
 				if (!isRandomNP1) {
 					QButton.SetActive (false);
 					EButton.SetActive (false);
@@ -502,13 +542,6 @@ public class Mecha : LifeObject
 					OButton.SetActive (false);
 					PButton.SetActive (false);
 					randomNP2 = Random.Range (0, 2);
-				}
-
-				if (correctPressCounter == 2) { //the part where the damage will increase and then reset counter
-					correctPressCounter = 0;
-					tempBonusDamage += 20;
-					isRandomNP1 = false;
-					isRandomNP2 = false;
 				}
 
 				if (randomNP1 == 0 && !isRandomNP1) { //Q
@@ -541,6 +574,7 @@ public class Mecha : LifeObject
 		}
 	}
 
+	public bool canSpecial = false;
 	public bool isFistRocket = false;
 	public bool isMinigame = false;
 	public bool isRandomNP1 = false;
