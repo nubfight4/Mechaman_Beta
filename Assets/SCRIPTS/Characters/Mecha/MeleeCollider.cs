@@ -6,7 +6,7 @@ public class MeleeCollider : MonoBehaviour {
 	public int damage;
 	public Mecha mechaScript;
 	public Goatzilla target;
-	Vector3 knockBackValue = new Vector3(0.3f,0.0f,0.0f);
+	//Vector3 knockBackValue = new Vector3(0.3f,0.0f,0.0f);
 
 	void OnTriggerEnter2D(Collider2D col)
 	{
