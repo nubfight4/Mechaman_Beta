@@ -28,7 +28,6 @@ public class PauseOnPress : MonoBehaviour {
 		}
 	}
 
-
     [SerializeField] public GameObject PauseMenuPanel;
     public bool paused;
 
@@ -40,32 +39,58 @@ public class PauseOnPress : MonoBehaviour {
 
      void Update()
     {
+//		if (Input.GetButtonDown("Pause"))
+//        {
+//            if (!PauseMenuPanel.activeInHierarchy)
+//            {
+//                PauseGame();
+//            }
+//            else if (PauseMenuPanel.activeInHierarchy)
+//            {
+//                ContinueGame();
+//            }
+//        }
 		if (Input.GetButtonDown("Pause"))
-        {
-            if (!PauseMenuPanel.activeInHierarchy)
-            {
-                PauseGame();
-            }
-            else if (PauseMenuPanel.activeInHierarchy)
-            {
-                ContinueGame();
-            }
-        }
+		{
+			if(!paused)
+			{
+				if(!PauseMenuPanel.activeInHierarchy)
+				{
+					PauseMenuPanel.SetActive(true);
+				}
+				else if(PauseMenuPanel.activeInHierarchy)
+				{
+					PauseMenuPanel.SetActive(false);
+				}
+				paused = !paused;
+			}
+		}
+		if(paused)
+		{
+			PauseGame();
+			Debug.Log("Timescale paused");
+		}
+		else{
+			ContinueGame();
+			Debug.Log("Timescale resumed");
+		}
     }
 
     public void PauseGame()
     {
-        PauseMenuPanel.SetActive(true);
 		paused = true;
-		Debug.Log("Timescale paused");
 		Time.timeScale = 0.0f;
     }
 
     public void ContinueGame()
     {
-        PauseMenuPanel.SetActive(false);
 		paused = false;
-		Debug.Log("Timescale resumed");
+		PauseMenuPanel.SetActive(false);
 		Time.timeScale = 1.0f;
     }
+
+	public void TogglePause()
+	{
+		paused = !paused;
+	}
 }

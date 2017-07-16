@@ -85,22 +85,25 @@ public class Mecha : LifeObject
 	// Update is called once per frame
 	void Update ()
 	{
-		CheckDeath();
-		Debug.Log (state);
-		Boundary ();
-		gamepadPos.x = Input.GetAxis ("Horizontal");
-		//gamepadPos.y = Input.GetAxis ("Vertical");
-		if(!isJumpPunching)
-		{
-			Debug.Log("I can Move");
-			transform.position = gamepadPos + transform.position;
-			Movement ();
+		if (PauseOnPress.Instance.paused != true) {
+			CheckDeath();
+			Debug.Log (state);
+			Boundary ();
+			gamepadPos.x = Input.GetAxis ("Horizontal");
+			//gamepadPos.y = Input.GetAxis ("Vertical");
+			if(!isJumpPunching)
+			{
+				Debug.Log("I can Move");
+				transform.position = gamepadPos + transform.position;
+				Movement ();
+			}
+			//transform.position = gamepadPos + transform.position;
+			//Movement ();
+			//Movement ();
+			Combo ();
+			UpdateAnimator ();
 		}
-		//transform.position = gamepadPos + transform.position;
-		//Movement ();
-		//Movement ();
-		Combo ();
-		UpdateAnimator ();
+
 	}
 
 	void Movement ()
