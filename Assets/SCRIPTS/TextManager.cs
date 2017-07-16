@@ -77,13 +77,23 @@ public class TextManager : MonoBehaviour
 
         theText.text = textLine[currentLine];
 
-        if (textScroll == true)
-        {
-			if (Input.GetButtonDown("Enter"))
-            {
-                currentLine += 1;
-            }
-        }
+		if (Input.GetButtonDown ("Skip_Tutorial")) 
+		{
+			textScroll = true;
+			currentLine = 12;
+		}
+
+		if (textScroll == true) {
+			if (Input.GetButtonDown ("Enter")) {
+				currentLine += 1;
+			} 
+			GameObject.FindGameObjectWithTag ("Button_B").GetComponent<SpriteRenderer> ().enabled = true;	
+		} 
+		else 
+		{
+			GameObject.FindGameObjectWithTag ("Button_B").GetComponent<SpriteRenderer> ().enabled = false;
+		}
+
 
 
         if (currentLine > endAtLine)
@@ -131,41 +141,8 @@ public class TextManager : MonoBehaviour
 			{
 					textScroll = true;
 					currentLine += 1;
-
 			}
 
-			/*
-            if (Input.GetKeyDown(KeyCode.A))
-            {
-                tutorLeft = true;
-            }
-
-            if (Input.GetKeyDown(KeyCode.D))
-            {
-                tutorRight = true;
-            }
-
-            if (Input.GetKeyDown(KeyCode.W))
-            {
-                tutorJump = true;
-            }
-
-            if (Input.GetKeyDown(KeyCode.S))
-            {
-                tutorDown = true;
-            }
-			
-
-            if (tutorJump == true && tutorLeft == true && tutorRight == true && tutorDown == true)
-            {
-                textScroll = true;
-                currentLine += 1;
-                tutorLeft = false;
-                tutorRight = false;
-                tutorJump = false;
-                tutorDown = false;
-            }
-            */
         }
 
         if (currentLine == 8) //Attack n Block
@@ -190,25 +167,6 @@ public class TextManager : MonoBehaviour
 			}
 
 
-			/*
-            if (Input.GetMouseButtonDown(0))
-            {
-                Punch = true;
-            }
-
-            if (Input.GetMouseButtonDown(1))
-            {
-                Block = true;
-            }
-
-            if (Punch == true && Block == true)
-            {
-                textScroll = true;
-                currentLine += 1;
-                Block = false;
-                Punch = false;
-            }
-			*/
         }
 
         if (currentLine == 9) //Combo Attack
@@ -234,18 +192,6 @@ public class TextManager : MonoBehaviour
 			}
 
 
-//            if (Input.GetMouseButtonDown(0))
-//            {
-//                threeWayCombo += 1;
-//            }
-//
-//            if (threeWayCombo == 3)
-//            {
-//                textScroll = true;
-//                currentLine += 1;
-//                threeWayCombo = 0;
-//            }
-
         }
 
         if (currentLine == 11) //Sync Attack
@@ -267,18 +213,6 @@ public class TextManager : MonoBehaviour
 			}
 
 
-//            if (Input.GetKeyDown(KeyCode.Y))
-//            {
-//                textScroll = true;
-//                currentLine = 22;
-//            }
-//
-//            else if (Input.GetKeyDown(KeyCode.N))
-//            {
-//                textScroll = true;
-//                currentLine += 1;
-//            }
-
         }
 
 		if (currentLine == 14) 
@@ -287,15 +221,6 @@ public class TextManager : MonoBehaviour
 		}
 
 
-//		if (currentLine == 13) //Special Attack
-//		{
-//			textScroll = false;
-//
-//		}
-//        if (currentLine == 15)
-//        {
-//            currentLine = 101;
-//        }
 
     }
 }

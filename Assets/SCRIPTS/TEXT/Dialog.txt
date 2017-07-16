@@ -1,4 +1,4 @@
-Welcome to the training simulation system, rookies. (Press B (on the controller))
+Welcome to the training simulation system, rookies.
 I will be teaching you amazing stuff about this Mecha. 
 The orangey bars up there are health bars. 
 Now, it's time for you two to learn some combat skills. 
