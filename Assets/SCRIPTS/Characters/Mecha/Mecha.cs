@@ -294,11 +294,13 @@ public class Mecha : LifeObject
 		}
 			
 		if (dashPunch) {
+			startReset = true;
 			if (dashPunchDurationTimer <= dashPunchDuration) 
 			{
 				state = (int)STATE.DASHPUNCH1;
 				dMG = 170;
 				dashPunchDurationTimer += Time.deltaTime * 1000f;
+				resetTimer = resetDuration *0.7f;
 			} 
 			else 
 			{
