@@ -40,6 +40,11 @@ public class Mecha : LifeObject
 	bool startReset;
 	float resetTimer;
 	float resetDuration;
+
+	//hitsparkreset
+	bool hitstartReset;
+	float hitresetTimer = 0.0f;
+	float hitresetDuration = 1.0f;
 	//prevent
 	bool isOtherCombo;
 	bool isJumpPunching;
@@ -104,6 +109,16 @@ public class Mecha : LifeObject
 			UpdateAnimator ();
 		}
 
+	}
+
+	void OnHitSpark()
+	{
+		GameObject.FindGameObjectWithTag ("PlayerHitSpark").GetComponent<SpriteRenderer> ().enabled = true;
+	}
+
+	void OffHitSpark()
+	{
+		GameObject.FindGameObjectWithTag ("PlayerHitSpark").GetComponent<SpriteRenderer> ().enabled = false;
 	}
 
 	void Movement ()
