@@ -9,6 +9,7 @@ public class Goatzilla : LifeObject
 {
 	public BoxCollider2D box2d;
 	public Rigidbody2D rb2d;
+	public float knockBackPower = 0.0f;
 
 	public float initialSpeed = 1f; // Phase 1 initial speed
 	public float walkTimer = 0.0f;
@@ -380,8 +381,9 @@ public class Goatzilla : LifeObject
 	{
 		if(GetDistanceFromTarget () <= meleeRange)
 		{
-			target.ReceiveDamage(20);
-			target.Knockback (Vector3.left, 0.1f);
+			target.ReceiveDamage(60);
+			target.transform.Translate(knockBackPower,0.0f,0.0f);
+			//target.Knockback (Vector3.left, 0.1f);
 		}
 	}
 
@@ -531,7 +533,8 @@ public class Goatzilla : LifeObject
 		if(GetDistanceFromTarget () <= meleeRange)
 		{
 			target.ReceiveDamage(70);
-			target.Knockback (Vector3.left, 0.1f);
+			target.transform.Translate(knockBackPower,0.0f,0.0f);
+			//target.Knockback (Vector3.left, 0.1f);
 		}
 	}
 

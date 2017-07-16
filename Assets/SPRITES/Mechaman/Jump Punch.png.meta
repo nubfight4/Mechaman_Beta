@@ -1,16 +1,13 @@
 fileFormatVersion: 2
-guid: c5d7f74e00008b54795a0f45b9a61adb
-timeCreated: 1499674002
+guid: 01594b4b1de249a43b4093b1dbc34f9c
+timeCreated: 1500229214
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Shadowless Strike_0
-    21300002: Shadowless Strike_1
-    21300004: Shadowless Strike_2
-    21300006: Shadowless Strike_3
-    21300008: Shadowless Strike_4
-    21300010: Shadowless Strike_5
-    21300012: Shadowless Strike_6
+    21300000: Jump Punch_0
+    21300002: Jump Punch_1
+    21300004: Jump Punch_2
+    21300006: Jump Punch_3
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -77,93 +74,54 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Shadowless Strike_0
+      name: Jump Punch_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 1260
+        y: 565
         width: 1000
-        height: 420
+        height: 565
       alignment: 9
-      pivot: {x: 0.31, y: 0.5}
+      pivot: {x: 0.35, y: 0.38}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Shadowless Strike_1
+      name: Jump Punch_1
       rect:
         serializedVersion: 2
         x: 1000
-        y: 1260
+        y: 565
         width: 1000
-        height: 420
+        height: 565
       alignment: 9
-      pivot: {x: 0.31, y: 0.5}
+      pivot: {x: 0.44536266, y: 0.1}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Shadowless Strike_2
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 840
-        width: 1000
-        height: 420
-      alignment: 9
-      pivot: {x: 0.31, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Shadowless Strike_3
-      rect:
-        serializedVersion: 2
-        x: 1000
-        y: 840
-        width: 1000
-        height: 420
-      alignment: 9
-      pivot: {x: 0.31, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Shadowless Strike_4
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 420
-        width: 1000
-        height: 420
-      alignment: 9
-      pivot: {x: 0.31, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Shadowless Strike_5
-      rect:
-        serializedVersion: 2
-        x: 1000
-        y: 420
-        width: 1000
-        height: 420
-      alignment: 9
-      pivot: {x: 0.31, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Shadowless Strike_6
+      name: Jump Punch_2
       rect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 1000
-        height: 420
+        height: 565
       alignment: 9
-      pivot: {x: 0.31, y: 0.5}
+      pivot: {x: 0.3191827, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Jump Punch_3
+      rect:
+        serializedVersion: 2
+        x: 1000
+        y: 0
+        width: 1000
+        height: 565
+      alignment: 9
+      pivot: {x: 0.35, y: 0.38}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0

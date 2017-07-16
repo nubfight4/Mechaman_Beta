@@ -52,11 +52,10 @@ public class LifeObject : MonoBehaviour
 			this.HP -= value;
 		if(this.gameObject.tag == "Player")
 		{
-			transform.Translate(-1.0f,0.0f,0.0f);		
-		}
-		else if(this.gameObject.tag == "Enemy")
-		{
-			transform.Translate(1.0f,0.0f,0.0f);
+			if(value >= 60)
+			{
+				transform.Translate(-1.0f,0.0f,0.0f);	
+			}
 		}
 	}
 

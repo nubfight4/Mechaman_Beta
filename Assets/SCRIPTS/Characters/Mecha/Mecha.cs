@@ -205,7 +205,7 @@ public class Mecha : LifeObject
 				p1RPressed = false;
 				p2LPressed = false;
 				p2RPressed = false;
-				resetDuration = 1.0f;
+				resetDuration = 0.7f;
 				state = (int)STATE.IDLE;
 			}
 		}
