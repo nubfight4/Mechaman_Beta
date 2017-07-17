@@ -12,6 +12,7 @@ public class Goatzilla : LifeObject
 
 	public float initialSpeed = 1f; // Phase 1 initial speed
 	public float walkTimer = 0.0f;
+	public float knockBackPower = 0.0f;
 
 	//! Melee
 	[Header("Melee")]
@@ -24,7 +25,7 @@ public class Goatzilla : LifeObject
 	//! Rock
 	[Header("Rock")]
 	public GameObject rockPrefab;
-	public GameObject rockIndicator;
+	//public GameObject rockIndicator;
 	//public GameObject rockIndicatorPrefab;
 	public float rockSpawnHeight = 20.0f;
 	public int singleRockThrowCountNormal = 3;
@@ -303,6 +304,16 @@ public class Goatzilla : LifeObject
 //			return Direction.NONE;
 //	}
 
+	public void GOnHitSpark()
+	{
+		GameObject.FindGameObjectWithTag ("PlayerHitSpark").GetComponent<SpriteRenderer> ().enabled = true;
+	}
+
+	public void GOffHitSpark()
+	{
+		GameObject.FindGameObjectWithTag ("PlayerHitSpark").GetComponent<SpriteRenderer> ().enabled = false;
+	}
+
 	private float GetDistanceFromTarget ()
 	{
 		return Vector3.Distance (transform.position, target.transform.position);
@@ -380,8 +391,9 @@ public class Goatzilla : LifeObject
 	{
 		if(GetDistanceFromTarget () <= meleeRange)
 		{
-			target.ReceiveDamage(20);
-			target.Knockback (Vector3.left, 0.1f);
+			target.ReceiveDamage(50);
+			target.transform.Translate(knockBackPower,0.0f,0.0f);
+			//target.Knockback (Vector3.left, 0.1f);
 		}
 	}
 
@@ -413,10 +425,6 @@ public class Goatzilla : LifeObject
 			isCheckMelee = true;
 			rockTimer += Time.deltaTime;
 
-			if(rockTimer >= rockDuration*0.8f)
-			{
-				rockIndicator.SetActive(true);
-			}
 			if(rockTimer >= rockDuration)
 			{
 				rockCounter ++;
@@ -531,7 +539,8 @@ public class Goatzilla : LifeObject
 		if(GetDistanceFromTarget () <= meleeRange)
 		{
 			target.ReceiveDamage(70);
-			target.Knockback (Vector3.left, 0.1f);
+			target.transform.Translate(knockBackPower,0.0f,0.0f);
+			//target.Knockback (Vector3.left, 0.1f);
 		}
 	}
 

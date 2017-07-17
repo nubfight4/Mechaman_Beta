@@ -5,8 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class StartOnClick : MonoBehaviour {
 
-    public void Start(int sceneIndex)
-    {
-        SceneManager.LoadScene("Level_Tutorial");
-    }
+//    public void Start(int sceneIndex)
+//    {
+//        SceneManager.LoadScene("Level_Tutorial");
+//    }
 }

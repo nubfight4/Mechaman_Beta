@@ -6,6 +6,7 @@ public class LifeObject : MonoBehaviour
 {
 
 	public int lives = 0;
+	public GameObject hitSpark;
 	protected int maxHP;
 	protected int HP;
 	protected Vector3 objposition;
@@ -49,14 +50,9 @@ public class LifeObject : MonoBehaviour
 	public virtual void ReceiveDamage (int value)
 	{
 		if (!isInvincible)
+		{
 			this.HP -= value;
-		if(this.gameObject.tag == "Player")
-		{
-			transform.Translate(-0.5f,0.0f,0.0f);		
-		}
-		else if(this.gameObject.tag == "Enemy")
-		{
-			transform.Translate(0.5f,0.0f,0.0f);
+			this.hitSpark.SetActive(true);
 		}
 	}
 

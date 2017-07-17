@@ -23,6 +23,10 @@ public class Mecha : LifeObject
 	Vector3 minPos;
 	Vector3 maxPos;
 
+	[Header("Movement")]
+	public float MovementSpeed;
+	float translation = 0.0f;
+
 	private Animator anim;
 	private SpriteRenderer sprite;
 	public int state;
@@ -30,10 +34,10 @@ public class Mecha : LifeObject
 	bool isJumping;
 	bool isStop;
 	//! Combo and Syncgronise attack
-	bool p1LPressed;
-	bool p1RPressed;
-	bool p2LPressed;
-	bool p2RPressed;
+//	bool p1LPressed;
+//	bool p1RPressed;
+//	bool p2LPressed;
+//	bool p2RPressed;
 	int timePressedNormal;
 	int timePressedHeavy;
 	//reset
@@ -43,11 +47,11 @@ public class Mecha : LifeObject
 
 	//hitsparkreset
 	bool hitstartReset;
-	float hitresetTimer = 0.0f;
-	float hitresetDuration = 1.0f;
+//	float hitresetTimer = 0.0f;
+//	float hitresetDuration = 1.0f;
 	//prevent
 	bool isOtherCombo;
-	bool isJumpPunching;
+	public bool isJumpPunching;
 
 	public GameObject JumpPunchCollider;
 	public GameObject DashPunchCollider;
@@ -76,15 +80,15 @@ public class Mecha : LifeObject
 		isOtherCombo = false;
 		isJumpPunching = false;
 		startReset = false;
-		p1LPressed = false;
-		p1RPressed = false;
-		p2LPressed = false;
-		p2RPressed = false;
+//		p1LPressed = false;
+//		p1RPressed = false;
+//		p2LPressed = false;
+//		p2RPressed = false;
 		timePressedNormal = 0;
 		timePressedHeavy = 0;
 		resetTimer = 0f;
 		//resetDuration = 0.7f;
-		resetDuration = 1.2f;
+		resetDuration = 0.5f;
 	}
 
 	// Update is called once per frame
@@ -94,7 +98,8 @@ public class Mecha : LifeObject
 			CheckDeath();
 			Debug.Log (state);
 			Boundary ();
-			gamepadPos.x = Input.GetAxis ("Horizontal");
+			Movement();
+			//gamepadPos.x = Input.GetAxis ("Horizontal");
 			//gamepadPos.y = Input.GetAxis ("Vertical");
 			if(!isJumpPunching)
 			{
@@ -121,17 +126,24 @@ public class Mecha : LifeObject
 		GameObject.FindGameObjectWithTag ("PlayerHitSpark").GetComponent<SpriteRenderer> ().enabled = false;
 	}
 
-	void Movement ()
+//	void Movement ()
+//	{
+//		gamepadPos.x = Input.GetAxis ("Horizontal");
+//		//gamepadPos.y = Input.GetAxis ("Vertical");
+//		transform.position = gamepadPos + transform.position;
+//		if (gamepadPos.x < -0.0187) {
+//			transform.localScale = new Vector3 (-1, transform.localScale.y);
+//		}
+//		if (gamepadPos.x > 0.01875) {
+//			transform.localScale = new Vector3 (1, transform.localScale.y);	
+//		}
+//	}
+
+	void Movement()
 	{
-		gamepadPos.x = Input.GetAxis ("Horizontal");
-		//gamepadPos.y = Input.GetAxis ("Vertical");
-		transform.position = gamepadPos + transform.position;
-		if (gamepadPos.x < -0.0187) {
-			transform.localScale = new Vector3 (-1, transform.localScale.y);
-		}
-		if (gamepadPos.x > 0.01875) {
-			transform.localScale = new Vector3 (1, transform.localScale.y);	
-		}
+		Debug.Log(Input.GetAxis("Horizontal"));
+		translation = Input.GetAxis("Horizontal") * MovementSpeed * Time.deltaTime;
+		transform.Translate(translation,0.0f,0.0f);
 	}
 
 	void Boundary ()
@@ -218,11 +230,11 @@ public class Mecha : LifeObject
 				startReset = false;
 				isOtherCombo = false;
 				isJumpPunching = false;
-				//dashPunch = false;
-				p1LPressed = false;
-				p1RPressed = false;
-				p2LPressed = false;
-				p2RPressed = false;
+				dashPunch = false;
+//				p1LPressed = false;
+//				p1RPressed = false;
+//				p2LPressed = false;
+//				p2RPressed = false;
 				resetDuration = 1.0f;
 				state = (int)STATE.IDLE;
 			}
@@ -289,66 +301,75 @@ public class Mecha : LifeObject
 //		}
 
 		//Dash punch (Terrence)
-		if (gamepadPos.x > 0) { // A + Mech Move Right
-			if (Input.GetButtonDown ("Heavy Attack") && isJumpPunching == false && timePressedHeavy == 0) 
+		if (Input.GetAxis("Horizontal")> 0) { // A + Mech Move Right
+			if (Input.GetButtonDown ("Heavy Attack") && isJumpPunching == false) 
 			{
-				Debug.Log ("Dash attack right");
 				//startReset = true;
+				gameObject.transform.Translate (Vector2.right * dashPunchForce * Time.deltaTime);
+				timePressedHeavy = 0;
 				isOtherCombo = true;
 				dashPunch = true;
-				dashPunchRight = true;
-				dashPunchLeft = false;
+				startReset = true;
+				//dashPunchRight = true;
+				//dashPunchLeft = false;
 			}
-		} else if (gamepadPos.x < 0) { //A + Mech Move Left
-			if (Input.GetButtonDown ("Heavy Attack") && isJumpPunching == false && timePressedHeavy == 0) 
+		} else if (Input.GetAxis("Horizontal") < 0) { //A + Mech Move Left
+			if (Input.GetButtonDown ("Heavy Attack") && isJumpPunching == false) 
 			{
-				Debug.Log ("Dash attack left");
 				//startReset = true;
+				gameObject.transform.Translate (Vector2.left * dashPunchForce * Time.deltaTime);
+				timePressedHeavy = 0;
 				isOtherCombo = true;
 				dashPunch = true;
-				dashPunchRight = false;
-				dashPunchLeft = true;
+				startReset = true;
+				//dashPunchRight = false;
+				//dashPunchLeft = true;
 			}
 		}
 			
-		if (dashPunch) {
-			if (dashPunchDurationTimer <= dashPunchDuration) 
-			{
-				state = (int)STATE.DASHPUNCH1;
-				dMG = 170;
-				dashPunchDurationTimer += Time.deltaTime * 1000f;
-			} 
-			else 
-			{
-				//state = (int)STATE.IDLE;
-				//Destroy (DashPunchColliderClone);
-				dashPunchDurationTimer = 0f;
-				dashPunch = false;
-				dashPunchLeft = false;
-				dashPunchRight = false;
-				instantOnce = false;
-			}
-
-			if (dashPunchLeft && !dashPunchRight) 
-			{
-				gameObject.transform.Translate (Vector2.left * dashPunchForce * Time.deltaTime);
-				if (!instantOnce) 
-				{
-					//DashPunchColliderClone = Instantiate (DashPunchCollider, new Vector2 (transform.position.x - 1, transform.position.y), Quaternion.identity);
-					//DashPunchColliderClone.transform.parent = gameObject.transform;
-					instantOnce = true;
-				}
-			} else if (dashPunchRight && !dashPunchLeft) 
-			{
-				gameObject.transform.Translate (Vector2.right * dashPunchForce * Time.deltaTime);
-				if (!instantOnce) 
-				{
-					//DashPunchColliderClone = Instantiate (DashPunchCollider, new Vector2 (transform.position.x + 1, transform.position.y), Quaternion.identity);
-					//DashPunchColliderClone.transform.parent = gameObject.transform;
-					instantOnce = true;
-				}
-			}
+		if(dashPunch)
+		{
+			state = (int)STATE.DASHPUNCH1;
+			resetTimer += (resetDuration*0.3f);
+			dMG = 100;
 		}
+//		if (dashPunch) {
+//			if (dashPunchDurationTimer <= dashPunchDuration) 
+//			{
+//				state = (int)STATE.DASHPUNCH1;
+//				dMG = 170;
+//				dashPunchDurationTimer += Time.deltaTime * 1000f;
+//			} 
+//			else 
+//			{
+//				//state = (int)STATE.IDLE;
+//				//Destroy (DashPunchColliderClone);
+//				dashPunchDurationTimer = 0f;
+//				dashPunch = false;
+//				dashPunchLeft = false;
+//				dashPunchRight = false;
+//				instantOnce = false;
+//			}
+//			if (dashPunchLeft && !dashPunchRight) 
+//			{
+//				gameObject.transform.Translate (Vector2.left * dashPunchForce * Time.deltaTime);
+//				if (!instantOnce) 
+//				{
+//					//DashPunchColliderClone = Instantiate (DashPunchCollider, new Vector2 (transform.position.x - 1, transform.position.y), Quaternion.identity);
+//					//DashPunchColliderClone.transform.parent = gameObject.transform;
+//					instantOnce = true;
+//				}
+//			} else if (dashPunchRight && !dashPunchLeft) 
+//			{
+//				gameObject.transform.Translate (Vector2.right * dashPunchForce * Time.deltaTime);
+//				if (!instantOnce) 
+//				{
+//					//DashPunchColliderClone = Instantiate (DashPunchCollider, new Vector2 (transform.position.x + 1, transform.position.y), Quaternion.identity);
+//					//DashPunchColliderClone.transform.parent = gameObject.transform;
+//					instantOnce = true;
+//				}
+//			}
+//		}
 
 		//normal combo
 		if (timePressedNormal < 4) 
@@ -370,14 +391,14 @@ public class Mecha : LifeObject
 					else if (timePressedNormal == 1) 
 					{
 						state = (int)STATE.WHATSUP;
-						dMG = 130;
+						dMG = 70;
 						resetTimer = 0;
 						timePressedNormal++;
 					}
 					else if(timePressedNormal == 2)
 					{
 						state = (int)STATE.SHADOW;
-						dMG = 200;
+						dMG = 80;
 					} 
 				}
 			}
@@ -456,30 +477,30 @@ public class Mecha : LifeObject
 //		}
 
 		//ULtimate
-		if (Input.GetButtonDown ("Bumper_Left_P1")) 
-		{
-			startReset = true;
-			p1LPressed = true;
-		}
-		if (Input.GetButtonDown ("Bumper_Right_P1")) 
-		{
-			startReset = true;
-			p1RPressed = true;
-		}
-		if (Input.GetButtonDown ("Bumper_Left_P2")) 
-		{
-			startReset = true;
-			p2LPressed = true;
-		}
-		if (Input.GetButtonDown ("Bumper_Right_P2")) 
-		{
-			startReset = true;
-			p2RPressed = true;
-		}
-
-		if (p1LPressed == true && p1RPressed == true && p2LPressed == true && p2RPressed == true) 
-		{
-			Debug.Log ("UltimateGG");
-		}
+//		if (Input.GetButtonDown ("Bumper_Left_P1")) 
+//		{
+//			startReset = true;
+//			p1LPressed = true;
+//		}
+//		if (Input.GetButtonDown ("Bumper_Right_P1")) 
+//		{
+//			startReset = true;
+//			p1RPressed = true;
+//		}
+//		if (Input.GetButtonDown ("Bumper_Left_P2")) 
+//		{
+//			startReset = true;
+//			p2LPressed = true;
+//		}
+//		if (Input.GetButtonDown ("Bumper_Right_P2")) 
+//		{
+//			startReset = true;
+//			p2RPressed = true;
+//		}
+//
+//		if (p1LPressed == true && p1RPressed == true && p2LPressed == true && p2RPressed == true) 
+//		{
+//			Debug.Log ("UltimateGG");
+//		}
 	}
 }

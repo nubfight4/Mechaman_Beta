@@ -6,6 +6,7 @@ public class RoarPrefab : MonoBehaviour
 {
 	public int roarDamage = 150;
 	public float roarSpeed = 1.0f;
+	public float knockBackPower = 0.0f;
 
 	void Start ()
 	{
@@ -28,6 +29,7 @@ public class RoarPrefab : MonoBehaviour
 		if (other.gameObject.CompareTag ("Player"))
 		{
 			other.gameObject.GetComponent<Mecha> ().ReceiveDamage (roarDamage);
+			other.gameObject.GetComponent<Transform> ().Translate(knockBackPower,0.0f,0.0f);
 			Destroy (this.gameObject);
 		}
 	}
