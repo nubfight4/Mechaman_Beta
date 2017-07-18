@@ -215,7 +215,7 @@ public class TextManager : MonoBehaviour
 
         }
 
-		if (currentLine == 14) 
+		if (currentLine == 13) 
 		{
 			GameObject.FindGameObjectWithTag ("TutorialDoor").GetComponent<Transform> ().Translate (Vector3.up * Time.deltaTime * doorspeed);
 		}

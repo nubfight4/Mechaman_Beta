@@ -72,9 +72,9 @@ public class Mecha : LifeObject
 		state = 0;
 		isJumping = false; 
 		isStop = false;
-		maxPos.x = 4.34f;
+		maxPos.x = 4.6f;
 		//maxPos.y = -1.0f;
-		minPos.x = -4.55f;
+		minPos.x = -4.75f;
 		//minPos.y = -2.25f;
 		anim = GetComponent<Animator> ();
 		isOtherCombo = false;
@@ -97,8 +97,8 @@ public class Mecha : LifeObject
 		if (PauseOnPress.Instance.paused != true) {
 			CheckDeath();
 			Debug.Log (state);
-			Boundary ();
 			Movement();
+			Boundary ();
 			//gamepadPos.x = Input.GetAxis ("Horizontal");
 			//gamepadPos.y = Input.GetAxis ("Vertical");
 			if(!isJumpPunching)
@@ -126,25 +126,31 @@ public class Mecha : LifeObject
 		GameObject.FindGameObjectWithTag ("PlayerHitSpark").GetComponent<SpriteRenderer> ().enabled = false;
 	}
 
-//	void Movement ()
-//	{
-//		gamepadPos.x = Input.GetAxis ("Horizontal");
-//		//gamepadPos.y = Input.GetAxis ("Vertical");
-//		transform.position = gamepadPos + transform.position;
-//		if (gamepadPos.x < -0.0187) {
-//			transform.localScale = new Vector3 (-1, transform.localScale.y);
-//		}
-//		if (gamepadPos.x > 0.01875) {
-//			transform.localScale = new Vector3 (1, transform.localScale.y);	
-//		}
-//	}
-
-	void Movement()
+	void Movement ()
 	{
-		Debug.Log(Input.GetAxis("Horizontal"));
-		translation = Input.GetAxis("Horizontal") * MovementSpeed * Time.deltaTime;
-		transform.Translate(translation,0.0f,0.0f);
+		gamepadPos.x = Input.GetAxis ("Horizontal");
+		//gamepadPos.y = Input.GetAxis ("Vertical");
+		transform.position = gamepadPos + transform.position;
+		if (gamepadPos.x < -0.0187) {
+			//transform.localScale = new Vector3 (-1, transform.localScale.y);
+			transform.Translate(Vector3.left * Time.deltaTime * translation);
+			transform.localScale = new Vector3 (-1,1,1);
+			SoundManagerScript.Instance.PlaySFX(AudioClipID.SFX_MECHAMAN_WALKING);
+		}
+		if (gamepadPos.x > 0.01875) {
+			//transform.localScale = new Vector3 (1, transform.localScale.y);
+			transform.Translate(Vector3.right * Time.deltaTime * translation);
+			transform.localScale = new Vector3 (1,1,1);
+			SoundManagerScript.Instance.PlaySFX(AudioClipID.SFX_MECHAMAN_WALKING);
+		}
 	}
+
+//	void Movement()
+//	{
+//		Debug.Log(Input.GetAxis("Horizontal"));
+//		translation = Input.GetAxis("Horizontal") * MovementSpeed * Time.deltaTime;
+//		transform.Translate(translation,0.0f,0.0f);
+//	}
 
 	void Boundary ()
 	{
@@ -250,6 +256,7 @@ public class Mecha : LifeObject
 			if (Input.GetButtonDown ("Normal Attack") && timePressedNormal == 0) 
 			{
 				state = (int)STATE.JUMPPUNCH1;
+				SoundManagerScript.Instance.PlaySFX(AudioClipID.SFX_MECHAMAN_NORMAL_PUNCH);
 				if(dashPunch)
 				{
 					dMG = 88;
@@ -329,6 +336,7 @@ public class Mecha : LifeObject
 			
 		if(dashPunch)
 		{
+			SoundManagerScript.Instance.PlaySFX(AudioClipID.SFX_MECHAMAN_DASH_PUNCH);
 			state = (int)STATE.DASHPUNCH1;
 			resetTimer += (resetDuration*0.3f);
 			dMG = 100;
@@ -376,7 +384,6 @@ public class Mecha : LifeObject
 		{
 			if (Input.GetButtonDown ("Normal Attack")) 
 			{ 
-
 				if (!isOtherCombo) 
 				{
 					startReset = true;
@@ -387,6 +394,7 @@ public class Mecha : LifeObject
 						dMG = 60;
 						resetTimer = 0;
 						timePressedNormal++;
+						SoundManagerScript.Instance.PlaySFX(AudioClipID.SFX_MECHAMAN_NORMAL_PUNCH);
 					} 
 					else if (timePressedNormal == 1) 
 					{
@@ -394,11 +402,13 @@ public class Mecha : LifeObject
 						dMG = 70;
 						resetTimer = 0;
 						timePressedNormal++;
+						SoundManagerScript.Instance.PlaySFX(AudioClipID.SFX_MECHAMAN_NORMAL_PUNCH);
 					}
 					else if(timePressedNormal == 2)
 					{
 						state = (int)STATE.SHADOW;
 						dMG = 80;
+						SoundManagerScript.Instance.PlaySFX(AudioClipID.SFX_MECHAMAN_NORMAL_PUNCH);
 					} 
 				}
 			}
@@ -446,6 +456,7 @@ public class Mecha : LifeObject
 		{
 			if (Input.GetButtonDown("Heavy Attack")) 
 			{ 
+				
 				if(!isOtherCombo)
 				{
 					Debug.Log(timePressedHeavy);
@@ -458,12 +469,14 @@ public class Mecha : LifeObject
 						resetTimer = 0;
 						timePressedHeavy++;
 						Debug.Log("HEAVY1");
+						SoundManagerScript.Instance.PlaySFX(AudioClipID.SFX_MECHAMAN_HEAVY_PUNCH);
 					}
 					else if(timePressedHeavy == 1)
 					{
 						Debug.Log("HEAVY2");
 						state = (int)STATE.DOUBLETROUBLE;
 						dMG = 250;
+						SoundManagerScript.Instance.PlaySFX(AudioClipID.SFX_MECHAMAN_HEAVY_PUNCH);
 					}
 				}
 			}
