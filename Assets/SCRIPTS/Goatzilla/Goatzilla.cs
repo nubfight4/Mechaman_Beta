@@ -129,66 +129,68 @@ public class Goatzilla : LifeObject
 			if (isAlive) {
 				//! Normal
 				UpdateMonsterCondition ();
-				if (curBehaviorState == BehaviorState.NORMAL) { 				
-					if (curAttackState == AttackState.NONE) {
-						if (isSwipeAnim == false || isThrowRockAnim == false || isAcidAnim == false) {
-							Walk (1.5f);
-						}
-					} else if (curAttackState == AttackState.THROWROCK) {
-						if (randRockThrow == false) {
-							randRockThrow = true;
-							randRockChoice = Random.Range (0, 2);
-						}
+				if (!mecha.isMinigame) {
+					if (curBehaviorState == BehaviorState.NORMAL) { 				
+						if (curAttackState == AttackState.NONE) {
+							if (isSwipeAnim == false || isThrowRockAnim == false || isAcidAnim == false) {
+								Walk (1.5f);
+							}
+						} else if (curAttackState == AttackState.THROWROCK) {
+							if (randRockThrow == false) {
+								randRockThrow = true;
+								randRockChoice = Random.Range (0, 2);
+							}
 //						if(isThrowRockAnim == false)
 //						{
 //							isThrowRockAnim = true;
 //						}
-						if (isThrowRock1 == true) {
-							//! Check if > 5 rocks switch state else to this logic
-							if (rockCounter >= 5) {
-								rockThrowCounter++;
-								Debug.Log ("HEllo? : " + rockThrowCounter);
-								rockCounter = 0;
-								if (rockThrowCounter >= 3) {
-									anim.SetBool ("DoRockThrow", false);
-									rockThrowCounter = 0;
-									UpdateAttackState (AttackState.ACID);
-									isThrowRock1 = false;
+							if (isThrowRock1 == true) {
+								//! Check if > 5 rocks switch state else to this logic
+								if (rockCounter >= 5) {
+									rockThrowCounter++;
+									Debug.Log ("HEllo? : " + rockThrowCounter);
+									rockCounter = 0;
+									if (rockThrowCounter >= 3) {
+										anim.SetBool ("DoRockThrow", false);
+										rockThrowCounter = 0;
+										UpdateAttackState (AttackState.ACID);
+										isThrowRock1 = false;
+									} else {
+										anim.SetBool ("DoRockThrow", false);
+										UpdateAttackState (AttackState.NONE);
+										isThrowRock1 = false;
+									}
 								} else {
-									anim.SetBool ("DoRockThrow", false);
-									UpdateAttackState (AttackState.NONE);
-									isThrowRock1 = false;
+									rockTimer += Time.deltaTime;
+									if (rockTimer >= rockDuration) {
+										rockCounter++;
+										Instantiate (rockPrefab, target.transform.position + (Vector3.up * rockSpawnHeight), Quaternion.identity);
+										rockTimer = 0.0f;
+									}	
 								}
+							}
+						} else if (curAttackState == AttackState.ACID) {
+							if (isAcidSpit == true) {
+								Acid ();
 							} else {
-								rockTimer += Time.deltaTime;
-								if (rockTimer >= rockDuration) {
-									rockCounter++;
-									Instantiate (rockPrefab, target.transform.position + (Vector3.up * rockSpawnHeight), Quaternion.identity);
-									rockTimer = 0.0f;
-								}	
+								if (isAcidAnim == false) {
+									isAcidAnim = true;
+									anim.SetTrigger ("DoAcid");
+								}
 							}
-						}
-					} else if (curAttackState == AttackState.ACID) {
-						if (isAcidSpit == true) {
-							Acid ();
-						} else {
-							if (isAcidAnim == false) {
-								isAcidAnim = true;
-								anim.SetTrigger ("DoAcid");
-							}
-						}
-					} 
+						} 
 //					else if (curAttackState == AttackState.SWIPE && isRock == false) 
 //					{
 //					} 
 					else if (curAttackState == AttackState.ROAR) {
-						if (isRoarAnim == false) {
-							isRoarAnim = true;
-							anim.SetBool ("DoWalk", false);
-							anim.SetTrigger ("DoPrepareRoar");
+							if (isRoarAnim == false) {
+								isRoarAnim = true;
+								anim.SetBool ("DoWalk", false);
+								anim.SetTrigger ("DoPrepareRoar");
+							}
+							Roar ();
+							//						UpdateAttackState(AttackState.NONE);
 						}
-						Roar ();
-						//						UpdateAttackState(AttackState.NONE);
 					}
 				}
 
