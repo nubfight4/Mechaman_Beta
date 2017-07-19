@@ -226,9 +226,8 @@ public class Goatzilla : LifeObject
 							randRockThrow = true;
 							randRockChoice = Random.Range(0, 2);
 							anim.SetBool ("DoThrowRock", true);
-							CameraShake._instance.shakeDuration = 5.0f;
+							CameraShake._instance.shakeDuration = 0.2f;
 							CameraShake._instance.shakeAmount = 0.1f;
-							SoundManagerScript.Instance.PlaySFX(AudioClipID.SFX_GOATZILLA_ROCK_TELEGRAPH);
 						}
 					}
 					else if (curAttackState == AttackState.CHECK)
@@ -390,7 +389,6 @@ public class Goatzilla : LifeObject
 
 	private void Walk (float walkDuration)
 	{
-		SoundManagerScript.Instance.PlaySFX(AudioClipID.SFX_GOATZILLA_WALKING);
 		randRockThrow = false;
 		isCheckMelee = true;
 		if (walkTimer >= walkDuration)
@@ -408,12 +406,10 @@ public class Goatzilla : LifeObject
 
 	private void Swipe ()
 	{
-		SoundManagerScript.Instance.PlaySFX(AudioClipID.SFX_GOATZILLA_SWIPING);
 		if(GetDistanceFromTarget () <= meleeRange)
 		{
 			target.ReceiveDamage(50);
 			target.transform.Translate(knockBackPower,0.0f,0.0f);
-			SoundManagerScript.Instance.PlaySFX(AudioClipID.SFX_MECHAMAN_GETTING_SWIPED);
 			//target.Knockback (Vector3.left, 0.1f);
 		}
 	}
@@ -545,13 +541,11 @@ public class Goatzilla : LifeObject
 		{
 			anim.SetBool("DoChargeRoar", true);
 			roarChargeTimer += Time.deltaTime;
-			SoundManagerScript.Instance.PlaySFX(AudioClipID.SFX_GOATZILLA_CHARGE_ROAR);
 			if ( roarChargeTimer > roarChargeDuration)
 			{
 				isRoarPrepare = false;
 				anim.SetBool("DoChargeRoar", false);
 				anim.SetTrigger ("DoRoarAttack");
-				SoundManagerScript.Instance.PlaySFX(AudioClipID.SFX_GOATZILLA_ROAR);
 				roarChargeTimer = 0;
 			}
 		}
@@ -561,7 +555,6 @@ public class Goatzilla : LifeObject
 	{
 		if(GetDistanceFromTarget () <= meleeRange)
 		{
-			SoundManagerScript.Instance.PlaySFX(AudioClipID.SFX_MECHAMAN_GETTING_HEADBUTTED);
 			target.ReceiveDamage(70);
 			target.transform.Translate(knockBackPower,0.0f,0.0f);
 			//target.Knockback (Vector3.left, 0.1f);
@@ -602,7 +595,6 @@ public class Goatzilla : LifeObject
 				isRoarDone = true;
 				isRoarReady = true;
 				UpdateAttackState(AttackState.CHECK);
-				SoundManagerScript.Instance.PlaySFX(AudioClipID.SFX_GOATZILLA_HIT_BY_PUNCH);
 			}
 		}
 	}
@@ -709,4 +701,17 @@ public class Goatzilla : LifeObject
 //			target.gameObject.GetComponent<Mecha> ().ReceiveDamage (chargeDamage);
 //		}
 	}
+
+    void Goatzilla_Stomp()
+    {
+        SoundManagerScript.Instance.PlaySFX(AudioClipID.SFX_GOATZILLA_STOMP);
+    }
+    void Goatzilla_Swipe()
+    {
+        SoundManagerScript.Instance.PlaySFX(AudioClipID.SFX_GOATZILLA_SWIPING);
+    }
+    void Goatzilla_Walking()
+    {
+        SoundManagerScript.Instance.PlaySFX(AudioClipID.SFX_GOATZILLA_WALKING);
+    }
 }
