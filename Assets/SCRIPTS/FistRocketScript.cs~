@@ -33,26 +33,32 @@ public class FistRocketScript : MonoBehaviour
 
 	void Update ()
 	{
+		PrimitiveRocketFistMovement ();
 	}
 
 	void FixedUpdate ()
 	{
+		/*
 		UpdatePos ();
 		if (goatzilla != null) {
 			MoveTowardsGoatzilla ();
 		}
 		ReturnToPlayer ();
+		*/
 	}
 
 	void UpdatePos ()
 	{
+		/*
 		specialFistPos = this.transform.position;
 		if (goatzilla != null) {
 			goatzillaPos = goatzilla.transform.position;
 		}
 		mechaPos = mecha.transform.position;
+		*/
 	}
 
+	/*
 	void MoveTowardsGoatzilla () //crashes when goatzilla is killed, suggest create empty as reference
 	{
 		if (!touchEnemy) {
@@ -64,7 +70,9 @@ public class FistRocketScript : MonoBehaviour
 			}
 		}
 	}
+	*/
 
+	/*
 	void ReturnToPlayer ()
 	{
 		if (touchEnemy) {
@@ -81,9 +89,23 @@ public class FistRocketScript : MonoBehaviour
 			Destroy (this.gameObject);
 		}
 	}
+	*/
 
-	public float punchDelay = 100f;
+	void PrimitiveRocketFistMovement ()
+	{
+		if (mecha.transform.position.x < goatzilla.transform.position.x) {
+			transform.localScale = new Vector2 (1f, 1f);
+			transform.eulerAngles = new Vector3 (0f, 0f, -90f);
+			transform.Translate (Vector2.up * Time.deltaTime * attackSpeed);
+		} else if (mecha.transform.position.x > goatzilla.transform.position.x) {
+			transform.localScale = new Vector2 (-1f, 1f);
+			transform.eulerAngles = new Vector3 (0f, 0f, 90f);
+			transform.Translate (Vector2.up * Time.deltaTime * attackSpeed);
+		}
+	}
+
 	//special fist gets temporarily stuck on enemy
+	public float punchDelay = 100f;
 	public float punchCounter;
 
 	void OnTriggerEnter2D (Collider2D target)
@@ -91,14 +113,17 @@ public class FistRocketScript : MonoBehaviour
 		if (target.gameObject.tag == "Enemy") {
 			punchCounter += Time.deltaTime * 1000f;
 			if (punchCounter > punchDelay) {
-				touchEnemy = true;
+				Destroy (gameObject);
+				//touchEnemy = true;
 			}
 		}
+		/*
 		if (touchEnemy) {
 			if (target.gameObject.tag == "Player") {
 				returnPlayer = true;
 			}
 		}
+		*/
 	}
 
 	void OnTriggerStay2D (Collider2D target)
@@ -106,13 +131,16 @@ public class FistRocketScript : MonoBehaviour
 		if (target.gameObject.tag == "Enemy") {
 			punchCounter += Time.deltaTime * 1000f;
 			if (punchCounter > punchDelay) {
-				touchEnemy = true;
+				Destroy (gameObject);
+				//touchEnemy = true;
 			}
 		}
+		/*
 		if (touchEnemy) {
 			if (target.gameObject.tag == "Player") {
 				returnPlayer = true;
 			}
 		}
+		*/
 	}
 }
