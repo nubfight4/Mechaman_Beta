@@ -387,21 +387,21 @@ public class Mecha : LifeObject
 					if (timePressedNormal == 0) 
 					{
 						state = (int)STATE.PUNCH;
-						dMG = 60;
+						dMG = 40;
 						resetTimer = 0;
 						timePressedNormal++;
 					} 
 					else if (timePressedNormal == 1) 
 					{
 						state = (int)STATE.WHATSUP;
-						dMG = 70;
+						dMG = 50;
 						resetTimer = 0;
 						timePressedNormal++;
 					}
 					else if(timePressedNormal == 2)
 					{
 						state = (int)STATE.SHADOW;
-						dMG = 80;
+						dMG = 50;
 					} 
 				}
 			}
@@ -458,7 +458,7 @@ public class Mecha : LifeObject
 					if(timePressedHeavy == 0)
 					{
 						state = (int)STATE.HEAVY;
-						dMG = 100;
+						dMG = 80;
 						resetTimer = 0;
 						timePressedHeavy++;
 						Debug.Log("HEAVY1");
@@ -467,7 +467,7 @@ public class Mecha : LifeObject
 					{
 						Debug.Log("HEAVY2");
 						state = (int)STATE.DOUBLETROUBLE;
-						dMG = 250;
+						dMG = 170;
 					}
 				}
 			}
