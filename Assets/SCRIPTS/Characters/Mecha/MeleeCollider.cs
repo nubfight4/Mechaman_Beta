@@ -13,15 +13,14 @@ public class MeleeCollider : MonoBehaviour {
 	{
 		if(col.gameObject.CompareTag("Enemy"))
 		{ 
-			Debug.Log(mechaScript.dashPunch);
 			damage = mechaScript.dMG;
 			col.gameObject.GetComponent<LifeObject>().ReceiveDamage(damage);
 			//col.gameObject.transform.Translate(knockBackValue);
-			if(damage >= 100) //! replace after HCI
+			if(mechaScript.dashPunch) //! replace after HCI
 			{
 				col.transform.Translate(knockBackValue,0.0f,0.0f);
 			}
-			if(mechaScript.isJumpPunching)
+			if(mechaScript.isJumping)
 			{
 				col.transform.Translate(knockBackValue,0.0f,0.0f);
 			}

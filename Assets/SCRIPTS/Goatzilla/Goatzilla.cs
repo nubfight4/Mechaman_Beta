@@ -150,6 +150,10 @@ public class Goatzilla : LifeObject
 		Boundary ();
 		if (target != null) 
 		{
+			if(CameraShake._instance.shakeDuration > 0)
+			{
+				CameraShake._instance.shakeDuration -= Time.deltaTime;
+			}
 			CheckDeath();
 			if(isAlive)
 			{
