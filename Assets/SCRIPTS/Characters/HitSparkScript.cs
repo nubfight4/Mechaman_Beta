@@ -21,7 +21,6 @@ public class HitSparkScript : MonoBehaviour {
 		}
 		if(timer >= lifetime)
 		{
-			Debug.Log("GG");
 			timer = 0.0f;
 			this.gameObject.SetActive(false);
 		}

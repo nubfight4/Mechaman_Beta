@@ -25,8 +25,8 @@ public class Goatzilla : LifeObject
 	//! Rock
 	[Header("Rock")]
 	public GameObject rockPrefab;
-	//public GameObject rockIndicator;
-	//public GameObject rockIndicatorPrefab;
+	public GameObject indicator;
+	Vector3 targetPosition;
 	public float rockSpawnHeight = 20.0f;
 	public int singleRockThrowCountNormal = 3;
 	public int singleRockThrowCountEnrage = 5;
@@ -449,7 +449,9 @@ public class Goatzilla : LifeObject
 			if(rockTimer >= rockDuration)
 			{
 				rockCounter ++;
-				Instantiate(rockPrefab, target.transform.position + (Vector3.up * rockSpawnHeight), Quaternion.identity);
+				targetPosition = target.transform.position + (Vector3.up * rockSpawnHeight);
+				RockIndicator(targetPosition,0.83f);
+				Instantiate(rockPrefab, targetPosition, Quaternion.identity);
 				rockTimer = 0.0f;
 			}	
 		}
@@ -468,9 +470,12 @@ public class Goatzilla : LifeObject
 			{
 				tempRockCount = singleRockThrowCountNormal;
 			}
+
 			for( int i = 0; i < tempRockCount; i++)
 			{
-				Instantiate(rockPrefab, target.transform.position + (Vector3.up * rockSpawnHeight) + (Vector3.right * (i - tempRockCount/2)), Quaternion.identity);
+				targetPosition = target.transform.position + (Vector3.up * rockSpawnHeight) + (Vector3.right * (i - tempRockCount/2));
+				RockIndicator(targetPosition,0.83f);
+				Instantiate(rockPrefab, targetPosition, Quaternion.identity);
 			}
 			rockThrowCounter++;
 			if(rockThrowCounter >= 3)
@@ -492,6 +497,17 @@ public class Goatzilla : LifeObject
 		{
 			isMultiRockThrow = true;
 		}
+	}
+
+	void RockIndicator(Vector3 position,float yPos)
+	{
+		indicator.transform.position = new Vector3(position.x, yPos, position.z);
+		Instantiate(indicator,indicator.transform.position,Quaternion.identity);
+		//enable the indicator
+
+		//disable it after the duration
+
+		//spawn the rocks
 	}
 
 	public void StartSpit()
@@ -660,11 +676,9 @@ public class Goatzilla : LifeObject
 			isRoarReady = false;
 			isRoarDone = false;
 		}
-
-		Debug.Log(GetHP () + (500 * lives));
+			
 		if (!isEnraged && (GetHP () + (500 * lives) <= enrageHpThreshold)) 
 		{
-			Debug.Log("Enrage");
 			isEnraged = true;
 		}
 	}
@@ -705,7 +719,7 @@ public class Goatzilla : LifeObject
 //			target.gameObject.GetComponent<Mecha> ().ReceiveDamage (chargeDamage);
 //		}
 	}
-
+		
     void Goatzilla_Stomp()
     {
         SoundManagerScript.Instance.PlaySFX(AudioClipID.SFX_GOATZILLA_STOMP);

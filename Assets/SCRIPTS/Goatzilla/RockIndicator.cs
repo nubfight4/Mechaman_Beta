@@ -33,24 +33,28 @@ using UnityEngine;
 public class RockIndicator : MonoBehaviour 
 {
 
-	public GameObject rockPrefab;
-	public float lifeTime = 1.0f;
-	private float timer;
-
-	void Start () 
+//	public GameObject rockPrefab;
+//	public float lifeTime = 1.0f;
+//	private float timer;
+//
+//	void Start () 
+//	{
+//		timer = 0;
+//	}
+//
+//	void Update () 
+//	{
+//		if (timer >= lifeTime) 
+//		{
+//			Vector3 initPos = new Vector3 (transform.position.x, 5);
+//			Instantiate (rockPrefab, initPos, Quaternion.identity);
+//			Destroy (this.gameObject);
+//		}
+//
+//		timer += Time.deltaTime;
+//	}
+	void Off()
 	{
-		timer = 0;
-	}
-
-	void Update () 
-	{
-		if (timer >= lifeTime) 
-		{
-			Vector3 initPos = new Vector3 (transform.position.x, 5);
-			Instantiate (rockPrefab, initPos, Quaternion.identity);
-			Destroy (this.gameObject);
-		}
-
-		timer += Time.deltaTime;
+		Destroy (this.gameObject);
 	}
 }

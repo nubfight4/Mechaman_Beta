@@ -141,7 +141,6 @@ public class SoundManagerScript : MonoBehaviour
 	public void PlayBGM(AudioClipID audioClipID)
     {   
         bgmAudioSource.clip = FindAudioClip(audioClipID);
-        Debug.Log (audioClipID);
 		bgmAudioSource.volume = bgmVolume;
 		bgmAudioSource.loop = true;
 		bgmAudioSource.Play();
