@@ -151,13 +151,13 @@ public class Mecha : LifeObject
 			//transform.localScale = new Vector3 (-1, transform.localScale.y);
 			transform.Translate(Vector3.left * Time.deltaTime * translation);
 			transform.localScale = new Vector3 (-1,1,1);
-			SoundManagerScript.Instance.PlaySFX(AudioClipID.SFX_MECHAMAN_WALKING);
+
 		}
 		if (gamepadPos.x > 0.01875) {
 			//transform.localScale = new Vector3 (1, transform.localScale.y);
 			transform.Translate(Vector3.right * Time.deltaTime * translation);
 			transform.localScale = new Vector3 (1,1,1);
-			SoundManagerScript.Instance.PlaySFX(AudioClipID.SFX_MECHAMAN_WALKING);
+
 		}
 	}
 
@@ -258,7 +258,7 @@ public class Mecha : LifeObject
 
 		if(dashPunch)
 		{
-			dMG = 100;
+			dMG = 180;
 			if(faceRight)
 			{
 				gameObject.transform.Translate (Vector2.right * dashPunchForce * Time.deltaTime);
@@ -267,7 +267,7 @@ public class Mecha : LifeObject
 			{
 				gameObject.transform.Translate (Vector2.left * dashPunchForce * Time.deltaTime);
 			}
-			SoundManagerScript.Instance.PlaySFX(AudioClipID.SFX_MECHAMAN_DASH_PUNCH);
+
 		}
 
 		//Jump Punch (Terrence)
@@ -275,14 +275,13 @@ public class Mecha : LifeObject
 			if (Input.GetButtonDown ("Normal Attack") && timePressedNormal == 0) 
 			{
 				anim.SetTrigger("JumpPunch");
-				SoundManagerScript.Instance.PlaySFX(AudioClipID.SFX_MECHAMAN_NORMAL_PUNCH);
 				if(dashPunch)
 				{
-					dMG = 88;
+					dMG = 180;
 				}
 				else
 				{
-					dMG = 250;
+					dMG = 180;
 				}
 				startReset = true;
 				isOtherCombo = true;
@@ -301,9 +300,8 @@ public class Mecha : LifeObject
 				{
 					anim.SetTrigger("Punch");
 					resetTimer = 0;
-					dMG = 60;
+					dMG = 40;
 					timePressedNormal++;
-					SoundManagerScript.Instance.PlaySFX(AudioClipID.SFX_MECHAMAN_NORMAL_PUNCH);
 
 				} 
 				else if (timePressedNormal == 1) 
@@ -311,16 +309,14 @@ public class Mecha : LifeObject
 					//state = (int)STATE.WHATSUP;
 					anim.SetTrigger("WhatsUp");
 					resetTimer = 0;
-					dMG = 70;
+					dMG = 60;
 					timePressedNormal++;
-					SoundManagerScript.Instance.PlaySFX(AudioClipID.SFX_MECHAMAN_NORMAL_PUNCH);
 				}
 				else if(timePressedNormal == 2)
 				{
 					//state = (int)STATE.SHADOW;
 					anim.SetTrigger("ShadowStrike");
 					dMG = 80;
-					SoundManagerScript.Instance.PlaySFX(AudioClipID.SFX_MECHAMAN_NORMAL_PUNCH);
 				} 
 			}
 		}
@@ -334,15 +330,14 @@ public class Mecha : LifeObject
 				if(timePressedHeavy == 0)
 				{
 					anim.SetTrigger("HeavyAttack");
-					dMG = 100;
+					dMG = 70;
 					timePressedHeavy++;
-					SoundManagerScript.Instance.PlaySFX(AudioClipID.SFX_MECHAMAN_HEAVY_PUNCH);
+
 				}
 				else if(timePressedHeavy == 1)
 				{
 					anim.SetTrigger("DoubleTrouble");
-					dMG = 250;
-					SoundManagerScript.Instance.PlaySFX(AudioClipID.SFX_MECHAMAN_HEAVY_PUNCH);
+					dMG = 180;
 				}
 			}
 		}
@@ -383,4 +378,26 @@ public class Mecha : LifeObject
 		//			Debug.Log ("UltimateGG");
 		//		}
 	}
+
+	void WalkSound()
+	{
+		SoundManagerScript.Instance.PlaySFX(AudioClipID.SFX_MECHAMAN_WALKING);
+	}
+
+	void NormalPunchSound()
+	{
+		SoundManagerScript.Instance.PlaySFX(AudioClipID.SFX_MECHAMAN_NORMAL_PUNCH);
+	}
+
+	void HeavyPunchSound()
+	{
+		SoundManagerScript.Instance.PlaySFX(AudioClipID.SFX_MECHAMAN_HEAVY_PUNCH);
+	}
+
+	void DashPunchSound()
+	{
+		SoundManagerScript.Instance.PlaySFX(AudioClipID.SFX_MECHAMAN_DASH_PUNCH);
+	}
+
+
 }
