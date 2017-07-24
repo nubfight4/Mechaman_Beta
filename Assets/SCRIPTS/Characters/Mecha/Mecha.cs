@@ -16,6 +16,7 @@ public class Mecha : LifeObject
 		DOUBLETROUBLE = 6,
 		JUMPPUNCH1 = 7,
 		DASHPUNCH1 = 8,
+		FISTROCKET = 9,
 		TOTAL
 	};
 
@@ -37,10 +38,6 @@ public class Mecha : LifeObject
 	bool faceRight;
 	bool faceLeft;
 	//! Combo and Syncgronise attack
-	//	bool p1LPressed;
-	//	bool p1RPressed;
-	//	bool p2LPressed;
-	//	bool p2RPressed;
 	int timePressedNormal;
 	int timePressedHeavy;
 	//reset
@@ -53,11 +50,31 @@ public class Mecha : LifeObject
 	//prevent
 	bool isOtherCombo;
 
+	public GameObject RocketFistPrefab;
 	public GameObject JumpPunchCollider;
 	public GameObject DashPunchCollider;
 
+	GameObject RocketFistPrefabClone;
 	GameObject JumpPunchColliderClone;
 	GameObject DashPunchColliderClone;
+
+
+	//Special Attack
+	bool p1LPressed;
+	bool p1RPressed;
+	bool p2LPressed;
+	bool p2RPressed;
+	bool isFistRocket;
+
+	Goatzilla goatzilla;
+	public int maxCharge = 100;
+	public int currentCharge = 0;
+	public int specialCharge = 80;
+
+	public float GetCurrentChargePercentage ()
+	{
+		return currentCharge * 100 / maxCharge;
+	}
 
 	void Awake()
 	{
@@ -78,14 +95,16 @@ public class Mecha : LifeObject
 		anim = GetComponent<Animator> ();
 		isOtherCombo = false;
 		startReset = false;
-		//		p1LPressed = false;
-		//		p1RPressed = false;
-		//		p2LPressed = false;
-		//		p2RPressed = false;
+		p1LPressed = false;
+		p1RPressed = false;
+		p2LPressed = false;
+		p2RPressed = false;
 		timePressedNormal = 0;
 		timePressedHeavy = 0;
 		resetTimer = 0f;
 		resetDuration = 0.7f;
+
+		goatzilla = FindObjectOfType<Goatzilla> ();
 	}
 
 	// Update is called once per frame
@@ -106,10 +125,10 @@ public class Mecha : LifeObject
 					isOtherCombo = false;
 					isJumping = false;
 					dashPunch = false;
-					//				p1LPressed = false;
-					//				p1RPressed = false;
-					//				p2LPressed = false;
-					//				p2RPressed = false;
+					p1LPressed = false;
+					p1RPressed = false;
+					p2LPressed = false;
+					p2RPressed = false;
 					anim.ResetTrigger("WhatsUp");
 					anim.ResetTrigger("ShadowStrike");
 					anim.ResetTrigger("DoubleTrouble");
@@ -123,9 +142,6 @@ public class Mecha : LifeObject
 				transform.position = gamepadPos + transform.position;
 				Movement ();
 			}
-			//transform.position = gamepadPos + transform.position;
-			//Movement ();
-			//Movement ();
 			Combo ();
 			UpdateAnimator ();
 		}
@@ -160,13 +176,6 @@ public class Mecha : LifeObject
 
 		}
 	}
-
-	//	void Movement()
-	//	{
-	//		Debug.Log(Input.GetAxis("Horizontal"));
-	//		translation = Input.GetAxis("Horizontal") * MovementSpeed * Time.deltaTime;
-	//		transform.Translate(translation,0.0f,0.0f);
-	//	}
 
 	void Boundary ()
 	{
@@ -267,7 +276,6 @@ public class Mecha : LifeObject
 			{
 				gameObject.transform.Translate (Vector2.left * dashPunchForce * Time.deltaTime);
 			}
-
 		}
 
 		//Jump Punch (Terrence)
@@ -278,11 +286,12 @@ public class Mecha : LifeObject
 				if(dashPunch)
 				{
 					dMG = 180;
+
 				}
-				else
-				{
-					dMG = 180;
-				}
+//				else
+//				{
+//					dMG = 180;
+//				}
 				startReset = true;
 				isOtherCombo = true;
 				isJumping = true;
@@ -350,33 +359,60 @@ public class Mecha : LifeObject
 		{
 			timePressedHeavy = 0;
 		}
+	
+		//Ultimate
+		if (Input.GetButtonDown ("Bumper_Left_P1")) {
+			Debug.Log ("P1.L.Bumper");
+			startReset = true;
+			p1LPressed = true;
+		
+		}
+		if (Input.GetButtonDown ("Bumper_Right_P1")) {
+			Debug.Log ("P1.R.Bumper");
+			startReset = true;
+			p1RPressed = true;
 
-		//ULtimate
-		//		if (Input.GetButtonDown ("Bumper_Left_P1")) 
-		//		{
-		//			startReset = true;
-		//			p1LPressed = true;
-		//		}
-		//		if (Input.GetButtonDown ("Bumper_Right_P1")) 
-		//		{
-		//			startReset = true;
-		//			p1RPressed = true;
-		//		}
-		//		if (Input.GetButtonDown ("Bumper_Left_P2")) 
-		//		{
-		//			startReset = true;
-		//			p2LPressed = true;
-		//		}
-		//		if (Input.GetButtonDown ("Bumper_Right_P2")) 
-		//		{
-		//			startReset = true;
-		//			p2RPressed = true;
-		//		}
-		//
-		//		if (p1LPressed == true && p1RPressed == true && p2LPressed == true && p2RPressed == true) 
-		//		{
-		//			Debug.Log ("UltimateGG");
-		//		}
+		}
+		if (Input.GetButtonDown ("Bumper_Left_P2")) {
+			Debug.Log ("P2.L.Bumper");
+			startReset = true;
+			p2LPressed = true;
+
+		}
+		if (Input.GetButtonDown ("Bumper_Right_P2")) {
+			Debug.Log ("P2.R.Bumper");
+			startReset = true;
+			p2RPressed = true;
+		
+		}
+			
+		if (p1LPressed == true && p1RPressed == true && p2LPressed == true && p2RPressed == true) {
+			Debug.Log ("UltimateGG");
+			if (currentCharge >= specialCharge) {
+				if (transform.position.x < goatzilla.transform.position.x) {
+					transform.localScale = new Vector2 (1f, 1f);
+				} else if (transform.position.x > goatzilla.transform.position.x) {
+					transform.localScale = new Vector2 (-1f, 1f);
+				}
+				anim.SetTrigger("FistRocket");
+				currentCharge -= specialCharge;
+//				canSpecial = true;
+//				isMinigame = true;
+//				stopMove = true;
+			}
+		}
+
+		if (isFistRocket) {
+			state = (int)STATE.FISTROCKET;
+			isFistRocket = false;
+		}
+
+	
+	}
+
+	void SpawnFist ()
+	{
+		RocketFistPrefabClone = Instantiate (RocketFistPrefab, new Vector2 (transform.position.x, transform.position.y + 1), Quaternion.identity);
 	}
 
 	void WalkSound()
@@ -398,6 +434,7 @@ public class Mecha : LifeObject
 	{
 		SoundManagerScript.Instance.PlaySFX(AudioClipID.SFX_MECHAMAN_DASH_PUNCH);
 	}
+
 
 
 }
