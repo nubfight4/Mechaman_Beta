@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: e215d00766bfd274abc26bb4610bc015
-timeCreated: 1500265837
+timeCreated: 1500426604
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -144,48 +144,9 @@ TextureImporter:
         x: 0
         y: 0
         width: 600
-        height: 550
+        height: 545
       alignment: 7
       pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: goatzilla_sprite_enraged_5
-      rect:
-        serializedVersion: 2
-        x: 600
-        y: 0
-        width: 600
-        height: 550
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: goatzilla_sprite_enraged_6
-      rect:
-        serializedVersion: 2
-        x: 1200
-        y: 0
-        width: 600
-        height: 550
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: goatzilla_sprite_enraged_7
-      rect:
-        serializedVersion: 2
-        x: 1800
-        y: 0
-        width: 600
-        height: 550
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0

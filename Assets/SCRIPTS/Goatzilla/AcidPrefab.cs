@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AcidPrefab : MonoBehaviour 
 {
-	public float acidSpitDuration = 2f;
+	public float acidSpitDuration = 1.2f;
 	private float acidDamage = 3f;
 	public float acidSpitTimer = 0.0f ;
 	bool isDamaged = false;

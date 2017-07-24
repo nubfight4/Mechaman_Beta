@@ -25,7 +25,6 @@ public class RoarPrefab : MonoBehaviour
 
 	void OnTriggerEnter2D (Collider2D other)
 	{
-		Debug.Log("Enter");
 		if (other.gameObject.CompareTag ("Player"))
 		{
 			other.gameObject.GetComponent<Mecha> ().ReceiveDamage (roarDamage);

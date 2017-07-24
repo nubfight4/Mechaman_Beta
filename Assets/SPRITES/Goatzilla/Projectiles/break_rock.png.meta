@@ -1,14 +1,14 @@
 fileFormatVersion: 2
-guid: f124602ba4f36934b9c9961cdab99ea3
-timeCreated: 1499596157
+guid: d59c6d438eba03847aa9945fe33fc5ec
+timeCreated: 1500876741
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: break_rock_0
-    21300002: break_rock_1
-    21300004: break_rock_2
-    21300006: break_rock_3
-    21300008: break_rock_4
+    21300000: rockbreak_0
+    21300002: rockbreak_1
+    21300004: rockbreak_2
+    21300006: rockbreak_3
+    21300008: rockbreak_5
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -75,67 +75,67 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: break_rock_0
+      name: rockbreak_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 550
-        width: 600
-        height: 550
+        x: 216
+        y: 861
+        width: 129
+        height: 125
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: break_rock_1
+      name: rockbreak_1
       rect:
         serializedVersion: 2
-        x: 600
-        y: 550
-        width: 600
-        height: 550
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 808
+        y: 830
+        width: 165
+        height: 156
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: break_rock_2
+      name: rockbreak_2
       rect:
         serializedVersion: 2
-        x: 1200
-        y: 550
-        width: 600
-        height: 550
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 1398
+        y: 826
+        width: 200
+        height: 160
+      alignment: 9
+      pivot: {x: 0.5, y: 0.125}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: break_rock_3
+      name: rockbreak_3
       rect:
         serializedVersion: 2
-        x: 1800
-        y: 550
-        width: 600
-        height: 550
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 2003
+        y: 800
+        width: 202
+        height: 178
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: break_rock_4
+      name: rockbreak_5
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 600
-        height: 550
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 2618
+        y: 796
+        width: 202
+        height: 153
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0

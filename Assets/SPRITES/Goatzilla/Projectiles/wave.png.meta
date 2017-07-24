@@ -1,15 +1,17 @@
 fileFormatVersion: 2
-guid: 5345161369307294fb5808ea6ae47e8e
-timeCreated: 1499596296
+guid: d46866878aa414b4590f384344fa113d
+timeCreated: 1500736332
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: wave_1
-    21300002: wave_2
-    21300004: wave_3
-    21300006: wave_4
-    21300008: wave_5
-    21300010: wave_6
+    21300000: wave 1_0
+    21300002: wave 1_1
+    21300004: wave 1_2
+    21300006: wave 1_3
+    21300008: wave 1_4
+    21300010: wave 1_5
+    21300012: wave 1_6
+    21300014: wave 1_7
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -76,80 +78,106 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: wave_1
+      name: wave 1_0
       rect:
         serializedVersion: 2
-        x: 444
-        y: 550
-        width: 480
-        height: 550
+        x: 469
+        y: 603
+        width: 99
+        height: 481
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: wave_2
+      name: wave 1_1
       rect:
         serializedVersion: 2
-        x: 962
-        y: 550
-        width: 480
-        height: 550
+        x: 969
+        y: 611
+        width: 131
+        height: 440
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: wave_3
+      name: wave 1_2
       rect:
         serializedVersion: 2
-        x: 1440
-        y: 550
-        width: 480
-        height: 550
+        x: 1429
+        y: 592
+        width: 176
+        height: 506
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: wave_4
+      name: wave 1_3
       rect:
         serializedVersion: 2
-        x: 1920
-        y: 550
-        width: 480
-        height: 550
+        x: 1993
+        y: 606
+        width: 167
+        height: 473
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: wave_5
+      name: wave 1_4
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 480
-        height: 550
+        x: 2517
+        y: 552
+        width: 204
+        height: 548
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: wave_6
+      name: wave 1_5
       rect:
         serializedVersion: 2
-        x: 480
-        y: 0
-        width: 480
-        height: 550
+        x: 3083
+        y: 601
+        width: 197
+        height: 492
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: wave 1_6
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 58
+        width: 189
+        height: 485
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: wave 1_7
+      rect:
+        serializedVersion: 2
+        x: 621
+        y: 54
+        width: 156
+        height: 498
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0

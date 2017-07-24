@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 74a78dacc14f5674aa5913b5abee4b15
-timeCreated: 1499596097
+timeCreated: 1500428906
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -124,8 +124,8 @@ TextureImporter:
         y: 550
         width: 600
         height: 550
-      alignment: 9
-      pivot: {x: 0.36360615, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -136,7 +136,7 @@ TextureImporter:
         x: 0
         y: 0
         width: 600
-        height: 550
+        height: 539
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -149,7 +149,7 @@ TextureImporter:
         x: 600
         y: 0
         width: 600
-        height: 550
+        height: 539
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -162,20 +162,7 @@ TextureImporter:
         x: 1200
         y: 0
         width: 600
-        height: 550
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: goatzilla_sprite_throw rock_7
-      rect:
-        serializedVersion: 2
-        x: 1800
-        y: 0
-        width: 600
-        height: 550
+        height: 539
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

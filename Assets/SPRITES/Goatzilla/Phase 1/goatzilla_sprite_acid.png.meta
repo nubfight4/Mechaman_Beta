@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 89d24af288a9ed94ea629bce57b57f18
-timeCreated: 1499595897
+guid: 43a4c6a18cd6dfc4db83b1641bb144c8
+timeCreated: 1500733180
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -14,6 +14,8 @@ TextureImporter:
     21300014: goatzilla_sprite_acid_7
     21300016: goatzilla_sprite_acid_8
     21300018: goatzilla_sprite_acid_9
+    21300020: goatzilla_sprite_acid_10
+    21300022: goatzilla_sprite_acid_11
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -109,7 +111,7 @@ TextureImporter:
       name: goatzilla_sprite_acid_2
       rect:
         serializedVersion: 2
-        x: 1202
+        x: 1200
         y: 550
         width: 600
         height: 550
@@ -148,8 +150,8 @@ TextureImporter:
       name: goatzilla_sprite_acid_5
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
+        x: 3000
+        y: 550
         width: 600
         height: 550
       alignment: 7
@@ -161,7 +163,7 @@ TextureImporter:
       name: goatzilla_sprite_acid_6
       rect:
         serializedVersion: 2
-        x: 600
+        x: 0
         y: 0
         width: 600
         height: 550
@@ -174,7 +176,7 @@ TextureImporter:
       name: goatzilla_sprite_acid_7
       rect:
         serializedVersion: 2
-        x: 1200
+        x: 600
         y: 0
         width: 600
         height: 550
@@ -187,7 +189,7 @@ TextureImporter:
       name: goatzilla_sprite_acid_8
       rect:
         serializedVersion: 2
-        x: 1800
+        x: 1200
         y: 0
         width: 600
         height: 550
@@ -200,7 +202,33 @@ TextureImporter:
       name: goatzilla_sprite_acid_9
       rect:
         serializedVersion: 2
+        x: 1800
+        y: 0
+        width: 600
+        height: 550
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: goatzilla_sprite_acid_10
+      rect:
+        serializedVersion: 2
         x: 2400
+        y: 0
+        width: 600
+        height: 550
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: goatzilla_sprite_acid_11
+      rect:
+        serializedVersion: 2
+        x: 3000
         y: 0
         width: 600
         height: 550

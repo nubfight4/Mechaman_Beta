@@ -1,19 +1,21 @@
 fileFormatVersion: 2
-guid: 3217fdf1a6cd129429b8b67b7e4843d1
-timeCreated: 1499595928
+guid: 7af714b4ba190a444a095e51cab26b4b
+timeCreated: 1500733730
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: goatzilla_sprite_roar_0
-    21300002: goatzilla_sprite_roar_1
-    21300004: goatzilla_sprite_roar_2
-    21300006: goatzilla_sprite_roar_3
-    21300008: goatzilla_sprite_roar_4
-    21300010: goatzilla_sprite_roar_5
-    21300012: goatzilla_sprite_roar_6
-    21300014: goatzilla_sprite_roar_7
-    21300016: goatzilla_sprite_roar_8
-    21300018: goatzilla_sprite_roar_9
+    21300000: goatzilla_sprite_roar 1_0
+    21300002: goatzilla_sprite_roar 1_1
+    21300004: goatzilla_sprite_roar 1_2
+    21300006: goatzilla_sprite_roar 1_3
+    21300008: goatzilla_sprite_roar 1_4
+    21300010: goatzilla_sprite_roar 1_5
+    21300012: goatzilla_sprite_roar 1_6
+    21300014: goatzilla_sprite_roar 1_7
+    21300016: goatzilla_sprite_roar 1_8
+    21300018: goatzilla_sprite_roar 1_9
+    21300020: goatzilla_sprite_roar 1_10
+    21300022: goatzilla_sprite_roar 1_11
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -80,7 +82,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: goatzilla_sprite_roar_0
+      name: goatzilla_sprite_roar 1_0
       rect:
         serializedVersion: 2
         x: 0
@@ -93,10 +95,10 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: goatzilla_sprite_roar_1
+      name: goatzilla_sprite_roar 1_1
       rect:
         serializedVersion: 2
-        x: 602
+        x: 600
         y: 550
         width: 600
         height: 550
@@ -106,7 +108,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: goatzilla_sprite_roar_2
+      name: goatzilla_sprite_roar 1_2
       rect:
         serializedVersion: 2
         x: 1200
@@ -119,7 +121,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: goatzilla_sprite_roar_3
+      name: goatzilla_sprite_roar 1_3
       rect:
         serializedVersion: 2
         x: 1800
@@ -132,7 +134,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: goatzilla_sprite_roar_4
+      name: goatzilla_sprite_roar 1_4
       rect:
         serializedVersion: 2
         x: 2400
@@ -145,7 +147,20 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: goatzilla_sprite_roar_5
+      name: goatzilla_sprite_roar 1_5
+      rect:
+        serializedVersion: 2
+        x: 3000
+        y: 550
+        width: 600
+        height: 550
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: goatzilla_sprite_roar 1_6
       rect:
         serializedVersion: 2
         x: 0
@@ -158,11 +173,11 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: goatzilla_sprite_roar_6
+      name: goatzilla_sprite_roar 1_7
       rect:
         serializedVersion: 2
-        x: 602
-        y: 2
+        x: 600
+        y: 0
         width: 600
         height: 550
       alignment: 7
@@ -171,7 +186,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: goatzilla_sprite_roar_7
+      name: goatzilla_sprite_roar 1_8
       rect:
         serializedVersion: 2
         x: 1200
@@ -184,7 +199,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: goatzilla_sprite_roar_8
+      name: goatzilla_sprite_roar 1_9
       rect:
         serializedVersion: 2
         x: 1800
@@ -197,10 +212,23 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: goatzilla_sprite_roar_9
+      name: goatzilla_sprite_roar 1_10
       rect:
         serializedVersion: 2
         x: 2400
+        y: 0
+        width: 600
+        height: 550
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: goatzilla_sprite_roar 1_11
+      rect:
+        serializedVersion: 2
+        x: 3000
         y: 0
         width: 600
         height: 550
