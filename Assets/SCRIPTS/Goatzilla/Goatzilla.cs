@@ -646,7 +646,7 @@ public class Goatzilla : LifeObject
 		else if (isEnraged && state == AttackState.CHECK && curBehaviorState == BehaviorState.NORMAL)
 		{
 			isCheckMelee = false;
-			StartCoroutine (Immobolize (3.0f, true)); //Invulnerable + Immoblize for 3s
+			StartCoroutine (Immobolize (5.0f, true)); //Invulnerable + Immoblize for 5s
 			prevAttackState = AttackState.NONE;
 			curAttackState = AttackState.TRANSITION;
 		}
