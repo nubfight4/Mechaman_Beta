@@ -3,24 +3,23 @@ using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 
+public enum STATE
+{
+	IDLE = 0,
+	WALKING = 1,
+	PUNCH = 2,
+	WHATSUP = 3,
+	SHADOW = 4,
+	HEAVY = 5,
+	DOUBLETROUBLE = 6,
+	JUMPPUNCH = 7,
+	DASHPUNCH = 8,
+	FISTROCKET = 9,
+	TOTAL}
+;
+
 public class Mecha : LifeObject
 {
-	public enum STATE
-	{
-		IDLE = 0,
-		WALKING = 1,
-		PUNCH = 2,
-		WHATSUP = 3,
-		SHADOW = 4,
-		HEAVY = 5,
-		DOUBLETROUBLE = 6,
-		JUMPPUNCH1 = 7,
-		DASHPUNCH1 = 8,
-		FISTROCKET = 9,
-		TOTAL}
-
-	;
-
 	public Vector3 gamepadPos;
 	Vector3 minPos;
 	Vector3 maxPos;
@@ -58,6 +57,80 @@ public class Mecha : LifeObject
 	Rigidbody2D rb2d;
 
 	public float mechSpeed = 5f;
+
+	public bool instantOnce = false;
+
+	public float jumpPunchDuration = 100f;
+	public float jumpPunchDurationTimer = 0f;
+	public float jumpPunchForce = 0.1f;
+	public float jumpPunchDamping = 0.5f;
+
+	public bool dashPunch = false;
+	public bool dashPunchLeft = false;
+	public bool dashPunchRight = false;
+	public float dashPunchDuration = 100f;
+	public float dashPunchDurationTimer = 0f;
+	public float dashPunchForce = 10f;
+
+	public float specialAttackDuration = 5000f;
+	public float specialAttackDurationTimer = 0f;
+
+	public GameObject RocketFistPrefab;
+	GameObject RocketFistPrefabClone;
+
+	// P1
+	public GameObject WButton;
+	public GameObject AButton;
+	public GameObject SButton;
+	public GameObject DButton;
+
+	// P2
+	public GameObject IButton;
+	public GameObject JButton;
+	public GameObject KButton;
+	public GameObject LButton;
+
+	public GameObject ExplodeP1;
+	public GameObject ExplodeP2;
+
+	public bool stopMove = false;
+	public bool canJumpPunch = false;
+	public bool canDashPunch = false;
+
+	public float jumpPunchCooldown = 200f;
+	public float jumpPunchCooldownTimer = 0f;
+
+	public float dashPunchCooldown = 200f;
+	public float dashPunchCooldownTimer = 0f;
+
+	public float gainDamping = 50f;
+	public float gainDampingTimer = 0f;
+	public int chargeGainInterval = 0;
+
+	public bool isPressDelay = false;
+	public float correctPressDelay = 500f;
+	public float correctPressTimer = 0f;
+
+	public float specialPressInterval = 1000f;
+	public float specialPressTimer = 0f;
+
+	public bool canSpecial = false;
+	public bool isFistRocket = false;
+	public bool isMinigame = false;
+	public bool isRandomNP1 = false;
+	public bool isRandomNP2 = false;
+	public int randomNP1 = 0;
+	public int randomNP2 = 0;
+	public int tempBonusDamage = 0;
+	public int fistRocketDamage = 300;
+
+	public int correctPressCounter = 0;
+
+	public int maxCharge = 100;
+	public int currentCharge = 0;
+	public int dashPunchChargeGain = 30;
+	public int jumpPunchChargeGain = 30;
+	public int specialCharge = 80;
 
 	void Awake ()
 	{
@@ -117,13 +190,13 @@ public class Mecha : LifeObject
 	void NewMovement ()
 	{
 		if (!stopMove) {
-			if (Input.GetButton ("Horizontal")) {
+			if (Input.GetButton ("HorizontalP1")) {
 				state = (int)STATE.WALKING;
-				if (Input.GetAxis ("Horizontal") > 0) {
+				if (Input.GetAxis ("HorizontalP1") > 0) {
 					rb2d.velocity = new Vector2 (mechSpeed, transform.position.y);
 					//transform.Translate (Vector2.right * mechSpeed * Time.deltaTime);
 					transform.localScale = new Vector3 (1f, 1f, 1f);
-				} else if (Input.GetAxis ("Horizontal") < 0) {
+				} else if (Input.GetAxis ("HorizontalP1") < 0) {
 					if (!stopMove) {
 						rb2d.velocity = new Vector2 (-mechSpeed, transform.position.y);
 						//transform.Translate (Vector2.left * mechSpeed * Time.deltaTime);
@@ -139,47 +212,43 @@ public class Mecha : LifeObject
 
 	void P1SpecialInput ()
 	{
-		if (Input.GetButtonDown ("Horizontal") && Input.GetAxis ("Horizontal") > 0) {
+		if (Input.GetButtonDown ("HorizontalP1") && Input.GetAxis ("HorizontalP1") > 0) {
 			if (isMinigame && randomNP1 == 3) { //D
 				//DButton.SetActive (false);
 				ExplodeP1.SetActive (true);
 				correctPressCounter++;
 			} else {
-				Debug.Log ("WRONG PRESS");
 				isRandomNP1 = false;
 				isRandomNP2 = false;
 			}
 		}
-		if (Input.GetButtonDown ("Horizontal") && Input.GetAxis ("Horizontal") < 0) {
+		if (Input.GetButtonDown ("HorizontalP1") && Input.GetAxis ("HorizontalP1") < 0) {
 			if (isMinigame && randomNP1 == 1) { //A
 				//AButton.SetActive (false);
 				ExplodeP1.SetActive (true);
 				correctPressCounter++;
 			} else {
-				Debug.Log ("WRONG PRESS");
 				isRandomNP1 = false;
 				isRandomNP2 = false;
 			}
 		}
 
-		if (Input.GetButtonDown ("Vertical") && Input.GetAxis ("Vertical") > 0) {
+		if (Input.GetButtonDown ("VerticalP1") && Input.GetAxis ("VerticalP1") > 0) {
 			if (isMinigame && randomNP1 == 0) { //W
 				//WButton.SetActive (false);
 				ExplodeP1.SetActive (true);
 				correctPressCounter++;
 			} else {
-				Debug.Log ("WRONG PRESS");
 				isRandomNP1 = false;
 				isRandomNP2 = false;
 			}
 		}
-		if (Input.GetButtonDown ("Vertical") && Input.GetAxis ("Vertical") < 0) {
+		if (Input.GetButtonDown ("VerticalP1") && Input.GetAxis ("VerticalP1") < 0) {
 			if (isMinigame && randomNP1 == 2) { //S
 				//SButton.SetActive (false);
 				ExplodeP1.SetActive (true);
 				correctPressCounter++;
 			} else {
-				Debug.Log ("WRONG PRESS");
 				isRandomNP1 = false;
 				isRandomNP2 = false;
 			}
@@ -194,7 +263,6 @@ public class Mecha : LifeObject
 				ExplodeP2.SetActive (true);
 				correctPressCounter++;
 			} else {
-				Debug.Log ("WRONG PRESS");
 				isRandomNP1 = false;
 				isRandomNP2 = false;
 			}
@@ -205,7 +273,6 @@ public class Mecha : LifeObject
 				ExplodeP2.SetActive (true);
 				correctPressCounter++;
 			} else {
-				Debug.Log ("WRONG PRESS");
 				isRandomNP1 = false;
 				isRandomNP2 = false;
 			}
@@ -218,7 +285,6 @@ public class Mecha : LifeObject
 				ExplodeP2.SetActive (true);
 				correctPressCounter++;
 			} else {
-				Debug.Log ("WRONG PRESS");
 				isRandomNP1 = false;
 				isRandomNP2 = false;
 			}
@@ -229,27 +295,11 @@ public class Mecha : LifeObject
 				ExplodeP2.SetActive (true);
 				correctPressCounter++;
 			} else {
-				Debug.Log ("WRONG PRESS");
 				isRandomNP1 = false;
 				isRandomNP2 = false;
 			}
 		}
 	}
-
-	/*
-	void Movement ()
-	{
-		gamepadPos.x = Input.GetAxis ("Horizontal");
-		//gamepadPos.y = Input.GetAxis ("Vertical");
-		transform.position = gamepadPos + transform.position;
-		if (gamepadPos.x < -0.0187) {
-			transform.localScale = new Vector3 (-1, transform.localScale.y);
-		}
-		if (gamepadPos.x > 0.01875) {
-			transform.localScale = new Vector3 (1, transform.localScale.y);	
-		}
-	}
-	*/
 
 	void Boundary ()
 	{
@@ -267,7 +317,6 @@ public class Mecha : LifeObject
 		{
 			transform.position = new Vector3 (transform.position.x,maxPos.y);
 		}
-
 		if (transform.position.y < minPos.y) 
 		{
 			transform.position = new Vector3 (transform.position.x,minPos.y);
@@ -295,52 +344,7 @@ public class Mecha : LifeObject
 		anim.SetInteger ("State", state);
 	}
 
-	public bool instantOnce = false;
 
-	public float jumpPunchDuration = 100f;
-	public float jumpPunchDurationTimer = 0f;
-	public float jumpPunchForce = 0.1f;
-	public float jumpPunchDamping = 0.5f;
-
-	public bool dashPunch = false;
-	public bool dashPunchLeft = false;
-	public bool dashPunchRight = false;
-	public float dashPunchDuration = 100f;
-	public float dashPunchDurationTimer = 0f;
-	public float dashPunchForce = 10f;
-
-	public float specialAttackDuration = 5000f;
-	public float specialAttackDurationTimer = 0f;
-
-	public GameObject RocketFistPrefab;
-	GameObject RocketFistPrefabClone;
-
-	public GameObject WButton;
-	public GameObject AButton;
-	public GameObject SButton;
-	public GameObject DButton;
-
-	public GameObject IButton;
-	public GameObject JButton;
-	public GameObject KButton;
-	public GameObject LButton;
-
-	public GameObject ExplodeP1;
-	public GameObject ExplodeP2;
-
-	public bool stopMove = false;
-	public bool canJumpPunch = false;
-	public bool canDashPunch = false;
-
-	public float jumpPunchCooldown = 200f;
-	public float jumpPunchCooldownTimer = 0f;
-
-	public float dashPunchCooldown = 200f;
-	public float dashPunchCooldownTimer = 0f;
-
-	public float gainDamping = 50f;
-	public float gainDampingTimer = 0f;
-	public int chargeGainInterval = 0;
 
 	public void GainJumpPunchCharge ()
 	{
@@ -348,9 +352,6 @@ public class Mecha : LifeObject
 		for (int i = 0; i < jumpPunchChargeGain; i++) {
 			currentCharge += i;
 		}
-		*/
-
-		/*
 		if (gainDampingTimer <= gainDamping) {
 			gainDampingTimer += Time.deltaTime * 1000f;
 		} else {
@@ -362,9 +363,8 @@ public class Mecha : LifeObject
 				chargeGainInterval = 0;
 			}
 		}
+		currentCharge += (int)Mathf.Lerp (0, jumpPunchChargeGain, Time.deltaTime);
 		*/
-
-		//currentCharge += (int)Mathf.Lerp (0, jumpPunchChargeGain, Time.deltaTime);
 
 		currentCharge += jumpPunchChargeGain;
 	}
@@ -408,12 +408,13 @@ public class Mecha : LifeObject
 			}
 		}
 
+		/*
 		//Jump Punch
 		if (!stopMove) {
-			if (Input.GetButton ("Vertical") && Input.GetAxis ("Vertical") > 0) { // Up + X
-				if (Input.GetButtonDown ("Normal Attack") && timePressedNormal == 0) {
+			if (Input.GetButton ("VerticalP1") && Input.GetAxis ("VerticalP1") > 0) { // Up + X
+				if (Input.GetButtonDown ("Fire02P2") && timePressedNormal == 0) {
 					if (!canJumpPunch) {
-						state = (int)STATE.JUMPPUNCH1;
+						//state = (int)STATE.JUMPPUNCH1;
 						//currentCharge += jumpPunchChargeGain;
 						Debug.Log ("JumpPunch");
 						if (dashPunch) {
@@ -430,7 +431,6 @@ public class Mecha : LifeObject
 				}
 			}
 		}
-
 		if (canJumpPunch) {
 			if (jumpPunchCooldownTimer <= jumpPunchCooldown) {
 				jumpPunchCooldownTimer += Time.deltaTime * 1000f;
@@ -439,14 +439,10 @@ public class Mecha : LifeObject
 				canJumpPunch = false;
 			}
 		}
-
-
-		/*
 		if(isJumpPunching)
 		{
 			gameObject.transform.Translate (Vector2.up * jumpPunchForce * Time.deltaTime);
 		}
-
 		if (isJumpPunching) 
 		{
 			if (jumpPunchDurationTimer <= jumpPunchDuration) 
@@ -462,24 +458,20 @@ public class Mecha : LifeObject
 				isJumpPunching = false;
 				instantOnce = false;
 			}
-			
 			//gameObject.transform.Translate (Vector2.up * jumpPunchForce * Time.deltaTime);
-			
 			if (!instantOnce) {
 				JumpPunchColliderClone = Instantiate (JumpPunchCollider, new Vector2 (transform.position.x, transform.position.y + 1), Quaternion.identity);
 				JumpPunchColliderClone.transform.parent = gameObject.transform;
 				instantOnce = true;
 			}
 		}
-		*/
-
 		//Dash Punch
 		if (!stopMove) {
-			if (Input.GetButton ("Horizontal") && Input.GetAxis ("Horizontal") > 0) { // A + Mech Move Right
-				if (Input.GetButtonDown ("Heavy Attack") && isJumpPunching == false && timePressedHeavy == 0) {
+			if (Input.GetButton ("HorizontalP1") && Input.GetAxis ("HorizontalP1") > 0) { // A + Mech Move Right
+				if (Input.GetButtonDown ("Fire01P2") && isJumpPunching == false && timePressedHeavy == 0) {
 					if (!canDashPunch && !dashPunch) {
-						Debug.Log ("Dash attack right");
-						state = (int)STATE.DASHPUNCH1;
+						Debug.Log ("Dash Attack Right");
+						//state = (int)STATE.DASHPUNCH1;
 						//startReset = true;
 						isOtherCombo = true;
 						dashPunch = true;
@@ -488,11 +480,11 @@ public class Mecha : LifeObject
 						//currentCharge += dashPunchChargeGain;
 					}
 				}
-			} else if (Input.GetButton ("Horizontal") && Input.GetAxis ("Horizontal") < 0) { //A + Mech Move Left
-				if (Input.GetButtonDown ("Heavy Attack") && isJumpPunching == false && timePressedHeavy == 0) {
+			} else if (Input.GetButton ("HorizontalP1") && Input.GetAxis ("HorizontalP1") < 0) { //A + Mech Move Left
+				if (Input.GetButtonDown ("Fire01P2") && isJumpPunching == false && timePressedHeavy == 0) {
 					if (!canDashPunch && !dashPunch) {
-						Debug.Log ("Dash attack left");
-						state = (int)STATE.DASHPUNCH1;
+						Debug.Log ("Dash Attack Left");
+						//state = (int)STATE.DASHPUNCH1;
 						//startReset = true;
 						isOtherCombo = true;
 						dashPunch = true;
@@ -503,7 +495,6 @@ public class Mecha : LifeObject
 				}
 			}
 		}
-			
 		if (dashPunch) {
 			if (dashPunchDurationTimer <= dashPunchDuration) {
 				dMG = 170;
@@ -518,7 +509,6 @@ public class Mecha : LifeObject
 				instantOnce = false;
 				canDashPunch = true;
 			}
-
 			if (dashPunchLeft && !dashPunchRight) {
 				transform.localScale = new Vector2 (-1f, 1f);
 				gameObject.transform.Translate (Vector2.left * dashPunchForce * Time.deltaTime);
@@ -528,7 +518,6 @@ public class Mecha : LifeObject
 					DashPunchColliderClone.transform.parent = gameObject.transform;
 					instantOnce = true;
 				}
-				*/
 			} else if (dashPunchRight && !dashPunchLeft) {
 				transform.localScale = new Vector2 (1f, 1f);
 				gameObject.transform.Translate (Vector2.right * dashPunchForce * Time.deltaTime);
@@ -538,10 +527,8 @@ public class Mecha : LifeObject
 					DashPunchColliderClone.transform.parent = gameObject.transform;
 					instantOnce = true;
 				}
-				*/
 			}
 		}
-
 		if (canDashPunch) {
 			if (dashPunchCooldownTimer <= dashPunchCooldown) {
 				dashPunchCooldownTimer += Time.deltaTime * 1000f;
@@ -550,10 +537,11 @@ public class Mecha : LifeObject
 				canDashPunch = false;
 			}
 		}
+		*/
 
 		//normal combo
 		if (timePressedNormal < 4) {
-			if (Input.GetButtonDown ("Normal Attack")) { 
+			if (Input.GetButtonDown ("Fire02P2")) { 
 
 				if (!isOtherCombo) {
 					startReset = true;
@@ -584,7 +572,6 @@ public class Mecha : LifeObject
 		}
 
 		//heavy combo
-
 		/*
 		if (Input.GetButtonDown("Heavy Attack")) 
 		{
@@ -618,7 +605,7 @@ public class Mecha : LifeObject
 
 		Debug.Log (timePressedHeavy);
 		if (timePressedHeavy < 3) {
-			if (Input.GetButtonDown ("Heavy Attack")) { 
+			if (Input.GetButtonDown ("Fire01P2")) { 
 				if (!isOtherCombo) {
 					Debug.Log (timePressedHeavy);
 					startReset = true;
@@ -653,7 +640,6 @@ public class Mecha : LifeObject
 
 		//Ultimate
 		if (Input.GetButtonDown ("Bumper_Left_P1")) {
-			Debug.Log ("P1.L.Bumper");
 			startReset = true;
 			p1LPressed = true;
 			/*
@@ -669,7 +655,6 @@ public class Mecha : LifeObject
 			*/
 		}
 		if (Input.GetButtonDown ("Bumper_Right_P1")) {
-			Debug.Log ("P1.R.Bumper");
 			startReset = true;
 			p1RPressed = true;
 			/*
@@ -685,7 +670,6 @@ public class Mecha : LifeObject
 			*/
 		}
 		if (Input.GetButtonDown ("Bumper_Left_P2")) {
-			Debug.Log ("P2.L.Bumper");
 			startReset = true;
 			p2LPressed = true;
 			/*
@@ -701,7 +685,6 @@ public class Mecha : LifeObject
 			*/
 		}
 		if (Input.GetButtonDown ("Bumper_Right_P2")) {
-			Debug.Log ("P2.R.Bumper");
 			startReset = true;
 			p2RPressed = true;
 			/*
@@ -721,7 +704,6 @@ public class Mecha : LifeObject
 		//just make it like respawn from thin air or some shit
 		//rocket fist retain previous behaviour on separate script
 		if (p1LPressed == true && p1RPressed == true && p2LPressed == true && p2RPressed == true && !canSpecial) {
-			Debug.Log ("UltimateGG");
 			if (currentCharge >= specialCharge) {
 				if (transform.position.x < goatzilla.transform.position.x) {
 					transform.localScale = new Vector2 (1f, 1f);
@@ -848,31 +830,6 @@ public class Mecha : LifeObject
 			}
 		}
 	}
-
-	public bool isPressDelay = false;
-	public float correctPressDelay = 500f;
-	public float correctPressTimer = 0f;
-
-	public float specialPressInterval = 1000f;
-	public float specialPressTimer = 0f;
-
-	public bool canSpecial = false;
-	public bool isFistRocket = false;
-	public bool isMinigame = false;
-	public bool isRandomNP1 = false;
-	public bool isRandomNP2 = false;
-	public int randomNP1 = 0;
-	public int randomNP2 = 0;
-	public int tempBonusDamage = 0;
-	public int fistRocketDamage = 300;
-
-	public int correctPressCounter = 0;
-
-	public int maxCharge = 100;
-	public int currentCharge = 0;
-	public int dashPunchChargeGain = 30;
-	public int jumpPunchChargeGain = 30;
-	public int specialCharge = 80;
 
 	public float GetCurrentChargePercentage ()
 	{
