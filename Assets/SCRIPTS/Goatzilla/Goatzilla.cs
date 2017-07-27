@@ -28,7 +28,9 @@ public class Goatzilla : LifeObject
 
 	[Header("Rock")]
 	public GameObject rockPrefab;
-	//public GameObject rockIndicatorPrefab;
+	public GameObject rockIndicatorPrefab;
+	Vector3 tempPosition = Vector3.zero;
+	public float indicatorHeight;
 	public float rockSpawnHeight = 20.0f;
 	public int singleRockThrowCountNormal = 3;
 	public int singleRockThrowCountEnrage = 5;
@@ -451,7 +453,9 @@ public class Goatzilla : LifeObject
 			if(rockTimer >= rockDuration)
 			{
 				rockCounter ++;
-				Instantiate(rockPrefab, target.transform.position + (Vector3.up * rockSpawnHeight), Quaternion.identity);
+				tempPosition = target.transform.position;
+				Instantiate(rockIndicatorPrefab,tempPosition + (Vector3.up* indicatorHeight), Quaternion.identity);
+				Instantiate(rockPrefab, tempPosition + (Vector3.up * rockSpawnHeight), Quaternion.identity);
 				rockTimer = 0.0f;
 			}	
 		}
@@ -473,7 +477,9 @@ public class Goatzilla : LifeObject
 			}
 			for( int i = 0; i < tempRockCount; i++)
 			{
-				Instantiate(rockPrefab, target.transform.position + (Vector3.up * rockSpawnHeight) + (Vector3.right * (i - tempRockCount/2)), Quaternion.identity);
+				tempPosition = target.transform.position;
+				Instantiate(rockIndicatorPrefab,tempPosition + (Vector3.up* indicatorHeight)+ (Vector3.right * (i - tempRockCount/2)), Quaternion.identity);
+				Instantiate(rockPrefab, tempPosition + (Vector3.up * rockSpawnHeight) + (Vector3.right * (i - tempRockCount/2)), Quaternion.identity);
 			}
 			rockThrowCounter++;
 			if(!isEnraged && rockThrowCounter >= 3)
