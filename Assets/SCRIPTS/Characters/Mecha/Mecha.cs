@@ -49,6 +49,25 @@ public class Mecha : LifeObject
 	bool hitstartReset;
 	//prevent
 	bool isOtherCombo;
+	//MiniGame
+	bool isMiniGame;
+	const int MAX_KEY = 4;
+	public Sprite[] p1ButtonSet = new Sprite[MAX_KEY];
+	public Sprite[] p2ButtonSet = new Sprite[MAX_KEY];
+	public SpriteRenderer sprP1;
+	public SpriteRenderer sprP2;
+	public GameObject[] buttons = new GameObject[2];
+	public GameObject[] explosion = new GameObject[2];
+	bool[] isPressed = new bool[2];
+	bool startPressedTimer;
+	float miniGameTimer = 0;
+	float pressedTimer = 0;
+	public float pressedWindowDuration;
+	public float miniGameDuration;
+	int randNum = 0; //random for p1 button
+	int correctPressed = 0;
+
+
 
 	public GameObject RocketFistPrefab;
 	public GameObject JumpPunchCollider;
@@ -64,7 +83,6 @@ public class Mecha : LifeObject
 	bool p1RPressed;
 	bool p2LPressed;
 	bool p2RPressed;
-	bool isFistRocket;
 
 	Goatzilla goatzilla;
 	public int maxCharge = 100;
@@ -99,12 +117,18 @@ public class Mecha : LifeObject
 		p1RPressed = false;
 		p2LPressed = false;
 		p2RPressed = false;
+		isMiniGame = false;
 		timePressedNormal = 0;
 		timePressedHeavy = 0;
 		resetTimer = 0f;
 		resetDuration = 0.7f;
-
 		goatzilla = FindObjectOfType<Goatzilla> ();
+		sprP1 = buttons[0].GetComponent<SpriteRenderer>();
+		sprP2 = buttons[1].GetComponent<SpriteRenderer>();
+		isPressed[0] = false;
+		isPressed[1] = false;
+		startPressedTimer = false;
+		RandomButtonNumber();
 	}
 
 	// Update is called once per frame
@@ -134,15 +158,34 @@ public class Mecha : LifeObject
 					anim.ResetTrigger("DoubleTrouble");
 				}
 			}
-			Movement();
-			Boundary ();
-
-			if(!isJumping)
+			if(!isMiniGame)
 			{
-				transform.position = gamepadPos + transform.position;
-				Movement ();
+				Movement();
+				Boundary ();
+
+				if(!isJumping)
+				{
+					transform.position = gamepadPos + transform.position;
+					Movement ();
+				}
+				Combo ();
 			}
-			Combo ();
+			else if(isMiniGame)
+			{
+				miniGameTimer += Time.deltaTime;
+				buttons[0].SetActive(true);
+				buttons[1].SetActive(true);
+				MiniGame();
+				if(miniGameTimer >= miniGameDuration)
+				{
+					dMG = (correctPressed * 20) + 300;
+					anim.SetTrigger("FistRocket");
+					correctPressed = 0;
+					isMiniGame = false;
+					buttons[0].SetActive(false);
+					buttons[1].SetActive(false);
+				}
+			}
 			UpdateAnimator ();
 		}
 
@@ -210,7 +253,7 @@ public class Mecha : LifeObject
 	void UpdateAnimator ()
 	{
 		anim.SetFloat ("Speed", gamepadPos.x);
-		anim.SetBool ("isJumping", isJumping);
+		//anim.SetBool ("isJumping", isJumping);
 		anim.SetBool ("isStop", isStop);
 		//		anim.SetInteger ("State", state);
 		anim.SetBool ("Chaining", startReset);
@@ -279,7 +322,8 @@ public class Mecha : LifeObject
 		}
 
 		//Jump Punch (Terrence)
-		if (Input.GetAxis ("Vertical") > 0) { // Up + X
+		if (Input.GetAxis ("Vertical") > 0) 
+		{ // Up + X
 			if (Input.GetButtonDown ("Normal Attack") && timePressedNormal == 0) 
 			{
 				anim.SetTrigger("JumpPunch");
@@ -288,10 +332,6 @@ public class Mecha : LifeObject
 					dMG = 180;
 
 				}
-//				else
-//				{
-//					dMG = 180;
-//				}
 				startReset = true;
 				isOtherCombo = true;
 				isJumping = true;
@@ -394,20 +434,119 @@ public class Mecha : LifeObject
 				} else if (transform.position.x > goatzilla.transform.position.x) {
 					transform.localScale = new Vector2 (-1f, 1f);
 				}
-				anim.SetTrigger("FistRocket");
-				currentCharge -= specialCharge;
-//				canSpecial = true;
-//				isMinigame = true;
-//				stopMove = true;
+				currentCharge = 0;
+				isMiniGame = true;
+			}
+			p1LPressed = false;
+			p1RPressed = false;
+			p2LPressed = false;
+			p2RPressed = false;
+		}
+	}
+
+	void RandomButtonNumber()
+	{
+		randNum = Random.Range(0,MAX_KEY); //can be simplyfied lagi by using 2d array
+		sprP1.sprite = p1ButtonSet[randNum];
+		randNum = Random.Range(0,MAX_KEY);
+		sprP2.sprite = p2ButtonSet[randNum];
+	}
+
+	void MiniGame()
+	{
+		if(startPressedTimer)
+		{
+			pressedTimer += Time.deltaTime;
+			if(pressedTimer >= pressedWindowDuration)
+			{
+				startPressedTimer = false;
+				pressedTimer = 0;
+				isPressed[0] = false;
+				isPressed[1] = false;
+				explosion[0].SetActive(false);
+				explosion[1].SetActive(false);
+				RandomButtonNumber();
 			}
 		}
-
-		if (isFistRocket) {
-			state = (int)STATE.FISTROCKET;
-			isFistRocket = false;
+		if(!isPressed[0])//P1 movement
+		{
+			if(Input.GetAxis("Vertical") > 0) //up
+			{
+				if(sprP1.sprite == p1ButtonSet[0])
+				{
+					isPressed[0] = true;
+					explosion[0].SetActive(true);
+				}
+			}
+			else if(Input.GetAxis("Vertical") < 0) //down 
+			{
+				if(sprP1.sprite == p1ButtonSet[1])
+				{
+					isPressed[0] = true;
+					explosion[0].SetActive(true);
+				}
+			}
+			else if(Input.GetAxis("Horizontal") < 0) //left
+			{
+				if(sprP1.sprite == p1ButtonSet[2])
+				{
+					isPressed[0] = true;
+					explosion[0].SetActive(true);
+				}
+			}
+			else if(Input.GetAxis("Horizontal") > 0) //right
+			{
+				if(sprP1.sprite == p1ButtonSet[3])
+				{
+					isPressed[0] = true;
+					explosion[0].SetActive(true);
+				}
+			}
+			startPressedTimer = true;
 		}
 
-	
+		if(!isPressed[1])//P2 attack
+		{
+			if(Input.GetButtonDown("Button_A"))
+			{
+				if(sprP2.sprite == p2ButtonSet[0])
+				{
+					isPressed[1] = true;
+					explosion[1].SetActive(true);
+				}
+			}
+			else if(Input.GetButtonDown("Button_B"))
+			{
+				if(sprP2.sprite == p2ButtonSet[1])
+				{
+					isPressed[1] = true;
+					explosion[1].SetActive(true);
+				}
+			}
+			else if(Input.GetButtonDown("Button_X"))
+			{
+				if(sprP2.sprite == p2ButtonSet[2])
+				{
+					isPressed[1] = true;
+					explosion[1].SetActive(true);
+				}
+			}
+			else if(Input.GetButtonDown("Button_Y"))
+			{
+				if(sprP2.sprite == p2ButtonSet[3])
+				{
+					isPressed[1] = true;
+					explosion[1].SetActive(true);
+				}
+			}
+			startPressedTimer = true;
+		}
+
+		if(isPressed[0] && isPressed[1])
+		{
+			correctPressed += 1;
+		}
+
 	}
 
 	void SpawnFist ()
@@ -434,7 +573,4 @@ public class Mecha : LifeObject
 	{
 		SoundManagerScript.Instance.PlaySFX(AudioClipID.SFX_MECHAMAN_DASH_PUNCH);
 	}
-
-
-
 }

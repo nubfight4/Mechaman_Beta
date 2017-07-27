@@ -134,10 +134,10 @@ public class Goatzilla : LifeObject
 		Boundary ();
 		if (target != null) 
 		{
-			if(Input.GetKeyDown(KeyCode.A))
-			{
-				base.ReceiveDamage (50);
-			}
+//			if(Input.GetKeyDown(KeyCode.A)) //! testing health bar purpose
+//			{
+//				base.ReceiveDamage (50);
+//			}
 			CheckDeath();
 			if(isAlive)
 			{
@@ -560,12 +560,10 @@ public class Goatzilla : LifeObject
 	{
 		if (isRoarPrepare == true)
 		{
-			Debug.Log(" Charging roar ?");
 			anim.SetBool("DoChargeRoar", true);
 			roarChargeTimer += Time.deltaTime;
 			if ( roarChargeTimer > roarChargeDuration)
 			{
-				Debug.Log(" Do roar?");
 				isRoarPrepare = false;
 				anim.SetTrigger ("DoRoarAttack");
 				roarChargeTimer = 0;
