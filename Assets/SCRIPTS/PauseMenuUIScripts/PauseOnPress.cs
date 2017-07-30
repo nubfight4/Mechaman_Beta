@@ -68,11 +68,9 @@ public class PauseOnPress : MonoBehaviour {
 		if(paused)
 		{
 			PauseGame();
-			Debug.Log("Timescale paused");
 		}
 		else{
 			ContinueGame();
-			Debug.Log("Timescale resumed");
 		}
     }
 

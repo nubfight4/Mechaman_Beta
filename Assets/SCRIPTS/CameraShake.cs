@@ -7,7 +7,6 @@ public class CameraShake : MonoBehaviour {
 	public static CameraShake _instance;
 	public float shakeDuration;
 	public float shakeAmount;
-	public float decreaseFactor;
 	Vector3 _originalPos;
 	float posX;
 	float posY;
@@ -31,7 +30,7 @@ public class CameraShake : MonoBehaviour {
 			posY = Random.value * shakeAmount;
 			Vector3 newPos = new Vector3(posX,posY,-1.0f);
 			this.GetComponent<Transform>().position = newPos;
-			shakeDuration -= Time.deltaTime * decreaseFactor;
+			shakeDuration -= Time.deltaTime;
 		}
 		else
 		{
