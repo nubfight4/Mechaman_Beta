@@ -752,4 +752,30 @@ public class Goatzilla : LifeObject
 	{
 		SoundManagerScript.Instance.PlaySFX (AudioClipID.SFX_GOATZILLA_ROAR);
 	}
+
+    void GoatzillaHitByPunch()
+    {
+        SoundManagerScript.Instance.PlaySFX(AudioClipID.SFX_GOATZILLA_HIT_BY_PUNCH);
+    }
+
+    void GoatzillaHitByRocketFist()
+    {
+        SoundManagerScript.Instance.PlaySFX(AudioClipID.SFX_GOATZILLA_HIT_BY_ROCKET_FIST);
+    }
+
+    void GoatzillaRockCrash()
+    {
+        SoundManagerScript.Instance.PlaySFX(AudioClipID.SFX_GOATZILLA_ROCK_CRASH);
+    }
+
+    void GoatzillaStomp()
+    {
+        SoundManagerScript.Instance.PlaySFX(AudioClipID.SFX_GOATZILLA_STOMP);
+    }
+
+    void GoatzillaVomitAcid()
+    {
+        SoundManagerScript.Instance.PlaySFX(AudioClipID.SFX_GOATZILLA_VOMIT_ACID);
+    }
+
 }

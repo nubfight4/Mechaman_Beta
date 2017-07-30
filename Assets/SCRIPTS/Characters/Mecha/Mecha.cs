@@ -435,6 +435,44 @@ public class Mecha : LifeObject
 		SoundManagerScript.Instance.PlaySFX(AudioClipID.SFX_MECHAMAN_DASH_PUNCH);
 	}
 
+    void Charging_Rocket_Fist()
+    {
+        SoundManagerScript.Instance.PlaySFX(AudioClipID.SFX_MECHAMAN_CHARGING_FIST_ROCKET);
+    }
 
+    void Getting_Headbutted()
+    {
+        SoundManagerScript.Instance.PlaySFX(AudioClipID.SFX_MECHAMAN_GETTING_HEADBUTTED);
+    }
+
+    void Getting_Swiped()
+    {
+        SoundManagerScript.Instance.PlaySFX(AudioClipID.SFX_MECHAMAN_GETTING_SWIPED);
+    }
+
+    void Getting_Roared()
+    {
+        SoundManagerScript.Instance.PlaySFX(AudioClipID.SFX_MECHAMAN_GETTING_ROARED);
+    }
+
+    void Hit_By_Rock()
+    {
+        SoundManagerScript.Instance.PlaySFX(AudioClipID.SFX_MECHAMAN_HIT_BY_ROCK);
+    }
+
+    void Hurt_By_Acid()
+    {
+        SoundManagerScript.Instance.PlaySFX(AudioClipID.SFX_MECHAMAN_HURT_BY_ACID);
+    }
+
+    void Rocket_Fist_Launched()
+    {
+        SoundManagerScript.Instance.PlaySFX(AudioClipID.SFX_MECHAMAN_ROCKET_FIST_LAUNCH);
+    }
+
+    void Ultimate_Mode()
+    {
+        SoundManagerScript.Instance.PlaySFX(AudioClipID.SFX_MECHAMAN_ULTIMATE_MODE);
+    }
 
 }
