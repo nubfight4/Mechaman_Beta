@@ -5,7 +5,7 @@ using UnityEngine;
 public class Rock : MonoBehaviour 
 {
 	public int rockDamage = 20;
-	private float lifeTime = 1.95f;
+	//private float lifeTime = 1.95f;
 	private Animator anim;
 	public bool isRockBreak = false;
 	float rotateAmount = 0.0f;
@@ -27,7 +27,19 @@ public class Rock : MonoBehaviour
 
 	void Update ()
 	{
-		transform.Rotate (0, 0, rotateAmount * Time.deltaTime);
+		if(!isRockBreak) 
+		{
+			transform.Rotate (0, 0, rotateAmount * Time.deltaTime);
+			if (transform.position.y < -2.9f)
+			{
+				GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+				GetComponent<Rigidbody2D>().gravityScale = 0.0f;
+				transform.rotation = Quaternion.Euler(Vector3.zero);
+				isRockBreak = true;
+				anim.SetTrigger("DoRockBreak");
+				rockDamage = 0;
+			}
+		}
 	}
 
 	public void DestroyRock()
@@ -50,7 +62,7 @@ public class Rock : MonoBehaviour
 				anim.SetTrigger("DoRockBreak");
 				//Destroy (this.gameObject);
 			} 
-			else if (other.gameObject.CompareTag ("Enemy") || other.gameObject.CompareTag ("Ground"))
+			else if (other.gameObject.CompareTag ("Enemy"))
 			{
 				Physics2D.IgnoreCollision (other.gameObject.GetComponent<Collider2D> (), GetComponent<Collider2D> ());
 				rockDamage = 0;

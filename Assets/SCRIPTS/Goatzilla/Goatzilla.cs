@@ -59,7 +59,7 @@ public class Goatzilla : LifeObject
 	public float roarChargeDuration = 8.0f;
 	public float roarDamageCheck = 0.0f;
 	public float roarDamageLimit = 300.0f;
-	public float roarStartLimit = 300.0f;
+	//public float roarStartLimit = 300.0f;
 	public GameObject RoarPrefab;
 	Vector3 roarPos;
 
@@ -136,10 +136,10 @@ public class Goatzilla : LifeObject
 		Boundary ();
 		if (target != null) 
 		{
-//			if(Input.GetKeyDown(KeyCode.A)) //! testing health bar purpose
-//			{
-//				base.ReceiveDamage (50);
-//			}
+			if(Input.GetKeyDown(KeyCode.A))
+			{
+				base.ReceiveDamage (50);
+			}
 			CheckDeath();
 			if(isAlive)
 			{
@@ -454,8 +454,8 @@ public class Goatzilla : LifeObject
 			{
 				rockCounter ++;
 				tempPosition = target.transform.position;
+				Instantiate(rockPrefab, target.transform.position + (Vector3.up * rockSpawnHeight), Quaternion.identity);
 				Instantiate(rockIndicatorPrefab,tempPosition + (Vector3.up* indicatorHeight), Quaternion.identity);
-				Instantiate(rockPrefab, tempPosition + (Vector3.up * rockSpawnHeight), Quaternion.identity);
 				rockTimer = 0.0f;
 			}	
 		}
@@ -479,7 +479,7 @@ public class Goatzilla : LifeObject
 			{
 				tempPosition = target.transform.position;
 				Instantiate(rockIndicatorPrefab,tempPosition + (Vector3.up* indicatorHeight)+ (Vector3.right * (i - tempRockCount/2)), Quaternion.identity);
-				Instantiate(rockPrefab, tempPosition + (Vector3.up * rockSpawnHeight) + (Vector3.right * (i - tempRockCount/2)), Quaternion.identity);
+				Instantiate(rockPrefab, target.transform.position + (Vector3.up * rockSpawnHeight) + (Vector3.right * (i - tempRockCount/2)), Quaternion.identity);
 			}
 			rockThrowCounter++;
 			if(!isEnraged && rockThrowCounter >= 3)
@@ -566,11 +566,13 @@ public class Goatzilla : LifeObject
 	{
 		if (isRoarPrepare == true)
 		{
+			Debug.Log(" Charging roar ?");
 			anim.SetBool("DoChargeRoar", true);
 			roarChargeTimer += Time.deltaTime;
 			if ( roarChargeTimer > roarChargeDuration)
 			{
-				
+				roarDamageCheck = 0.0f;
+				Debug.Log(" Do roar?");
 				isRoarPrepare = false;
 				anim.SetTrigger ("DoRoarAttack");
 				roarChargeTimer = 0;
@@ -607,24 +609,35 @@ public class Goatzilla : LifeObject
 	public override void ReceiveDamage (int value)
 	{
 		base.ReceiveDamage (value);
-		if(!isInvincible)
-		{
-			anim.SetTrigger("DoLightDamage");
-		}
 		if(isRoarPrepare == true)
 		{
 			roarDamageCheck += value;
 			if (roarDamageCheck >= roarDamageLimit)
 			{
-				Debug.Log("Roar1");
+				Debug.Log("Cancel Roar");
+				anim.SetTrigger("DoLightDamage");
 				isRoarPrepare = false;
 				roarDamageCheck = 0.0f;
 				isRoarDone = true;
 				isRoarReady = true;
 				UpdateAttackState(AttackState.CHECK);
-
+			} 
+			else
+			{
+				StartCoroutine (Tinting ());
 			}
 		}
+		else if(!isInvincible)
+		{
+			anim.SetTrigger("DoLightDamage");
+		}
+	}
+
+	private IEnumerator Tinting ()
+	{
+		this.GetComponent<SpriteRenderer>().enabled = false;
+		yield return new WaitForSeconds (0.5f);
+		this.GetComponent<SpriteRenderer>().enabled = true;
 	}
 
 	public IEnumerator Immobolize (float duration, bool invincible)
@@ -653,7 +666,7 @@ public class Goatzilla : LifeObject
 		else if (isEnraged && state == AttackState.CHECK && curBehaviorState == BehaviorState.NORMAL)
 		{
 			isCheckMelee = false;
-			StartCoroutine (Immobolize (5.0f, true)); //Invulnerable + Immoblize for 5s
+			StartCoroutine (Immobolize (5.0f, true)); //Invulnerable + Immoblize for 3s
 			prevAttackState = AttackState.NONE;
 			curAttackState = AttackState.TRANSITION;
 		}
@@ -757,30 +770,4 @@ public class Goatzilla : LifeObject
 	{
 		SoundManagerScript.Instance.PlaySFX (AudioClipID.SFX_GOATZILLA_ROAR);
 	}
-
-    void GoatzillaHitByPunch()
-    {
-        SoundManagerScript.Instance.PlaySFX(AudioClipID.SFX_GOATZILLA_HIT_BY_PUNCH);
-    }
-
-    void GoatzillaHitByRocketFist()
-    {
-        SoundManagerScript.Instance.PlaySFX(AudioClipID.SFX_GOATZILLA_HIT_BY_ROCKET_FIST);
-    }
-
-    void GoatzillaRockCrash()
-    {
-        SoundManagerScript.Instance.PlaySFX(AudioClipID.SFX_GOATZILLA_ROCK_CRASH);
-    }
-
-    void GoatzillaStomp()
-    {
-        SoundManagerScript.Instance.PlaySFX(AudioClipID.SFX_GOATZILLA_STOMP);
-    }
-
-    void GoatzillaVomitAcid()
-    {
-        SoundManagerScript.Instance.PlaySFX(AudioClipID.SFX_GOATZILLA_VOMIT_ACID);
-    }
-
 }
