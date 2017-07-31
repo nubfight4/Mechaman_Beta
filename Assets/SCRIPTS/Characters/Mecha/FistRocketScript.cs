@@ -16,6 +16,7 @@ public class FistRocketScript : MonoBehaviour
 
 	public float attackSpeed = 20f;
 	public float returnSpeed = 2f;
+	public float knockBackValue;
 
 	public bool touchEnemy;
 	public bool returnPlayer;
@@ -113,7 +114,8 @@ public class FistRocketScript : MonoBehaviour
 		if (target.gameObject.tag == "Enemy") {
 			punchCounter += Time.deltaTime * 1000f;
 			if (punchCounter > punchDelay) {
-				goatzilla.ReceiveDamage(300); 
+				goatzilla.ReceiveDamage(300);
+				goatzilla.transform.Translate(knockBackValue,0.0f,0.0f);
 				Destroy (gameObject);
 				//touchEnemy = true;
 			}

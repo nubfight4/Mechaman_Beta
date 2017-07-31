@@ -570,6 +570,7 @@ public class Goatzilla : LifeObject
 			roarChargeTimer += Time.deltaTime;
 			if ( roarChargeTimer > roarChargeDuration)
 			{
+				
 				isRoarPrepare = false;
 				anim.SetTrigger ("DoRoarAttack");
 				roarChargeTimer = 0;

@@ -358,14 +358,14 @@ public class Mecha : LifeObject
 					//state = (int)STATE.WHATSUP;
 					anim.SetTrigger("WhatsUp");
 					resetTimer = 0;
-					dMG = 60;
+					dMG = 50;
 					timePressedNormal++;
 				}
 				else if(timePressedNormal == 2)
 				{
 					//state = (int)STATE.SHADOW;
 					anim.SetTrigger("ShadowStrike");
-					dMG = 80;
+					dMG = 50;
 				} 
 			}
 		}
@@ -379,14 +379,14 @@ public class Mecha : LifeObject
 				if(timePressedHeavy == 0)
 				{
 					anim.SetTrigger("HeavyAttack");
-					dMG = 70;
+					dMG = 40;
 					timePressedHeavy++;
 
 				}
 				else if(timePressedHeavy == 1)
 				{
 					anim.SetTrigger("DoubleTrouble");
-					dMG = 180;
+					dMG = 50;
 				}
 			}
 		}
@@ -573,7 +573,6 @@ public class Mecha : LifeObject
 	{
 		SoundManagerScript.Instance.PlaySFX(AudioClipID.SFX_MECHAMAN_DASH_PUNCH);
 	}
-<<<<<<< HEAD
 
     void Charging_Rocket_Fist()
     {
@@ -614,7 +613,5 @@ public class Mecha : LifeObject
     {
         SoundManagerScript.Instance.PlaySFX(AudioClipID.SFX_MECHAMAN_ULTIMATE_MODE);
     }
-
-=======
->>>>>>> d9154d46ced841e68e8a06d341cc32acd97afc9b
+		
 }
