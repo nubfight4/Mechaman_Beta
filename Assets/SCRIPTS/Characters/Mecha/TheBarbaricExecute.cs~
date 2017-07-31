@@ -42,6 +42,7 @@ public class TheBarbaricExecute : MonoBehaviour
 				jumpPunchDurationTimer = 0f;
 				bbCombo.canJumpPunch = false;
 				mecha.stopMove = false;
+				bbCombo.IsJumpPunchCooldown = true;
 			}
 		}
 
@@ -60,6 +61,7 @@ public class TheBarbaricExecute : MonoBehaviour
 				mecha.stopMove = false;
 				bbCombo.canDashPunch = false;
 				bbCombo.canDashPunchLeft = false;
+				bbCombo.IsDashPunchCooldown = true;
 			}
 
 
@@ -78,6 +80,7 @@ public class TheBarbaricExecute : MonoBehaviour
 				mecha.stopMove = false;
 				bbCombo.canDashPunch = false;
 				bbCombo.canDashPunchRight = false;
+				bbCombo.IsDashPunchCooldown = true;
 			}
 		}
 	}

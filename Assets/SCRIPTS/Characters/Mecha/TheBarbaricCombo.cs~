@@ -14,11 +14,19 @@ public class TheBarbaricCombo : MonoBehaviour
 
 	// Normal Attack (P2) + Up (P1)
 	public bool canJumpPunch = false;
+	public bool IsJumpPunchCooldown = false;
+
+	public float jumpPunchCooldown = 500f;
+	public float jumpPunchCDTimer = 0f;
 
 	// Heavy Attack (P2) + Left or Right (P1)
 	public bool canDashPunch = false;
 	public bool canDashPunchLeft = false;
 	public bool canDashPunchRight = false;
+	public bool IsDashPunchCooldown = false;
+
+	public float dashPunchCooldown = 500f;
+	public float dashPunchCDTimer = 0f;
 
 	// Block (P2) + Block (P1)
 	public bool canMiniGame = false;
@@ -33,25 +41,8 @@ public class TheBarbaricCombo : MonoBehaviour
 
 	void Update ()
 	{
-		if (!mecha.stopMove) {
-			if (bbInput.tapFire2P2 == 1 && bbInput.holdUpP1Duration > 50f && !canJumpPunch) {
-				Debug.Log ("JUMP PUNCH");
-				canJumpPunch = true;
-			}
-			if (bbInput.tapFire1P2 == 1 && bbInput.holdLeftP1Duration > 50f && !canDashPunch && !canDashPunchLeft) {
-				Debug.Log ("DASH PUNCH LEFT");
-				canDashPunch = true;
-				canDashPunchLeft = true;
-				canDashPunchRight = false;
-			}
-			if (bbInput.tapFire1P2 == 1 && bbInput.holdRightP1Duration > 50f && !canDashPunch && !canDashPunchRight) {
-				Debug.Log ("DASH PUNCH RIGHT");
-				canDashPunch = true;
-				canDashPunchRight = true;
-				canDashPunchLeft = false;
-			}
-		}
-
+		Cooldown ();
+		SyncAttacks ();
 		/*
 		if (bbInput.ComboStore.Count > 0) {
 			if (bbInput.ComboStore.Count > 1) {
@@ -77,5 +68,47 @@ public class TheBarbaricCombo : MonoBehaviour
 			}
 		}
 		*/
+	}
+
+	public void Cooldown ()
+	{
+		if (IsDashPunchCooldown) {
+			if (dashPunchCDTimer <= dashPunchCooldown) {
+				dashPunchCDTimer += Time.deltaTime * 1000f;
+			} else {
+				dashPunchCDTimer = 0f;
+				IsDashPunchCooldown = false;
+			}
+		}
+		if (IsJumpPunchCooldown) {
+			if (jumpPunchCDTimer <= jumpPunchCooldown) {
+				jumpPunchCDTimer += Time.deltaTime * 1000f;
+			} else {
+				jumpPunchCDTimer = 0f;
+				IsJumpPunchCooldown = false;
+			}
+		}
+	}
+
+	public void SyncAttacks ()
+	{
+		if (!mecha.stopMove) {
+			if (bbInput.tapFire2P2 == 1 && bbInput.holdUpP1Duration > 50f && !canJumpPunch && !IsJumpPunchCooldown) {
+				Debug.Log ("JUMP PUNCH");
+				canJumpPunch = true;
+			}
+			if (bbInput.tapFire1P2 == 1 && bbInput.holdLeftP1Duration > 50f && !canDashPunch && !canDashPunchLeft && !IsDashPunchCooldown) {
+				Debug.Log ("DASH PUNCH LEFT");
+				canDashPunch = true;
+				canDashPunchLeft = true;
+				canDashPunchRight = false;
+			}
+			if (bbInput.tapFire1P2 == 1 && bbInput.holdRightP1Duration > 50f && !canDashPunch && !canDashPunchRight && !IsDashPunchCooldown) {
+				Debug.Log ("DASH PUNCH RIGHT");
+				canDashPunch = true;
+				canDashPunchRight = true;
+				canDashPunchLeft = false;
+			}
+		}
 	}
 }

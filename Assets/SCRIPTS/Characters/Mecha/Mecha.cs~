@@ -181,7 +181,7 @@ public class Mecha : LifeObject
 		CheckDeath ();
 		Boundary ();
 		NewMovement ();
-		Combo ();
+		//Combo ();
 		P1SpecialInput ();
 		P2SpecialInput ();
 		UpdateAnimator ();

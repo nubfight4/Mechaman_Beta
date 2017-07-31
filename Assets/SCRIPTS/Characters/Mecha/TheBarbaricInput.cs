@@ -235,5 +235,17 @@ public class TheBarbaricInput : MonoBehaviour
 		tapRightBumperP1 = 0;
 		tapLeftBumperP2 = 0;
 		tapRightBumperP2 = 0;
+
+		holdUpP1Duration = 0;
+		holdDownP1Duration = 0;
+		holdLeftP1Duration = 0;
+		holdRightP1Duration = 0;
+		holdFire1P2Duration = 0;
+		holdFire2P2Duration = 0;
+		holdFire3P2Duration = 0;
+		holdLeftBumperP1Duration = 0;
+		holdRightBumperP1Duration = 0;
+		holdLeftBumperP2Duration = 0;
+		holdRightBumperP2Duration = 0;
 	}
 }
