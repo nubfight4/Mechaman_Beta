@@ -80,7 +80,7 @@ public class TextManager : MonoBehaviour
 		if (Input.GetButtonDown ("Skip_Tutorial")) 
 		{
 			textScroll = true;
-			currentLine = 12;
+			currentLine = 18;
 		}
 
 		if (textScroll == true) {
@@ -118,7 +118,7 @@ public class TextManager : MonoBehaviour
 
     void levelSelection()
     {
-        if (currentLine == 14) //level 1
+        if (currentLine == 19) //level 1
         {
             SceneManager.LoadScene("GameScene");
             //currentLine = 20;
@@ -215,7 +215,7 @@ public class TextManager : MonoBehaviour
 
         }
 
-		if (currentLine == 13) 
+		if (currentLine == 18) 
 		{
 			GameObject.FindGameObjectWithTag ("TutorialDoor").GetComponent<Transform> ().Translate (Vector3.up * Time.deltaTime * doorspeed);
 		}
