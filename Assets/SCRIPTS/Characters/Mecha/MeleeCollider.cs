@@ -28,6 +28,7 @@ public class MeleeCollider : MonoBehaviour {
 				col.transform.Translate(knockBackValue,0.0f,0.0f);
 				mechaScript.currentCharge += specialCharge;
 			}
+			//this.gameObject.SetActive(false);
 		}
 
 	}

@@ -18,17 +18,19 @@ public class Goatzilla : LifeObject
 	private bool nearToTarget;
 	//private Direction movingDirection;
 	//public GameObject eyeLaserPrefab;
-
 	[Header("Melee")]
 	public float meleeRange = 3.5f; // Melee Distance 1f = 100px
 	public float meleeTimer = 0.0f;
 	public float meleeDurationNormal = 2.0f;
 	public float meleeDurationEnrage = 1.0f;
 	public bool isCheckMelee = true;
+	public float swipeKnockbackValue = 0;
+	public float headButtKnockbackValue = 0;
 
 	[Header("Rock")]
 	public GameObject rockPrefab;
-	//public GameObject rockIndicatorPrefab;
+	public GameObject rockIndicatorPrefab;
+	public float indicatorHeight = 0;
 	public float rockSpawnHeight = 20.0f;
 	public int singleRockThrowCountNormal = 3;
 	public int singleRockThrowCountEnrage = 5;
@@ -40,6 +42,7 @@ public class Goatzilla : LifeObject
 	float rockTimer = 0.0f;
 	public float rockDuration = 3.0f;
 	public int rockThrowCounterLimit = 3;
+	Vector3 temPos = Vector3.zero;
 
 	[Header("Acid")]
 	public float acidTimer = 0.0f;
@@ -219,9 +222,6 @@ public class Goatzilla : LifeObject
 							randRockThrow = true;
 							randRockChoice = Random.Range(0, 2);
 							anim.SetBool("DoThrowRock", true);
-							CameraShake._instance.shakeDuration = 1.0f;
-							CameraShake._instance.shakeAmount = 0.1f;
-
 						}
 					}
 					else if (curAttackState == AttackState.CHECK)
@@ -415,7 +415,8 @@ public class Goatzilla : LifeObject
 		if(GetDistanceFromTarget () <= meleeRange)
 		{
 			target.ReceiveDamage(80);
-			target.Knockback (Vector3.left, 0.1f);
+			//target.Knockback (Vector3.left, 2f);
+			target.transform.Translate(swipeKnockbackValue,0.0f,0.0f);
 		}
 	}
 
@@ -459,7 +460,9 @@ public class Goatzilla : LifeObject
 			if(rockTimer >= rockDuration)
 			{
 				rockCounter ++;
-				Instantiate(rockPrefab, target.transform.position + (Vector3.up * rockSpawnHeight), Quaternion.identity);
+				temPos = target.transform.position;
+				Instantiate(rockIndicatorPrefab,temPos + (Vector3.up * indicatorHeight), Quaternion.identity);
+				Instantiate(rockPrefab, temPos + (Vector3.up * rockSpawnHeight), Quaternion.identity);
 				rockTimer = 0.0f;
 			}	
 		}
@@ -481,7 +484,9 @@ public class Goatzilla : LifeObject
 			}
 			for( int i = 0; i < tempRockCount; i++)
 			{
-				Instantiate(rockPrefab, target.transform.position + (Vector3.up * rockSpawnHeight) + (Vector3.right * (i - tempRockCount/2)), Quaternion.identity);
+				temPos = target.transform.position;
+				Instantiate(rockIndicatorPrefab,temPos + (Vector3.up * indicatorHeight) + (Vector3.right * (i - tempRockCount/2)), Quaternion.identity);
+				Instantiate(rockPrefab, temPos + (Vector3.up * rockSpawnHeight) + (Vector3.right * (i - tempRockCount/2)), Quaternion.identity);
 			}
 			rockThrowCounter++;
 			if(!isEnraged && rockThrowCounter >= 3)
@@ -591,7 +596,8 @@ public class Goatzilla : LifeObject
 		if(GetDistanceFromTarget () <= meleeRange)
 		{
 			target.ReceiveDamage(70);
-			target.Knockback (Vector3.left, 0.1f);
+			//target.Knockback (Vector3.left, 0.1f);
+			target.transform.Translate(swipeKnockbackValue,0.0f,0.0f);
 		}
 	}
 
@@ -766,6 +772,12 @@ public class Goatzilla : LifeObject
 		//		{
 		//			target.gameObject.GetComponent<Mecha> ().ReceiveDamage (chargeDamage);
 		//		}
+	}
+
+	void StompShake()
+	{
+		CameraShake._instance.shakeDuration = 1.0f;
+		CameraShake._instance.shakeAmount = 0.1f;
 	}
 
 	void GoatzillaWalkingSFX()

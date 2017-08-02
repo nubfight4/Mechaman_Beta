@@ -133,7 +133,7 @@ public class FistRocketScript : MonoBehaviour
 		if (target.gameObject.tag == "Enemy") {
 			punchCounter += Time.deltaTime * 1000f;
 			if (punchCounter > punchDelay) {
-				goatzilla.ReceiveDamage(300); 
+				goatzilla.ReceiveDamage(mecha.dMG); 
 				goatzilla.transform.Translate(knockBackValue,0.0f,0.0f);
 				Destroy (gameObject);
 				//touchEnemy = true;
