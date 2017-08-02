@@ -1,9 +1,11 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 
 [System.Serializable]
+
+//    1/8/2017
 
 public class Goatzilla : LifeObject
 {
@@ -28,7 +30,9 @@ public class Goatzilla : LifeObject
 
     [Header("Rock")]
     public GameObject rockPrefab;
-    //public GameObject rockIndicatorPrefab;
+    public GameObject rockIndicatorPrefab;
+    Vector3 tempPosition = Vector3.zero;
+    public float indicatorHeight;
     public float rockSpawnHeight = 20.0f;
     public int singleRockThrowCountNormal = 3;
     public int singleRockThrowCountEnrage = 5;
@@ -72,7 +76,6 @@ public class Goatzilla : LifeObject
     public bool isThrowRockAnim = false;
     public bool isEnraged;
     bool isTransitionAnim = false;
-    private bool isTinting = false;
 
     public AttackState prevAttackState;
     public AttackState curAttackState;
@@ -137,7 +140,7 @@ public class Goatzilla : LifeObject
         {
             if (Input.GetKeyDown(KeyCode.A))
             {
-                this.ReceiveDamage(50);
+                base.ReceiveDamage(50);
             }
             CheckDeath();
             if (isAlive)
@@ -227,8 +230,6 @@ public class Goatzilla : LifeObject
                     else if (curAttackState == AttackState.CHECK)
                     {
                         //! Check walk func
-                        if (isRoarAnim)
-                            isRoarAnim = false;
                         anim.SetTrigger("DoWalk");
                         Walk(3.0f);
                     }
@@ -255,6 +256,7 @@ public class Goatzilla : LifeObject
                             isCheckMelee = false;
                         }
                     }
+
                     if (curAttackState == AttackState.NONE)
                     {
                         //! idle anim
@@ -304,8 +306,6 @@ public class Goatzilla : LifeObject
                     else if (curAttackState == AttackState.CHECK)
                     {
                         //! Check walk func
-                        if (isRoarAnim)
-                            isRoarAnim = false;
                         anim.SetTrigger("DoWalk");
                         Walk(3.0f);
                     }
@@ -339,7 +339,6 @@ public class Goatzilla : LifeObject
                 HP = 500;
                 isRoarDone = false;
                 isRoarReady = true;
-                roarDamageCheck = 0.0f;
                 //				UpdateAttackState(AttackState.CHECK);
             }
             else
@@ -352,7 +351,7 @@ public class Goatzilla : LifeObject
 
     public void LoadAfterDeathAnim()
     {
-        //Debug.Log("Next scene");
+        Debug.Log("Next scene");
         SceneManager.LoadScene(4);
         Destroy(this.gameObject);
     }
@@ -362,7 +361,6 @@ public class Goatzilla : LifeObject
         anim.SetLayerWeight(1, 1);
         curBehaviorState = BehaviorState.ENRAGE;
         UpdateAttackState(AttackState.CHECK);
-        randRockThrow = false;
     }
 
     public void ResetAnim()
@@ -457,7 +455,9 @@ public class Goatzilla : LifeObject
             if (rockTimer >= rockDuration)
             {
                 rockCounter++;
+                tempPosition = target.transform.position;
                 Instantiate(rockPrefab, target.transform.position + (Vector3.up * rockSpawnHeight), Quaternion.identity);
+                Instantiate(rockIndicatorPrefab, tempPosition + (Vector3.up * indicatorHeight), Quaternion.identity);
                 rockTimer = 0.0f;
             }
         }
@@ -479,6 +479,8 @@ public class Goatzilla : LifeObject
             }
             for (int i = 0; i < tempRockCount; i++)
             {
+                tempPosition = target.transform.position;
+                Instantiate(rockIndicatorPrefab, tempPosition + (Vector3.up * indicatorHeight) + (Vector3.right * (i - tempRockCount / 2)), Quaternion.identity);
                 Instantiate(rockPrefab, target.transform.position + (Vector3.up * rockSpawnHeight) + (Vector3.right * (i - tempRockCount / 2)), Quaternion.identity);
             }
             rockThrowCounter++;
@@ -575,11 +577,7 @@ public class Goatzilla : LifeObject
                 Debug.Log(" Do roar?");
                 isRoarPrepare = false;
                 anim.SetTrigger("DoRoarAttack");
-                StartCoroutine(Immobolize(1.5f, true));
                 roarChargeTimer = 0;
-                //isRoarAnim = false;
-                isRoarDone = true;
-                isRoarReady = false;
             }
         }
     }
@@ -615,26 +613,20 @@ public class Goatzilla : LifeObject
         base.ReceiveDamage(value);
         if (isRoarPrepare == true)
         {
-            Debug.Log("isRoarPrepare true");
             roarDamageCheck += value;
             if (roarDamageCheck >= roarDamageLimit)
             {
                 Debug.Log("Cancel Roar");
                 anim.SetTrigger("DoLightDamage");
-                isRoarReady = false; // Added
-                isRoarAnim = false;
-                isRoarDone = true;
                 isRoarPrepare = false;
-                UpdateAttackState(AttackState.CHECK);
                 roarDamageCheck = 0.0f;
-
+                isRoarDone = true;
+                isRoarReady = true;
+                UpdateAttackState(AttackState.CHECK);
             }
             else
             {
-                if (!isTinting)
-                {
-                    StartCoroutine(Tinting());
-                }
+                StartCoroutine(Tinting());
             }
         }
         else if (!isInvincible)
@@ -645,11 +637,9 @@ public class Goatzilla : LifeObject
 
     private IEnumerator Tinting()
     {
-        isTinting = true;
         this.GetComponent<SpriteRenderer>().enabled = false;
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.5f);
         this.GetComponent<SpriteRenderer>().enabled = true;
-        isTinting = false;
     }
 
     public IEnumerator Immobolize(float duration, bool invincible)
@@ -668,24 +658,20 @@ public class Goatzilla : LifeObject
 
     void UpdateAttackState(AttackState state)
     {
-        if (isEnraged && state == AttackState.CHECK && curBehaviorState == BehaviorState.NORMAL)
+        if (isRoarReady && state == AttackState.CHECK)
         {
+            Debug.Log("PrepareROar???");
             isCheckMelee = false;
-            prevAttackState = AttackState.NONE;
-            curAttackState = AttackState.TRANSITION;
-            StartCoroutine(Immobolize(5.0f, true)); //Invulnerable + Immoblize for 3s
-        }
-        else if (isRoarReady && state == AttackState.CHECK)
-        {
-            //Debug.Log("PrepareROar???");
-            isCheckMelee = false;
-            isRoarReady = false;
             prevAttackState = AttackState.NONE;
             curAttackState = AttackState.ROAR;
         }
-
-        // Problem with this one, it interfered the ReceiveDamage's supposed UpdateAttackState(AttackState.CHECK)
-
+        else if (isEnraged && state == AttackState.CHECK && curBehaviorState == BehaviorState.NORMAL)
+        {
+            isCheckMelee = false;
+            StartCoroutine(Immobolize(5.0f, true)); //Invulnerable + Immoblize for 3s
+            prevAttackState = AttackState.NONE;
+            curAttackState = AttackState.TRANSITION;
+        }
         else
         {
             prevAttackState = curAttackState;
@@ -722,10 +708,6 @@ public class Goatzilla : LifeObject
         if (!isEnraged && (GetHP() + (500 * lives) <= enrageHpThreshold))
         {
             Debug.Log("Enrage");
-            if (isRoarAnim)
-            {
-                isRoarAnim = false;
-            }
             isEnraged = true;
         }
     }
