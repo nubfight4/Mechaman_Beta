@@ -67,7 +67,13 @@ public class TextManager : MonoBehaviour
         {
             currentLine = 0;
         }
-
+        GameObject.FindGameObjectWithTag("MovementTutorialLeft").GetComponent<SpriteRenderer>().enabled = false;
+        GameObject.FindGameObjectWithTag("MovementTutorialRight").GetComponent<SpriteRenderer>().enabled = false;
+        GameObject.FindGameObjectWithTag("AttackTutorialX").GetComponent<SpriteRenderer>().enabled = false;
+        GameObject.FindGameObjectWithTag("AttackTutorialA").GetComponent<SpriteRenderer>().enabled = false;
+        GameObject.FindGameObjectWithTag("AttackTutorialX2").GetComponent<SpriteRenderer>().enabled = false;
+        GameObject.FindGameObjectWithTag("AttackTutorialX3").GetComponent<SpriteRenderer>().enabled = false;
+        GameObject.FindGameObjectWithTag("AttackTutorialUp").GetComponent<SpriteRenderer>().enabled = false;
     }
 
     void Update()
@@ -137,19 +143,26 @@ public class TextManager : MonoBehaviour
         {
             textScroll = false;
 
-			if (gamepadPos.x > 0.01 || gamepadPos.x < -0.01) 
+            GameObject.FindGameObjectWithTag("MovementTutorialLeft").GetComponent<SpriteRenderer>().enabled = true;
+            GameObject.FindGameObjectWithTag("MovementTutorialRight").GetComponent<SpriteRenderer>().enabled = true;
+
+            if (gamepadPos.x > 0.01 || gamepadPos.x < -0.01)
 			{
 					textScroll = true;
-					currentLine += 1;
-			}
+                currentLine += 1;
+                GameObject.FindGameObjectWithTag("MovementTutorialLeft").GetComponent<SpriteRenderer>().enabled = false;
+                GameObject.FindGameObjectWithTag("MovementTutorialRight").GetComponent<SpriteRenderer>().enabled = false;
+            }
 
         }
 
         if (currentLine == 8) //Attack n Block
         {
             textScroll = false;
+            GameObject.FindGameObjectWithTag("AttackTutorialX").GetComponent<SpriteRenderer>().enabled = true;
+            GameObject.FindGameObjectWithTag("AttackTutorialA").GetComponent<SpriteRenderer>().enabled = true;
 
-			if (Input.GetButtonDown("Normal Attack"))
+            if (Input.GetButtonDown("Normal Attack"))
 			{ 
 				tutorNormalAtk = true;
 			}
@@ -164,7 +177,9 @@ public class TextManager : MonoBehaviour
 			{
 				textScroll = true;
 				currentLine += 1;
-			}
+                GameObject.FindGameObjectWithTag("AttackTutorialX").GetComponent<SpriteRenderer>().enabled = false;
+                GameObject.FindGameObjectWithTag("AttackTutorialA").GetComponent<SpriteRenderer>().enabled = false;
+            }
 
 
         }
@@ -172,9 +187,9 @@ public class TextManager : MonoBehaviour
         if (currentLine == 9) //Combo Attack
         {
             textScroll = false;
+            GameObject.FindGameObjectWithTag("AttackTutorialX2").GetComponent<SpriteRenderer>().enabled = true;
 
-
-			if (Input.GetButtonDown("Normal Attack"))
+            if (Input.GetButtonDown("Normal Attack"))
 			{ 
 				mechaTimePressedNormal++;
 			}
@@ -189,7 +204,8 @@ public class TextManager : MonoBehaviour
 			{
 				textScroll = true;
 				currentLine += 1;
-			}
+                GameObject.FindGameObjectWithTag("AttackTutorialX2").GetComponent<SpriteRenderer>().enabled = false;
+            }
 
 
         }
@@ -198,7 +214,10 @@ public class TextManager : MonoBehaviour
         {
             textScroll = false;
 
-			if(gamepadPos.y > 0.01)
+            GameObject.FindGameObjectWithTag("AttackTutorialX3").GetComponent<SpriteRenderer>().enabled = true;
+            GameObject.FindGameObjectWithTag("AttackTutorialUp").GetComponent<SpriteRenderer>().enabled = true;
+
+            if (gamepadPos.y > 0.01)
 			{
 				if(Input.GetButtonDown("Normal Attack"))
 				{
@@ -210,7 +229,9 @@ public class TextManager : MonoBehaviour
 			{
 				textScroll = true;
 				currentLine += 1;
-			}
+                GameObject.FindGameObjectWithTag("AttackTutorialX3").GetComponent<SpriteRenderer>().enabled = false;
+                GameObject.FindGameObjectWithTag("AttackTutorialUp").GetComponent<SpriteRenderer>().enabled = false;
+            }
 
 
         }
