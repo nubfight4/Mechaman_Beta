@@ -11,4 +11,9 @@ Try your best to fight against this extremely scary and vicious enemy.
 Alright before you two leave, now both pilots try to work together and do some synchronized attacks.
 * Movement pilot       while the Attacking pilot does a normal attack       at the same time! *
 You guys can press the Start button to check the Movelist and pause the game.
+One more thing before you go...
+Notice the green bar below your health bar?
+That's your special attack bar. Both of you can perform it by pressing LB and RB together.
+But it's a little wonky right now, but I am pretty sure you can get it working once you walk out and do a little bit more Sync Attacks to warm it up.
+And without further ado... 
 Now off you go!

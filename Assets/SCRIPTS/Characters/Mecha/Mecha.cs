@@ -3,6 +3,13 @@ using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 
+[System.Serializable]
+public class Attacks
+{
+	public string name;
+	public int damage;
+}
+
 public class Mecha : LifeObject 
 {
 	public enum STATE
@@ -44,20 +51,29 @@ public class Mecha : LifeObject
 	bool startReset;
 	float resetTimer;
 	float resetDuration;
-
 	//hitsparkreset
-	bool hitstartReset;
+	//bool hitstartReset;
 	//prevent
 	bool isOtherCombo;
-	//MiniGame
+	[Header("KnockBack")]
+	public bool isKnockBack = false;
+	public float knockBackSpeed = 0f;
+	public float knockBackTimer = 0f;
+	public float knockBackDuration = 0f;
+
+	[Header("Attacks")]
+	const int MAX_ATACK = 9;
+	public Attacks[] attackList = new Attacks[MAX_ATACK];
+
+	[Header("MiniGame")]
 	bool isMiniGame;
 	const int MAX_KEY = 4;
-	public Sprite[] p1ButtonSet = new Sprite[MAX_KEY];
-	public Sprite[] p2ButtonSet = new Sprite[MAX_KEY];
 	public SpriteRenderer sprP1;
 	public SpriteRenderer sprP2;
 	public GameObject[] buttons = new GameObject[2];
 	public GameObject[] explosion = new GameObject[2];
+	public Sprite[] p1ButtonSet = new Sprite[MAX_KEY];
+	public Sprite[] p2ButtonSet = new Sprite[MAX_KEY];
 	bool[] isPressed = new bool[2];
 	bool startPressedTimer;
 	float miniGameTimer = 0;
@@ -70,12 +86,12 @@ public class Mecha : LifeObject
 
 
 	public GameObject RocketFistPrefab;
-	public GameObject JumpPunchCollider;
-	public GameObject DashPunchCollider;
+	//public GameObject JumpPunchCollider;
+	//public GameObject DashPunchCollider;
 
 	GameObject RocketFistPrefabClone;
-	GameObject JumpPunchColliderClone;
-	GameObject DashPunchColliderClone;
+//	GameObject JumpPunchColliderClone;
+//	GameObject DashPunchColliderClone;
 
 
 	//Special Attack
@@ -88,6 +104,18 @@ public class Mecha : LifeObject
 	public int maxCharge = 100;
 	public int currentCharge = 0;
 	public int specialCharge = 80;
+
+	//public bool instantOnce = false;
+	//public float jumpPunchDuration = 100f;
+	//public float jumpPunchDurationTimer = 0f;
+	//public float jumpPunchForce = 0.1f;
+	//public float jumpPunchDamping = 0.5f;
+
+	//public bool dashPunchLeft = false;
+	//public bool dashPunchRight = false;
+	//public float dashPunchDuration = 100f;
+	//public float dashPunchDurationTimer = 0f;
+	public float dashPunchForce = 10f;
 
 	public float GetCurrentChargePercentage ()
 	{
@@ -134,6 +162,7 @@ public class Mecha : LifeObject
 	// Update is called once per frame
 	void Update ()
 	{
+		Debug.Log(correctPressed);
 		if (PauseOnPress.Instance.paused != true) 
 		{
 			CheckDeath();
@@ -153,9 +182,6 @@ public class Mecha : LifeObject
 					p1RPressed = false;
 					p2LPressed = false;
 					p2RPressed = false;
-					anim.ResetTrigger("WhatsUp");
-					anim.ResetTrigger("ShadowStrike");
-					anim.ResetTrigger("DoubleTrouble");
 				}
 			}
 			if(!isMiniGame)
@@ -178,7 +204,7 @@ public class Mecha : LifeObject
 				MiniGame();
 				if(miniGameTimer >= miniGameDuration)
 				{
-					dMG = (correctPressed * 20) + 300;
+					dMG = (correctPressed * 20) + attackList[8].damage;
 					anim.SetTrigger("FistRocket");
 					correctPressed = 0;
 					isMiniGame = false;
@@ -259,18 +285,6 @@ public class Mecha : LifeObject
 		anim.SetBool ("Chaining", startReset);
 	}
 
-	public bool instantOnce = false;
-	public float jumpPunchDuration = 100f;
-	public float jumpPunchDurationTimer = 0f;
-	public float jumpPunchForce = 0.1f;
-	public float jumpPunchDamping = 0.5f;
-
-	public bool dashPunchLeft = false;
-	public bool dashPunchRight = false;
-	public float dashPunchDuration = 100f;
-	public float dashPunchDurationTimer = 0f;
-	public float dashPunchForce = 10f;
-
 	void Combo ()
 	{
 		if (gamepadPos.x == 0) 
@@ -310,7 +324,7 @@ public class Mecha : LifeObject
 
 		if(dashPunch)
 		{
-			dMG = 180;
+			dMG = attackList[6].damage;
 			if(faceRight)
 			{
 				gameObject.transform.Translate (Vector2.right * dashPunchForce * Time.deltaTime);
@@ -327,11 +341,7 @@ public class Mecha : LifeObject
 			if (Input.GetButtonDown ("Normal Attack") && timePressedNormal == 0) 
 			{
 				anim.SetTrigger("JumpPunch");
-				if(dashPunch)
-				{
-					dMG = 180;
-
-				}
+				dMG = attackList[5].damage;
 				startReset = true;
 				isOtherCombo = true;
 				isJumping = true;
@@ -349,7 +359,7 @@ public class Mecha : LifeObject
 				{
 					anim.SetTrigger("Punch");
 					resetTimer = 0;
-					dMG = 40;
+					dMG = attackList[0].damage;
 					timePressedNormal++;
 
 				} 
@@ -358,14 +368,13 @@ public class Mecha : LifeObject
 					//state = (int)STATE.WHATSUP;
 					anim.SetTrigger("WhatsUp");
 					resetTimer = 0;
-					dMG = 50;
+					dMG = attackList[1].damage;
 					timePressedNormal++;
 				}
 				else if(timePressedNormal == 2)
 				{
-					//state = (int)STATE.SHADOW;
 					anim.SetTrigger("ShadowStrike");
-					dMG = 50;
+					dMG = attackList[2].damage;
 				} 
 			}
 		}
@@ -379,14 +388,15 @@ public class Mecha : LifeObject
 				if(timePressedHeavy == 0)
 				{
 					anim.SetTrigger("HeavyAttack");
-					dMG = 40;
+					dMG = attackList[3].damage;
 					timePressedHeavy++;
 
 				}
-				else if(timePressedHeavy == 1)
+				else if(timePressedHeavy >= 1)
 				{
 					anim.SetTrigger("DoubleTrouble");
-					dMG = 50;
+					dMG = attackList[4].damage;
+					timePressedHeavy = 0;
 				}
 			}
 		}
@@ -545,6 +555,8 @@ public class Mecha : LifeObject
 		if(isPressed[0] && isPressed[1])
 		{
 			correctPressed += 1;
+			isPressed[0] = false;
+			isPressed[1] = false;
 		}
 
 	}
