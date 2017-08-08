@@ -19,6 +19,7 @@ public class MeleeCollider : MonoBehaviour {
 			//col.gameObject.transform.Translate(knockBackValue);
 			if(mechaScript.dashPunch) //! replace after HCI
 			{
+				Debug.Log (damage);
 				col.transform.Translate(knockBackValue,0.0f,0.0f);
 				mechaScript.currentCharge += specialCharge;
 			}

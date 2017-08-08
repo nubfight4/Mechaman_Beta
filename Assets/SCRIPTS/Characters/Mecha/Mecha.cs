@@ -162,7 +162,6 @@ public class Mecha : LifeObject
 	// Update is called once per frame
 	void Update ()
 	{
-		Debug.Log(correctPressed);
 		if (PauseOnPress.Instance.paused != true) 
 		{
 			CheckDeath();
