@@ -8,29 +8,32 @@ public class MeleeCollider : MonoBehaviour {
 	public Mecha mechaScript;
 	public Goatzilla target;
 	public float knockBackValue = 0.0f;
+	public bool isColliding = true;
 	//Vector3 knockBackValue = new Vector3(0.3f,0.0f,0.0f);
 
 	void OnTriggerEnter2D(Collider2D col)
 	{
-		if(col.gameObject.CompareTag("Enemy"))
-		{ 
-			damage = mechaScript.dMG;
-			col.gameObject.GetComponent<LifeObject>().ReceiveDamage(damage);
-			//col.gameObject.transform.Translate(knockBackValue);
-			if(mechaScript.dashPunch) //! replace after HCI
-			{
-				Debug.Log (damage);
-				col.transform.Translate(knockBackValue,0.0f,0.0f);
-				mechaScript.currentCharge += specialCharge;
-			}
+		if (isColliding) 
+		{
+			if(col.gameObject.CompareTag("Enemy"))
+			{ 
+				damage = mechaScript.dMG;
+				col.gameObject.GetComponent<LifeObject>().ReceiveDamage(damage);
+				//col.gameObject.transform.Translate(knockBackValue);
+				if(mechaScript.dashPunch) //! replace after HCI
+				{
+					Debug.Log (damage);
+					col.transform.Translate(knockBackValue,0.0f,0.0f);
+					mechaScript.currentCharge += specialCharge;
+				}
 
-			if(mechaScript.isJumping)
-			{
-				col.transform.Translate(knockBackValue,0.0f,0.0f);
-				mechaScript.currentCharge += specialCharge;
+				if(mechaScript.isJumping)
+				{
+					col.transform.Translate(knockBackValue,0.0f,0.0f);
+					mechaScript.currentCharge += specialCharge;
+				}
+				isColliding = false;
 			}
-			//this.gameObject.SetActive(false);
 		}
-
 	}
 }

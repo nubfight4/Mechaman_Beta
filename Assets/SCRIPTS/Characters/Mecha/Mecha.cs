@@ -64,6 +64,7 @@ public class Mecha : LifeObject
 	[Header("Attacks")]
 	const int MAX_ATACK = 9;
 	public Attacks[] attackList = new Attacks[MAX_ATACK];
+	public MeleeCollider meleecol;
 
 	[Header("MiniGame")]
 	bool isMiniGame;
@@ -326,11 +327,11 @@ public class Mecha : LifeObject
 			dMG = attackList[6].damage;
 			if(faceRight)
 			{
-				gameObject.transform.Translate (Vector2.right * dashPunchForce * Time.deltaTime);
+				gameObject.transform.Translate (dashPunchForce * Time.deltaTime,0.0f,0.0f);
 			}
 			else if(faceLeft)
 			{
-				gameObject.transform.Translate (Vector2.left * dashPunchForce * Time.deltaTime);
+				gameObject.transform.Translate (-dashPunchForce * Time.deltaTime,0.0f,0.0f);
 			}
 		}
 
@@ -339,8 +340,8 @@ public class Mecha : LifeObject
 		{ // Up + X
 			if (Input.GetButtonDown ("Normal Attack") && timePressedNormal == 0) 
 			{
-				anim.SetTrigger("JumpPunch");
 				dMG = attackList[5].damage;
+				anim.SetTrigger("JumpPunch");
 				startReset = true;
 				isOtherCombo = true;
 				isJumping = true;
@@ -624,5 +625,9 @@ public class Mecha : LifeObject
     {
         SoundManagerScript.Instance.PlaySFX(AudioClipID.SFX_MECHAMAN_ULTIMATE_MODE);
     }
-		
+
+	void EnableColliding()
+	{
+		meleecol.isColliding = true;
+	}
 }

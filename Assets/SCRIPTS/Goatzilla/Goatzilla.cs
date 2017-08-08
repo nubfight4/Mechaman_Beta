@@ -24,8 +24,8 @@ public class Goatzilla : LifeObject
 	public float meleeDurationNormal = 2.0f;
 	public float meleeDurationEnrage = 1.0f;
 	public bool isCheckMelee = true;
-	public float swipeKnockbackValue = 0;
-	public float headButtKnockbackValue = 0;
+	public float swipeKnockbackValue = 2.0f;
+	public float headButtKnockbackValue = 3.0f;
 
 	[Header("Rock")]
 	public GameObject rockPrefab;
@@ -75,7 +75,7 @@ public class Goatzilla : LifeObject
 	public bool isThrowRockAnim = false;
 	public bool isEnraged;
 	bool isTransitionAnim = false;
-	private bool isTinting = false;
+	private bool isFlashes = false;
 
 	public AttackState prevAttackState;
 	public AttackState curAttackState;
@@ -416,7 +416,7 @@ public class Goatzilla : LifeObject
 		{
 			target.ReceiveDamage(80);
 			//target.Knockback (Vector3.left, 2f);
-			target.transform.Translate(swipeKnockbackValue,0.0f,0.0f);
+			target.transform.Translate(-swipeKnockbackValue,0.0f,0.0f);
 		}
 	}
 
@@ -597,7 +597,7 @@ public class Goatzilla : LifeObject
 		{
 			target.ReceiveDamage(70);
 			//target.Knockback (Vector3.left, 0.1f);
-			target.transform.Translate(swipeKnockbackValue,0.0f,0.0f);
+			target.transform.Translate(-headButtKnockbackValue,0.0f,0.0f);
 		}
 	}
 
@@ -639,34 +639,41 @@ public class Goatzilla : LifeObject
 			} 
 			else
 			{
-				if(!isTinting)
+				if(!isFlashes)
 				{
-					StartCoroutine (Tinting ());
+					StartCoroutine (Flashes ());
 				}
 			}
 		}
 		else if(!isInvincible)
 		{
-			anim.SetTrigger("DoLightDamage");
+			StartCoroutine (Flashes ());
+
+			if (curAttackState == AttackState.CHECK || curAttackState == AttackState.NONE) 
+			{
+				anim.SetTrigger ("DoLightDamage");
+			}
 		}
 	}
 
-	private IEnumerator Tinting ()
+	private IEnumerator Flashes ()
 	{
-		isTinting = true;
+		isFlashes = true;
 		this.GetComponent<SpriteRenderer>().enabled = false;
-		yield return new WaitForSeconds (0.2f);
+		yield return new WaitForSeconds (0.05f);
 		this.GetComponent<SpriteRenderer>().enabled = true;
-		isTinting = false;
+		isFlashes = false;
 	}
 
 	public IEnumerator Immobolize (float duration, bool invincible)
 	{
-		//SetSpeed (0);
+		float temp = GetInitialSpeed ();
+		SetSpeed (0);
 		if (invincible)
 			SetIsInvincible (true);
 		yield return new WaitForSeconds (duration);
 		SetIsInvincible (false);
+		SetSpeed (temp);
 	}
 
 	public void PlayKnockbackAnimation ()
