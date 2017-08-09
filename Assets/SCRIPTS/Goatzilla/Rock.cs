@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Rock : MonoBehaviour 
 {
-	public int rockDamage = 20;
+	public int rockDamage = 40;
 	//private float lifeTime = 1.95f;
 	private Animator anim;
 	public bool isRockBreak = false;

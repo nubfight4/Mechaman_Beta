@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RoarPrefab : MonoBehaviour 
 {
-	public int roarDamage = 150;
+	public int roarDamage = 180;
 	public float roarSpeed = 1.0f;
 	public float knockBackPower = 0.0f;
 

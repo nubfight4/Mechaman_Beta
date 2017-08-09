@@ -5,7 +5,7 @@ using UnityEngine;
 public class AcidPrefab : MonoBehaviour 
 {
 	public float acidSpitDuration = 1.2f;
-	private float acidDamage = 3f;
+	private float acidDamage = 40f;
 	public float acidSpitTimer = 0.0f ;
 	bool isDamaged = false;
 
@@ -14,7 +14,7 @@ public class AcidPrefab : MonoBehaviour
 	void Start () 
 	{
 		mechaman = GameObject.FindGameObjectWithTag ("Player").GetComponent<Mecha>();
-		Destroy (this.gameObject, 2.0f);
+		Destroy (this.gameObject, 1.5f);
 		acidDamage = 30 * acidSpitDuration; 
 	}
 

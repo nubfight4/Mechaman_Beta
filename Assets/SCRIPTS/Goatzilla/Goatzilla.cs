@@ -59,7 +59,7 @@ public class Goatzilla : LifeObject
 	public float roarChargeTimer = 0.0f;
 	public float roarChargeDuration = 8.0f;
 	public float roarDamageCheck = 0.0f;
-	public float roarDamageLimit = 300.0f;
+	public float roarDamageLimit = 0.0f;
 	//public float roarStartLimit = 300.0f;
 	public GameObject RoarPrefab;
 	Vector3 roarPos;
@@ -414,7 +414,7 @@ public class Goatzilla : LifeObject
 	{
 		if(GetDistanceFromTarget () <= meleeRange)
 		{
-			target.ReceiveDamage(80);
+			target.ReceiveDamage(100);
 			//target.Knockback (Vector3.left, 2f);
 			target.transform.Translate(-swipeKnockbackValue,0.0f,0.0f);
 		}
@@ -595,7 +595,7 @@ public class Goatzilla : LifeObject
 	{
 		if(GetDistanceFromTarget () <= meleeRange)
 		{
-			target.ReceiveDamage(70);
+			target.ReceiveDamage(120);
 			//target.Knockback (Vector3.left, 0.1f);
 			target.transform.Translate(-headButtKnockbackValue,0.0f,0.0f);
 		}
