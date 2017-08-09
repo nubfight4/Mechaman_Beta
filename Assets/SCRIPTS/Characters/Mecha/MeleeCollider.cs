@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MeleeCollider : MonoBehaviour {
 	public int damage;
-	int specialCharge = 20;
+	int specialCharge = 25;
 	public Mecha mechaScript;
 	public Goatzilla target;
 	public float knockBackValue = 0.0f;

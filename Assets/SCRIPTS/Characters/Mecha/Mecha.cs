@@ -102,9 +102,8 @@ public class Mecha : LifeObject
 	bool p2RPressed;
 
 	Goatzilla goatzilla;
-	public int maxCharge = 100;
+	public int maxCharge = 375;
 	public int currentCharge = 0;
-	public int specialCharge = 80;
 
 	//public bool instantOnce = false;
 	//public float jumpPunchDuration = 100f;
@@ -166,6 +165,8 @@ public class Mecha : LifeObject
 		if (PauseOnPress.Instance.paused != true) 
 		{
 			CheckDeath();
+			Debug.Log("current"+currentCharge);
+			Debug.Log("maxCharge" + maxCharge);
 			if (startReset) 
 			{
 				resetTimer += Time.deltaTime;
@@ -439,7 +440,7 @@ public class Mecha : LifeObject
 			
 		if (p1LPressed == true && p1RPressed == true && p2LPressed == true && p2RPressed == true) {
 			Debug.Log ("UltimateGG");
-			if (currentCharge >= specialCharge) {
+			if (currentCharge >= maxCharge) {
 				if (transform.position.x < goatzilla.transform.position.x) {
 					transform.localScale = new Vector2 (1f, 1f);
 				} else if (transform.position.x > goatzilla.transform.position.x) {

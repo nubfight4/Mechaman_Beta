@@ -59,7 +59,7 @@ public class Goatzilla : LifeObject
 	public float roarChargeTimer = 0.0f;
 	public float roarChargeDuration = 8.0f;
 	public float roarDamageCheck = 0.0f;
-	public float roarDamageLimit = 0.0f;
+	public float roarDamageLimit = 0.0f; 
 	//public float roarStartLimit = 300.0f;
 	public GameObject RoarPrefab;
 	Vector3 roarPos;
@@ -569,13 +569,11 @@ public class Goatzilla : LifeObject
 	{
 		if (isRoarPrepare == true)
 		{
-			Debug.Log(" Charging roar ?");
 			anim.SetBool("DoChargeRoar", true);
 			roarChargeTimer += Time.deltaTime;
 			if ( roarChargeTimer > roarChargeDuration)
 			{
 				roarDamageCheck = 0.0f;
-				Debug.Log(" Do roar?");
 				isRoarPrepare = false;		
 				anim.SetTrigger ("DoRoarAttack");
 				StartCoroutine (Immobolize (1.5f, true));
