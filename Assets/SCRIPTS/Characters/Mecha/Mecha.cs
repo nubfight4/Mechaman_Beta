@@ -204,6 +204,7 @@ public class Mecha : LifeObject
 				MiniGame();
 				if(miniGameTimer >= miniGameDuration)
 				{
+					miniGameTimer = 0;
 					dMG = (correctPressed * 20) + attackList[7].damage;
 					anim.SetTrigger("FistRocket");
 					correctPressed = 0;
