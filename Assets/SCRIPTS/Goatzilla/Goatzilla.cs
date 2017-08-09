@@ -138,10 +138,6 @@ public class Goatzilla : LifeObject
 		Boundary ();
 		if (target != null) 
 		{
-			if(Input.GetKeyDown(KeyCode.A))
-			{
-				this.ReceiveDamage (50);
-			}
 			CheckDeath();
 			if(isAlive)
 			{

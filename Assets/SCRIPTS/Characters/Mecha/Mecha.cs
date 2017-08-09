@@ -28,8 +28,8 @@ public class Mecha : LifeObject
 	};
 
 	public Vector3 gamepadPos;
-	Vector3 minPos;
-	Vector3 maxPos;
+	public Vector3 minPos;
+	public Vector3 maxPos;
 
 	//	[Header("Movement")]
 	//	public float MovementSpeed;
@@ -138,7 +138,7 @@ public class Mecha : LifeObject
 		dashPunch = false;
 		isStop = false;
 		maxPos.x = 4.6f;
-		minPos.x = -4.75f;
+		minPos.x = -4.45f;
 		anim = GetComponent<Animator> ();
 		isOtherCombo = false;
 		startReset = false;
