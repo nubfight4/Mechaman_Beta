@@ -165,8 +165,6 @@ public class Mecha : LifeObject
 		if (PauseOnPress.Instance.paused != true) 
 		{
 			CheckDeath();
-			Debug.Log("current"+currentCharge);
-			Debug.Log("maxCharge" + maxCharge);
 			if (startReset) 
 			{
 				resetTimer += Time.deltaTime;

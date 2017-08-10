@@ -621,15 +621,15 @@ public class Goatzilla : LifeObject
 			roarDamageCheck += value;
 			if (roarDamageCheck >= roarDamageLimit)
 			{
-				Debug.Log("Cancel Roar");
-				anim.SetTrigger("DoLightDamage");
+				//anim.SetTrigger("DoLightDamage");
+				anim.SetTrigger("DoHeavy");
 				isRoarReady = false; // Added
 				isRoarAnim = false;
 				isRoarDone = true;
 				isRoarPrepare = false;
 				UpdateAttackState(AttackState.CHECK);
 				roarDamageCheck = 0.0f;
-
+				roarChargeTimer = 0.0f;
 			} 
 			else
 			{
@@ -680,6 +680,7 @@ public class Goatzilla : LifeObject
 		if (isEnraged && state == AttackState.CHECK && curBehaviorState == BehaviorState.NORMAL)
 		{
 			isCheckMelee = false;
+			isRoarReady = false; //test
 			prevAttackState = AttackState.NONE;
 			curAttackState = AttackState.TRANSITION;
 			StartCoroutine (Immobolize (5.0f, true)); //Invulnerable + Immoblize for 3s
@@ -688,7 +689,6 @@ public class Goatzilla : LifeObject
 		{
 			//Debug.Log("PrepareROar???");
 			isCheckMelee = false;
-			isRoarReady = false;
 			prevAttackState = AttackState.NONE;
 			curAttackState = AttackState.ROAR;
 		}
