@@ -299,7 +299,7 @@ public class Mecha : LifeObject
 		//Dash punch (Terrence)
 		if (Input.GetAxis("Horizontal")> 0) // A + Mech Move Right
 		{ 
-			if (Input.GetButtonDown ("Heavy Attack") && isJumping == false) 
+			if (Input.GetButtonDown ("Button_A") && isJumping == false) 
 			{
 				dashPunch = true;
 				isOtherCombo = true;
@@ -311,7 +311,7 @@ public class Mecha : LifeObject
 			}
 		} else if (Input.GetAxis("Horizontal") < 0) //A + Mech Move Left
 		{ 
-			if (Input.GetButtonDown ("Heavy Attack") && isJumping == false) 
+			if (Input.GetButtonDown ("Button_A") && isJumping == false) 
 			{
 				dashPunch = true;
 				isOtherCombo = true;
@@ -338,7 +338,7 @@ public class Mecha : LifeObject
 		//Jump Punch (Terrence)
 		if (Input.GetAxis ("Vertical") > 0) 
 		{ // Up + X
-			if (Input.GetButtonDown ("Normal Attack") && timePressedNormal == 0) 
+			if (Input.GetButtonDown ("Button_X") && timePressedNormal == 0) 
 			{
 				dMG = attackList[5].damage;
 				anim.SetTrigger("JumpPunch");
@@ -349,7 +349,7 @@ public class Mecha : LifeObject
 		}
 
 		//normal Punch
-		if (Input.GetButtonDown ("Normal Attack")) 
+		if (Input.GetButtonDown ("Button_X")) 
 		{ 
 			startReset = true;
 			timePressedHeavy = 0;
@@ -379,7 +379,7 @@ public class Mecha : LifeObject
 			}
 		}
 		//Heavy Punch
-		if (Input.GetButtonDown("Heavy Attack")) 
+		if (Input.GetButtonDown("Button_A")) 
 		{ 
 			if(!isOtherCombo)
 			{

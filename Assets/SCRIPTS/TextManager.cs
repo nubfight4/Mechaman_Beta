@@ -83,14 +83,14 @@ public class TextManager : MonoBehaviour
 
         theText.text = textLine[currentLine];
 
-		if (Input.GetButtonDown ("Skip_Tutorial")) 
+		if (Input.GetButtonDown ("Button_Select")) 
 		{
 			textScroll = true;
 			currentLine = 18;
 		}
 
 		if (textScroll == true) {
-			if (Input.GetButtonDown ("Enter")) {
+			if (Input.GetButtonDown ("Button_B")) {
 				currentLine += 1;
 			} 
 			GameObject.FindGameObjectWithTag ("Button_B").GetComponent<SpriteRenderer> ().enabled = true;	
@@ -162,12 +162,12 @@ public class TextManager : MonoBehaviour
             GameObject.FindGameObjectWithTag("AttackTutorialX").GetComponent<SpriteRenderer>().enabled = true;
             GameObject.FindGameObjectWithTag("AttackTutorialA").GetComponent<SpriteRenderer>().enabled = true;
 
-            if (Input.GetButtonDown("Normal Attack"))
+            if (Input.GetButtonDown("Button_X"))
 			{ 
 				tutorNormalAtk = true;
 			}
 				
-			if (Input.GetButtonDown("Heavy Attack"))
+			if (Input.GetButtonDown("Button_A"))
 			{
 				tutorHeavyAtk = true;
 			}
@@ -189,7 +189,7 @@ public class TextManager : MonoBehaviour
             textScroll = false;
             GameObject.FindGameObjectWithTag("AttackTutorialX2").GetComponent<SpriteRenderer>().enabled = true;
 
-            if (Input.GetButtonDown("Normal Attack"))
+            if (Input.GetButtonDown("Button_X"))
 			{ 
 				mechaTimePressedNormal++;
 			}
@@ -219,7 +219,7 @@ public class TextManager : MonoBehaviour
 
             if (gamepadPos.y > 0.01)
 			{
-				if(Input.GetButtonDown("Normal Attack"))
+				if(Input.GetButtonDown("Button_X"))
 				{
 					tutorSyncAtk = true;
 				}

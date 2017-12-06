@@ -50,7 +50,7 @@ public class PauseOnPress : MonoBehaviour {
 //                ContinueGame();
 //            }
 //        }
-		if (Input.GetButtonDown("Pause"))
+		if (Input.GetButtonDown("Button_Start"))
 		{
 			if(!paused)
 			{
